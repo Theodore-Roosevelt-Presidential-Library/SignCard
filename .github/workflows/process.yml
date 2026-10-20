@@ -1,0 +1,62 @@
+name: Process signatures
+
+# Every 10 minutes: read new signatures from Firestore, screen them with OpenAI, update the
+# private running totals in Firestore and the public numbers in data/<campaign>.json, then
+# redeploy the site if anything changed. Needs two repository secrets:
+#   FIREBASE_SERVICE_ACCOUNT  the JSON key of a Firebase service account
+#   OPENAI_KEY                an OpenAI API key (same name as the Reviews repo)
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "campaigns/**"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: process-signatures
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+      - run: pip install -r scripts/requirements.txt
+      - name: Process new signatures
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+        run: python3 scripts/process_signatures.py
+      - name: Commit public numbers
+        id: commit
+        run: |
+          git config user.name  "trpl-signcard-bot"
+          git config user.email "actions@github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Update card data"
+            git push || (git pull --rebase origin main && git push)
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    needs: process
+    if: needs.process.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml

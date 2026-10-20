@@ -1,0 +1,80 @@
+{
+  "id": "tr-birthday-2026",
+  "name": "TR's Birthday Card",
+  "opens": "2026-10-20",
+  "closes": "2026-11-15",
+  "theme": "night-sky",
+  "opener": {
+    "type": "cake",
+    "rows": "HAPPY BIRTHDAY",
+    "kicker": "Born October 27, 1858",
+    "headline": "Happy birthday, TR!",
+    "candles": "168",
+    "photo": "assets/img/tr-buckskin-bust.webp",
+    "photoAlt": "Theodore Roosevelt in his buckskin hunting suit, 1885",
+    "background": "assets/img/badlands-river.jpg",
+    "backgroundAlt": "The Little Missouri River winding through the North Dakota Badlands",
+    "wishPrompt": "Make a wish for the country.",
+    "blowButton": "Blow out the candles",
+    "blowHint": "Tap the cake, or blow into your microphone.",
+    "doneHeadline": "Wish made!",
+    "video": "",
+    "poster": "",
+    "nextPrompt": "Now sign his card.",
+    "cakeText": "Happy birthday, TR"
+  },
+  "card": {
+    "coverTitle": "Happy 168th, TR",
+    "coverSub": "Theodore Roosevelt was born October 27, 1858, in New York City.",
+    "inviteTitle": "Sign TR's birthday card",
+    "inviteBody": "Add your name and share a wish for the country he loved.",
+    "openButton": "Open the card",
+    "greeting": "Happy 168th birthday, Theodore Roosevelt.",
+    "greetingSub": "From the Badlands, with wishes for the country.",
+    "messageLabel": "Your wish for the country",
+    "messagePlaceholder": "I wish for…",
+    "messageMax": 280,
+    "messageRequired": false,
+    "showMessage": true,
+    "optInLabel": "Send me news and stories from the Theodore Roosevelt Presidential Library.",
+    "optInDefault": true,
+    "privacyNote": "Your first name, last initial, city and wish may appear on the card. Your email and ZIP code are never shown.",
+    "submitLabel": "Sign the card",
+    "signedTitle": "You're on the card",
+    "signedBody": "Your name is on Theodore Roosevelt's birthday card.",
+    "closedTitle": "This card has been delivered",
+    "closedBody": "Thank you to everyone who signed."
+  },
+  "wall": {
+    "show": true,
+    "title": "Wishes for the country",
+    "count": 12
+  },
+  "map": {
+    "show": true,
+    "title": "Signed from coast to coast",
+    "minimum": 25
+  },
+  "cta": {
+    "title": "Honor TR. Become a member.",
+    "body": "Celebrate his birthday by joining the Theodore Roosevelt Presidential Library as a member.",
+    "button": "Become a member",
+    "url": "https://www.trlibrary.com/membership",
+    "utmSource": "signcard",
+    "utmMedium": "card",
+    "utmCampaign": "tr-birthday-2026"
+  },
+  "share": {
+    "title": "Pass the card around",
+    "text": "I signed Theodore Roosevelt's birthday card and made a wish for the country. Add your name:",
+    "url": "https://card.labs.trlibrary.com/?c=tr-birthday-2026"
+  },
+  "ai": {
+    "topic": "wishes for the United States, written to sign Theodore Roosevelt's 168th birthday card",
+    "guidance": "Feature wishes that are heartfelt, specific and hopeful, and that connect to values Roosevelt is known for: conservation, citizenship, courage, hard work, the strenuous life, service. Never feature partisan content, named living politicians, parties or campaigns."
+  },
+  "moderation": {
+    "hide": [],
+    "pin": []
+  }
+}

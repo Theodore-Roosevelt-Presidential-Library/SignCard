@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Builder | Theodore Roosevelt Presidential Library</title>
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="builder.css">
+</head>
+<body>
+<header class="top">
+  <img src="../assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library" class="mark">
+  <div>
+    <h1>Card Builder</h1>
+    <p>Set up a new sign-the-card campaign. Nothing goes live until the finished file is added to the SignCard repository.</p>
+  </div>
+</header>
+<div class="wrap">
+  <section class="panel" aria-label="Campaign settings">
+    <nav class="steps" role="tablist"></nav>
+    <form id="bform" autocomplete="off" novalidate></form>
+    <div class="stepnav"><button type="button" class="b ghost" data-back>Back</button><button type="button" class="b" data-next>Next</button></div>
+  </section>
+  <section class="previewcol" aria-label="Live preview">
+    <div class="pvbar">
+      <span>Preview</span>
+      <div class="seg" role="group" aria-label="Show part of the card">
+        <button type="button" data-jump="start" class="on">Opening</button>
+        <button type="button" data-jump="card">Card</button>
+        <button type="button" data-jump="reveal">After signing</button>
+      </div>
+      <div class="seg" role="group" aria-label="Screen size">
+        <button type="button" data-size="desk" class="on">Desktop</button>
+        <button type="button" data-size="mob">Phone</button>
+      </div>
+    </div>
+    <div class="pvframe"><iframe id="pv" src="../?preview=1" title="Card preview" allow="microphone"></iframe></div>
+    <p class="pvnote">The preview uses sample signatures and never saves anything.</p>
+  </section>
+</div>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="builder.js"></script>
+</body>
+</html>

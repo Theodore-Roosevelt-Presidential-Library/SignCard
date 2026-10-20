@@ -1,0 +1,34 @@
+/*
+ * TRPL Popup: the Library's website fonts.
+ *
+ * A copy of the font declarations in the trlibrary.com theme: same family names, same weights,
+ * same files, served from www.trlibrary.com. Nothing is hosted here.
+ *
+ * On trlibrary.com the theme already declares these, so pop-ups use them with no extra request.
+ * This file is for pages that do not: the builder, its preview, the demo and this site's front page.
+ * popup.js adds it by itself on any page where the fonts are missing.
+ *
+ * If the website's theme changes its font files, update this list to match (tests/run.js checks the format).
+ */
+@font-face{font-family:"Dharma Gothic E";font-weight:700;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/dharma_type-dharmagothice-bold.woff2") format("woff2")}
+@font-face{font-family:"Dharma Gothic E";font-weight:800;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/dharma_type-dharmagothice-exbold.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:400;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-regular.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:400;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-italic.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:500;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-bold.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:500;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-bolditalic.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:700;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-heavy.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:700;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-heavyitalic.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:900;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-black.woff2") format("woff2")}
+@font-face{font-family:"Clearface";font-weight:900;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/clearfacestd-blackitalic.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:300;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-light.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:300;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-lightitalic.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:400;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-regular.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:400;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-regularitalic.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:700;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-bold.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:700;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-bolditalic.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:900;font-style:normal;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-black.woff2") format("woff2")}
+@font-face{font-family:"Frutiger";font-weight:900;font-style:italic;font-display:swap;src:url("https://www.trlibrary.com/themes/custom/trpl/css/frutigerltstd-blackitalic.woff2") format("woff2")}
+/* Stand-ins while the files load, sized to match (same values as the website). */
+@font-face{font-family:"Clearface Fallback";src:local(Georgia);size-adjust:93.1%;ascent-override:101.28%;descent-override:28.95%;line-gap-override:0%}
+@font-face{font-family:"Dharma Gothic E Fallback";src:local(Arial);size-adjust:60.46%;ascent-override:141.09%;descent-override:37.31%;line-gap-override:0%}
+@font-face{font-family:"Frutiger Fallback";src:local(Arial);size-adjust:105.7%;ascent-override:88.47%;descent-override:25.5%;line-gap-override:0%}

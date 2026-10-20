@@ -1,0 +1,32 @@
+rules_version = '2';
+
+// SignCard: browsers may only CREATE a signature. Nobody can read, list, change or delete
+// signatures from a browser; the GitHub Action reads them with a service account, which
+// bypasses these rules. The document ID is a SHA-256 of "campaign|email", so a second
+// signature with the same email for the same campaign is refused (one signature per person).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /signatures/{sigId} {
+      allow create: if sigId.matches('^[0-9a-f]{64}$')
+        && request.resource.data.keys().hasAll(['campaign', 'first', 'last', 'email', 'zip', 'optIn', 'status'])
+        && request.resource.data.keys().hasOnly(['campaign', 'first', 'last', 'email', 'zip', 'message', 'optIn', 'status', 'source', 'v'])
+        && request.resource.data.campaign is string && request.resource.data.campaign.matches('^[a-z0-9-]{3,60}$')
+        && request.resource.data.first is string && request.resource.data.first.size() > 0 && request.resource.data.first.size() <= 60
+        && request.resource.data.last is string && request.resource.data.last.size() > 0 && request.resource.data.last.size() <= 60
+        && request.resource.data.email is string && request.resource.data.email.size() <= 254
+        && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && request.resource.data.zip is string && request.resource.data.zip.matches('^[0-9]{5}$')
+        && (!('message' in request.resource.data) || (request.resource.data.message is string && request.resource.data.message.size() <= 1000))
+        && request.resource.data.optIn is bool
+        && request.resource.data.status == 'new'
+        && (!('source' in request.resource.data) || (request.resource.data.source is string && request.resource.data.source.size() <= 200))
+        && (!('v' in request.resource.data) || request.resource.data.v is int);
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
