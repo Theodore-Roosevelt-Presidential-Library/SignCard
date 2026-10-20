@@ -1,9 +1,24 @@
 {
-  "campaign": "tr-birthday-2026",
-  "updated": null,
-  "total": 0,
-  "states": 0,
-  "featured": [],
-  "signers": [],
-  "points": []
+ "campaign": "tr-birthday-2026",
+ "updated": "2026-10-20T20:55:11+00:00",
+ "total": 1,
+ "states": 1,
+ "featured": [
+  {
+   "id": "860ba06e12",
+   "name": "Matt B.",
+   "place": "Dallas, TX",
+   "message": "the country to unite as one together under the ideals of Theodore Roosevelt."
+  }
+ ],
+ "signers": [
+  "Matt B."
+ ],
+ "points": [
+  [
+   -96.86,
+   32.87,
+   1
+  ]
+ ]
 }
