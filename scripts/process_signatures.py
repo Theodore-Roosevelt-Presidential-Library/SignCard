@@ -173,7 +173,18 @@ def pick_featured(pool, campaign):
                 continue
             chosen.append(p)
             per_state[st] = per_state.get(st, 0) + 1
-    return [{"id": p["id"], "name": p["name"], "place": p["place"], "message": p["message"]} for p in chosen[:want]]
+    return [{"id": p["id"], "name": p["name"], "place": p["place"], "message": with_prefix(p["message"], campaign)} for p in chosen[:want]]
+
+
+def with_prefix(msg, campaign):
+    """Messages are sent with the campaign's sentence starter (e.g. "I wish for"); add it to any that lack it."""
+    prefix = str((campaign.get("card") or {}).get("messagePrefix") or "").strip()
+    if not prefix or not msg:
+        return msg
+    norm = lambda t: "".join(ch for ch in t.lower() if ch.isalpha() or ch == " ")
+    if norm(msg).startswith(norm(prefix)) or norm(msg).startswith("i wish"):
+        return msg
+    return prefix + " " + msg.lstrip(" .…")
 
 
 def public_json(cid, campaign, agg, zips):

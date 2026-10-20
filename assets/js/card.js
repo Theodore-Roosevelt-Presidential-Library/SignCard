@@ -363,13 +363,17 @@
       "</div></section>";
   }
   function formHTML() {
+    var prefix = String(get(C, "card.messagePrefix", "") || "").trim();
     var max = +get(C, "card.messageMax", 280), showMsg = get(C, "card.showMessage", true) !== false, msgReq = !!get(C, "card.messageRequired", false);
     return '<form class="form" novalidate>' +
       '<div class="preview-sig" aria-hidden="true"></div>' +
       '<div class="two">' + fld("first", "First name", "text", "given-name") + fld("last", "Last name", "text", "family-name") + "</div>" +
       '<div class="two">' + fld("email", "Email", "email", "email") + fld("zip", "ZIP code", "text", "postal-code", 'inputmode="numeric" maxlength="5"') + "</div>" +
       (showMsg ? '<div class="fld" data-f="message"><label for="f-message">' + esc(get(C, "card.messageLabel", "Message")) + (msgReq ? "" : ' <span class="opt">(optional)</span>') + '<span class="ctr">0/' + max + "</span></label>" +
-        '<textarea id="f-message" name="message" rows="3" maxlength="' + max + '" placeholder="' + esc(get(C, "card.messagePlaceholder", "")) + '"' + (msgReq ? " required" : "") + '></textarea><div class="msg"></div></div>' : "") +
+        '<div class="wishbox">' + (prefix ? '<span class="pre" aria-hidden="true">' + esc(prefix) + "</span>" : "") +
+        '<textarea id="f-message" name="message" rows="3" maxlength="' + (max - (prefix ? prefix.length + 1 : 0)) + '" placeholder="' + esc(get(C, "card.messagePlaceholder", "")) + '"' +
+        (prefix ? ' aria-label="' + esc(get(C, "card.messageLabel", "Message") + ": " + prefix + "…") + '"' : "") + (msgReq ? " required" : "") + "></textarea></div>" +
+        '<div class="msg"></div></div>' : "") +
       '<label class="check"><input type="checkbox" name="optIn"' + (get(C, "card.optInDefault", true) ? " checked" : "") + "><span>" + esc(get(C, "card.optInLabel", "")) + "</span></label>" +
       '<div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>' +
       '<p class="fine">' + esc(get(C, "card.privacyNote", "")) + "</p>" +
@@ -398,8 +402,17 @@
     form.first.addEventListener("input", upd); form.last.addEventListener("input", upd);
     form.zip.addEventListener("input", function () { form.zip.value = form.zip.value.replace(/\D/g, "").slice(0, 5); });
     if (form.message) {
-      var ctr = $("[data-f=message] .ctr", form), max = form.message.maxLength;
-      form.message.addEventListener("input", function () { ctr.textContent = form.message.value.length + "/" + max; });
+      var ctr = $("[data-f=message] .ctr", form), max = +get(C, "card.messageMax", 280), pre = $(".wishbox .pre", form);
+      var plen = pre ? pre.textContent.length + 1 : 0;
+      ctr.textContent = plen + "/" + max;
+      form.message.addEventListener("input", function () { ctr.textContent = (form.message.value.length + plen) + "/" + max; });
+      if (pre) {
+        // The prompt reads as the start of the sentence; typing continues it on the same line.
+        var indent = function () { form.message.style.textIndent = (pre.offsetWidth + 6) + "px"; };
+        indent();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(indent);
+        pre.addEventListener("click", function () { form.message.focus(); });
+      }
     }
     form.addEventListener("submit", function (e) { e.preventDefault(); submit(form); });
   }
@@ -430,6 +443,14 @@
     if (form.message && form.message.required) checks.message = v("message") ? "" : "Share a few words.";
     Object.keys(checks).forEach(function (k) { setErr(form, k, checks[k]); if (checks[k]) { if (ok) form[k].focus(); ok = false; } });
     return ok;
+  }
+  function withPrefix(text) {
+    // "I wish for" + "clean rivers" -> "I wish for clean rivers". Leave it alone if they wrote the prompt themselves.
+    var prefix = String(get(C, "card.messagePrefix", "") || "").trim();
+    if (!text || !prefix) return text;
+    var p = prefix.toLowerCase().replace(/[^a-z ]/g, ""), t = text.toLowerCase().replace(/[^a-z ]/g, "");
+    if (t.indexOf(p) === 0 || /^i wish/.test(t)) return text;
+    return prefix + " " + text.replace(/^[\s.…]+/, "");
   }
   function sha256(s) {
     if (!(window.crypto && crypto.subtle)) return Promise.resolve(hash(s).toString(16).padStart(8, "0").repeat(8));
@@ -470,7 +491,7 @@
       campaign: C.id,
       first: form.first.value.trim().slice(0, 60), last: form.last.value.trim().slice(0, 60),
       email: form.email.value.trim().slice(0, 254), zip: form.zip.value.trim(),
-      message: form.message ? form.message.value.trim().slice(0, form.message.maxLength) : "",
+      message: form.message ? withPrefix(form.message.value.trim().slice(0, form.message.maxLength)) : "",
       optIn: !!form.optIn.checked,
       source: (EMBED ? "embed:" + (ref || "unknown") : "site") + (STARTER ? ":starter" : "")
     };
