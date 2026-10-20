@@ -7,8 +7,8 @@
  */
 window.SIGNCARD_CONFIG = {
   firebase: {
-    projectId: "",
-    apiKey: ""
+    projectId: "trpl-signcard",
+    apiKey: "AIzaSyB-749Wq-l7RTY6jhp8ghnlOJ6GV6Ixnx4"
   },
   siteUrl: "https://card.labs.trlibrary.com/"
 };
