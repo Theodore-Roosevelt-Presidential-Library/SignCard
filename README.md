@@ -51,7 +51,8 @@ Run the processor locally:
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r scripts/requirements.txt
-FIREBASE_SERVICE_ACCOUNT="$(cat key.json)" OPENAI_KEY=sk-... python3 scripts/process_signatures.py --dry-run
+gcloud auth application-default login   # once, as an account with Firestore access
+OPENAI_KEY=sk-... python3 scripts/process_signatures.py --dry-run
 ```
 
 ## Credits
