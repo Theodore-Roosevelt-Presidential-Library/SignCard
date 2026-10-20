@@ -14,10 +14,14 @@ Runs in GitHub Actions every 10 minutes (see .github/workflows/process.yml).
    initial, city), signer names for the card, and ZIP-level map points. No emails, no full
    last names, no ZIP codes leave Firestore.
 
-Local run (needs the same two environment variables):
+Google credentials: in Actions they come from Workload Identity Federation (no key file). Locally,
+sign in once with `gcloud auth application-default login` as an account that can read Firestore in
+trpl-signcard. FIREBASE_SERVICE_ACCOUNT (a JSON key) also works where keys are allowed.
+
+Local run:
   python3 -m venv .venv && source .venv/bin/activate
   pip install -r scripts/requirements.txt
-  FIREBASE_SERVICE_ACCOUNT="$(cat key.json)" OPENAI_KEY=sk-... python3 scripts/process_signatures.py
+  OPENAI_KEY=sk-... python3 scripts/process_signatures.py
 Add --dry-run to screen and print without writing anything.
 """
 import glob
@@ -31,6 +35,7 @@ import urllib.request
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT = os.environ.get("SIGNCARD_PROJECT", "trpl-signcard")
 MODEL = os.environ.get("SIGNCARD_MODEL", "gpt-4.1-mini-2025-04-14")
 MOD_MODEL = "omni-moderation-latest"
 BATCH = 20            # signatures per chat-model call
@@ -216,8 +221,8 @@ def write_public(cid, data):
 
 def main():
     sa, key = os.environ.get("FIREBASE_SERVICE_ACCOUNT", ""), os.environ.get("OPENAI_KEY", "")
-    if not sa:
-        log("FIREBASE_SERVICE_ACCOUNT is not set; nothing to do. Add it under Settings > Secrets and variables > Actions.")
+    if os.environ.get("GOOGLE_SIGNIN") not in (None, "", "success") and not sa:
+        log("Google sign-in did not work yet (Workload Identity Federation not set up?). See firebase/setup-wif.sh. Nothing to do.")
         return 0
     if not key:
         log("OPENAI_KEY is not set; signatures stay unscreened until it is added.")
@@ -227,7 +232,10 @@ def main():
     from firebase_admin import credentials, firestore
     from google.cloud.firestore_v1.base_query import FieldFilter
 
-    firebase_admin.initialize_app(credentials.Certificate(json.loads(sa)))
+    if sa:
+        firebase_admin.initialize_app(credentials.Certificate(json.loads(sa)))
+    else:
+        firebase_admin.initialize_app(credentials.ApplicationDefault(), {"projectId": PROJECT})
     db = firestore.client()
     campaigns = load_campaigns()
     zips = json.load(gzip.open(os.path.join(ROOT, "scripts", "zips.json.gz"), "rt", encoding="utf-8"))

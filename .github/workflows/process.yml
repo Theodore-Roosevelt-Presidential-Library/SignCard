@@ -2,9 +2,12 @@ name: Process signatures
 
 # Every 10 minutes: read new signatures from Firestore, screen them with OpenAI, update the
 # private running totals in Firestore and the public numbers in data/<campaign>.json, then
-# redeploy the site if anything changed. Needs two repository secrets:
-#   FIREBASE_SERVICE_ACCOUNT  the JSON key of a Firebase service account
-#   OPENAI_KEY                an OpenAI API key (same name as the Reviews repo)
+# redeploy the site if anything changed.
+#
+# Google sign-in uses Workload Identity Federation: GitHub proves to Google that this run comes
+# from this repository, and Google lets it act as the signcard-actions service account. No key
+# file exists anywhere (trlibrary.com blocks service account keys). Setup: firebase/setup-wif.sh.
+# One repository secret is needed: OPENAI_KEY (same name as the Reviews repo).
 
 on:
   schedule:
@@ -37,9 +40,16 @@ jobs:
           cache: pip
           cache-dependency-path: scripts/requirements.txt
       - run: pip install -r scripts/requirements.txt
+      - name: Sign in to Google Cloud (no key file)
+        id: gcp
+        continue-on-error: true
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/762009281473/locations/global/workloadIdentityPools/github/providers/signcard
+          service_account: signcard-actions@trpl-signcard.iam.gserviceaccount.com
       - name: Process new signatures
         env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          GOOGLE_SIGNIN: ${{ steps.gcp.outcome }}
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
         run: python3 scripts/process_signatures.py
       - name: Commit public numbers

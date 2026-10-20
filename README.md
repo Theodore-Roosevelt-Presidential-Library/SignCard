@@ -42,9 +42,8 @@ The iframe resizes itself, scrolls the host page as the visitor moves through th
 ## Setup
 
 1. **Firebase** (project under matt@trlibrary.com): create a Firestore database, publish `firebase/firestore.rules`, register a web app and put its `projectId` and `apiKey` in `assets/js/config.js`.
-2. **Repository secrets** (Settings → Secrets and variables → Actions):
-   - `FIREBASE_SERVICE_ACCOUNT`: the whole JSON key from Firebase → Project settings → Service accounts → Generate new private key.
-   - `OPENAI_KEY`: an OpenAI API key (same name as the Reviews repo).
+2. **Google sign-in for the Action**: trlibrary.com blocks service account keys, so the Action uses Workload Identity Federation instead. Run `firebase/setup-wif.sh` once in Google Cloud Shell for trpl-signcard. Only this repository can use the resulting sign-in.
+   **Repository secret** (Settings → Secrets and variables → Actions): `OPENAI_KEY`, an OpenAI API key (same name as the Reviews repo).
 3. **Pages**: Settings → Pages → Source: GitHub Actions. Custom domain `card.labs.trlibrary.com` (CNAME record to `theodore-roosevelt-presidential-library.github.io`).
 
 Run the processor locally:
