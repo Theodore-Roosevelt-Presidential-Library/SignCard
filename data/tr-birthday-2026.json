@@ -1,23 +1,35 @@
 {
  "campaign": "tr-birthday-2026",
- "updated": "2026-10-20T21:17:06+00:00",
- "total": 2,
- "states": 2,
+ "updated": "2026-10-20T21:31:34+00:00",
+ "total": 3,
+ "states": 3,
  "featured": [
   {
    "id": "860ba06e12",
    "name": "Matt B.",
    "place": "Dallas, TX",
    "message": "I wish for the country to unite as one together under the ideals of Theodore Roosevelt."
+  },
+  {
+   "id": "9c6d4ddb15",
+   "name": "Peter T.",
+   "place": "Marion, IN",
+   "message": "I wish for little moments of joy to be celebrated and found"
   }
  ],
  "signers": [
+  "Peter T.",
   "Matt B."
  ],
  "points": [
   [
    -96.86,
    32.87,
+   1
+  ],
+  [
+   -85.66,
+   40.54,
    1
   ],
   [
