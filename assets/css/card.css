@@ -130,6 +130,14 @@ a{color:inherit}
 .leaf-front,.leaf-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:4px}
 .leaf-back{transform:rotateY(180deg);border-radius:4px 0 0 4px}
 .s-card.is-open .leaf{transform:rotateY(-180deg)}
+/* Children of the cover sit on their own layers and ignore the parent's backface rule in some browsers,
+   so the front is hidden outright once the leaf passes 90 degrees (and the back until it does). */
+.leaf-front *{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.leaf-front{transition:visibility 0s linear .5s}
+.s-card.is-open .leaf-front{visibility:hidden}
+.leaf-back{visibility:hidden;transition:visibility 0s linear .5s}
+.s-card.is-open .leaf-back{visibility:visible}
+.s-card.no-anim .leaf-front,.s-card.no-anim .leaf-back{transition:none}
 .s-card.no-anim .leaf,.s-card.no-anim .invite,.s-card.no-anim .book{transition:none!important}
 .mobile-greet{display:none}
 
