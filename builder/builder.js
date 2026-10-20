@@ -73,13 +73,17 @@
       { k: "card.closedTitle", t: "text", label: "Headline after the card closes" },
       { k: "card.closedBody", t: "text", label: "Line after the card closes" }
     ]},
-    { title: "After signing", jump: "reveal", intro: "What people see once they sign: the best wishes, the map, the call to action and sharing.", fields: [
+    { title: "After signing", jump: "join", intro: "What people see once they sign: the best wishes, the map, the call to action and sharing.", fields: [
       { k: "wall.show", t: "check", label: "Show the best messages" },
       { k: "wall.title", t: "text", label: "Messages headline" },
       { k: "wall.count", t: "num", label: "How many messages to feature", min: 3, max: 40 },
       { k: "map.show", t: "check", label: "Show the map" },
       { k: "map.title", t: "text", label: "Map headline" },
       { k: "map.minimum", t: "num", label: "Show the map once this many have signed", min: 0, max: 1000 },
+      { k: "cta.popup", t: "check", label: "Also show the call to action as a pop-up", hint: "Appears over the wishes or map a few seconds after someone arrives there. Visitors have to dismiss it. It shows once per visit, and the call to action is always the final step." },
+      { k: "cta.popupDelay", t: "num", label: "Seconds before the pop-up appears", min: 2, max: 60 },
+      { k: "cta.kicker", t: "text", label: "Pop-up small label", hint: "e.g. Before you go" },
+      { k: "cta.dismiss", t: "text", label: "Pop-up dismiss link", hint: "e.g. Maybe later" },
       { k: "cta.title", t: "text", label: "Call to action headline" },
       { k: "cta.body", t: "area", label: "Call to action text" },
       { k: "cta.button", t: "text", label: "Call to action button" },
@@ -106,7 +110,7 @@
       privacyNote: "Your first name, last initial, city and message may appear on the card. Your email and ZIP code are never shown.", submitLabel: "Sign the card",
       signedTitle: "You're on the card", signedBody: "", closedTitle: "This card has been delivered", closedBody: "Thank you to everyone who signed." },
     wall: { show: true, title: "Messages", count: 12 }, map: { show: true, title: "Signed from coast to coast", minimum: 25 },
-    cta: { title: "", body: "", button: "Become a member", url: "https://www.trlibrary.com/membership", utmSource: "signcard", utmMedium: "card", utmCampaign: "" },
+    cta: { popup: true, popupDelay: 8, kicker: "Before you go", dismiss: "Maybe later", title: "", body: "", button: "Become a member", url: "https://www.trlibrary.com/membership", utmSource: "signcard", utmMedium: "card", utmCampaign: "" },
     share: { title: "Pass the card around", text: "", url: "" }, ai: { topic: "", guidance: "" }, moderation: { hide: [], pin: [] }
   };
   var templates = [];

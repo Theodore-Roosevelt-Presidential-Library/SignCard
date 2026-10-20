@@ -55,6 +55,10 @@
     "minimum": 25
   },
   "cta": {
+    "popup": true,
+    "popupDelay": 8,
+    "kicker": "Before you go",
+    "dismiss": "Maybe later",
     "title": "Honor TR. Become a member.",
     "body": "Celebrate his birthday by joining the Theodore Roosevelt Presidential Library as a member.",
     "button": "Become a member",
