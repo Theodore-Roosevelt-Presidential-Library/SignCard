@@ -6,7 +6,6 @@
   "theme": "night-sky",
   "opener": {
     "type": "cake",
-    "rows": "HAPPY BIRTHDAY",
     "kicker": "Born October 27, 1858",
     "headline": "Happy birthday, TR!",
     "candles": "168",
@@ -21,7 +20,7 @@
     "video": "",
     "poster": "",
     "nextPrompt": "Now sign his card.",
-    "cakeText": "Happy birthday, TR"
+    "cakeText": ""
   },
   "card": {
     "coverTitle": "Happy 168th, TR",

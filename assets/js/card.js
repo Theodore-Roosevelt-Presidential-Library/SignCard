@@ -96,6 +96,7 @@
   }
 
   function cakeSVG(label) {
+    var cakeText = String(get(C, "opener.cakeText", "") || "").toUpperCase();
     var candles = "", flames = "", smokes = "", n = 7;
     for (var i = 0; i < n; i++) {
       var cx = 122 + i * 26;
@@ -116,8 +117,8 @@
       '<ellipse cx="200" cy="310" rx="188" ry="13" fill="#FBF8F1"/>' +
       '<rect x="38" y="198" width="324" height="110" rx="8" fill="#E7805D"/>' +
       drips(38, 198, 324, 30, "#FBF8F1") + dots +
-      maltese(74, 262, 26, "#092A4D") + maltese(326, 262, 26, "#092A4D") +
-      '<text x="200" y="276" text-anchor="middle" font-family="Dharma Gothic E,Oswald,Arial Narrow,sans-serif" font-weight="800" font-size="40" fill="#FFFFFF" letter-spacing="1">' + esc(String(get(C, "opener.cakeText", "")).toUpperCase()) + '</text>' +
+      (cakeText ? maltese(74, 262, 26, "#092A4D") + maltese(326, 262, 26, "#092A4D") : maltese(200, 258, 40, "#092A4D")) +
+      '<text x="200" y="276" text-anchor="middle" font-family="Dharma Gothic E,Oswald,Arial Narrow,sans-serif" font-weight="800" font-size="40" fill="#FFFFFF" letter-spacing="1">' + esc(cakeText) + '</text>' +
       '<rect x="92" y="120" width="216" height="84" rx="8" fill="#F36079"/>' +
       drips(92, 120, 216, 24, "#FBF8F1") +
       '<text x="200" y="192" text-anchor="middle" font-family="Dharma Gothic E,Oswald,Arial Narrow,sans-serif" font-weight="800" font-size="54" fill="#FFFFFF">' + esc(label || "") + '</text>' +
@@ -174,30 +175,27 @@
         '<button class="op-skip" type="button" data-unmute style="right:auto;left:12px">Sound on</button>' +
         '<button class="op-skip" type="button" data-skip>Skip</button></div></section>';
     }
-    var rowsWord = esc(get(C, "opener.rows", "HAPPY BIRTHDAY")).toUpperCase();
-    var rowText = "";
-    for (var i = 0; i < 6; i++) rowText += "<span>" + rowsWord + " •</span>";
-    var rows = "";
-    for (var r = 0; r < 4; r++) rows += '<div class="op-row" aria-hidden="true">' + rowText + rowText + "</div>";
     var bg = get(C, "opener.background", "");
+    var head = esc(get(C, "opener.headline", "Happy birthday!"));
+    // Last word of the headline in the accent color, e.g. "Happy birthday, TR!"
+    head = head.replace(/(\S+)$/, '<span class="acc">$1</span>');
     return '<section class="op-wrap" aria-label="' + esc(get(C, "opener.headline", "")) + '">' +
       '<div class="op">' +
-      '<div class="op-rows">' + rows + "</div>" +
-      (bg ? '<div class="op-photo" role="img" aria-label="' + esc(get(C, "opener.backgroundAlt", "")) + '" style="background-image:url(\'' + esc(asset(bg)) + '\')"></div>' : "") +
-      '<div class="op-stamp">' + sealSVG("#F36079", "#FFFFFF", "TR", get(C, "opener.candles", "")) + "</div>" +
+      '<div class="op-bg" role="img" aria-label="' + esc(get(C, "opener.backgroundAlt", "")) + '"' + (bg ? ' style="background-image:url(\'' + esc(asset(bg)) + '\')"' : "") + "></div>" +
+      '<div class="op-shade"></div>' +
       '<div class="op-tr"><img src="' + esc(asset(get(C, "opener.photo", ""))) + '" alt="' + esc(get(C, "opener.photoAlt", "")) + '"></div>' +
       '<div class="op-cake" role="button" tabindex="0" aria-label="' + esc(get(C, "opener.blowButton", "Blow out the candles")) + '">' + cakeSVG(get(C, "opener.candles", "")) + "</div>" +
-      '<div class="op-brand"><img src="assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library"><span class="kicker">' + esc(get(C, "opener.kicker", "")) + "</span></div>" +
       '<canvas class="op-confetti" aria-hidden="true"></canvas>' +
-      '<div class="op-done" aria-hidden="true"><p class="dh">' + esc(get(C, "opener.doneHeadline", "Wish made!")) + "</p></div>" +
       '<button class="op-skip" type="button" data-skip>Skip</button>' +
       "</div>" +
-      '<div class="op-prompt">' +
-      '<h1 class="dh">' + esc(get(C, "opener.wishPrompt", "Make a wish.")) + "</h1>" +
-      "<p>" + esc(get(C, "opener.blowHint", "")) + "</p>" +
+      '<div class="op-copy">' +
+      '<img class="mark" src="assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library">' +
+      '<p class="kicker">' + esc(get(C, "opener.kicker", "")) + "</p>" +
+      '<h1 class="dh">' + head + "</h1>" +
+      '<div class="op-ask"><p>' + esc(get(C, "opener.wishPrompt", "")) + " " + esc(get(C, "opener.blowHint", "")) + "</p>" +
       '<div class="row"><button class="btn" type="button" data-blow>' + esc(get(C, "opener.blowButton", "Blow out the candles")) + "</button>" +
-      '<button class="mic" type="button" data-mic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>Use my mic</button><span class="mic-meter"><i></i></span></div>' +
-      "</div></section>";
+      '<button class="mic" type="button" data-mic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg><span>Use my mic</span></button><span class="mic-meter"><i></i></span></div>' +
+      "</div></div></section>";
   }
 
   function coverHTML() {
@@ -206,7 +204,6 @@
       (get(C, "opener.photo") ? '<img class="cover-tr" src="' + esc(asset(get(C, "opener.photo"))) + '" alt="">' : "") +
       '<h2 class="dh cover-title">' + esc(get(C, "card.coverTitle", "")) + "</h2>" +
       '<div class="cover-band"><img class="cover-mark" src="assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library"><span>' + esc(get(C, "opener.kicker", "")) + "</span></div>" +
-      '<div class="cover-seal">' + sealSVG("#092A4D", "#F9D635", "TR", "") + "</div>" +
       '<span class="cover-hint">Tap to open</span></div>';
   }
 
@@ -272,10 +269,10 @@
     var op = $(".op"), wrap = $(".op-wrap");
     var img = $(".op-tr img");
     var go = function () {
-      requestAnimationFrame(function () { op.classList.add("go"); });
+      requestAnimationFrame(function () { op.classList.add("go"); wrap.classList.add("go"); });
       var flames = $$(".flame", op);
-      flames.forEach(function (f, i) { setTimeout(function () { f.classList.add("lit"); }, REDUCED ? 0 : 2000 + i * 140); });
-      setTimeout(function () { wrap.classList.add("ready"); }, REDUCED ? 0 : 2000 + flames.length * 140 + 200);
+      flames.forEach(function (f, i) { setTimeout(function () { f.classList.add("lit"); }, REDUCED ? 0 : 2100 + i * 120); });
+      setTimeout(function () { wrap.classList.add("ready"); }, REDUCED ? 0 : 2100 + flames.length * 120 + 150);
     };
     var started = false;
     var once = function () { if (!started) { started = true; go(); } };
@@ -300,13 +297,13 @@
     op.classList.add("blowing");
     $$(".flame", op).forEach(function (f, i) { setTimeout(function () { f.classList.add("out"); }, 120 + i * 45); });
     setTimeout(function () {
-      op.classList.add("blown", "cheer");
-      confetti($(".op-confetti"));
-      var b = $("[data-blow]"), h = $(".op-prompt .dh"), p = $(".op-prompt p"), m = $("[data-mic]");
-      if (h) h.textContent = get(C, "opener.nextPrompt", "Now sign his card.");
-      if (p) p.textContent = get(C, "card.inviteBody", "");
-      if (m) m.remove();
-      if (b) { var nb = b.cloneNode(false); nb.textContent = get(C, "card.inviteTitle", "Sign the card"); b.replaceWith(nb);
+      op.classList.add("blown");
+      confetti($(".op-confetti"), { x: 0.68, y: 0.6, count: 110 });
+      var h = $(".op-copy h1"), p = $(".op-ask p"), b = $("[data-blow]"), m = $("[data-mic]"), mm = $(".mic-meter");
+      if (h) h.innerHTML = esc(get(C, "opener.doneHeadline", "Wish made!")).replace(/(\S+)$/, '<span class="acc">$1</span>');
+      if (p) p.textContent = get(C, "opener.nextPrompt", "Now sign his card.") + " " + get(C, "card.inviteBody", "");
+      if (m) m.remove(); if (mm) mm.remove();
+      if (b) { var nb = b.cloneNode(false); nb.textContent = get(C, "card.inviteTitle", "Sign the card"); nb.className = "btn alt"; b.replaceWith(nb);
         nb.addEventListener("click", function () { scrollToEl($("#sc-card")); openCard(false); }); }
     }, 450);
     setTimeout(function () { scrollToEl($("#sc-card")); pulseCover(); }, skip === true ? 500 : 2600);
