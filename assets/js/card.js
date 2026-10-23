@@ -746,6 +746,72 @@
       }).catch(function (e) { console.error(e); note.textContent = "Couldn't make the image on this device."; });
   }
 
+  /* ---------------- campaigns page (the bare address) ---------------- */
+  function listCampaigns() {
+    // list.json is written at deploy time from every file in campaigns/; index.json is the fallback.
+    return loadJSON("campaigns/list.json").then(function (l) { return l.campaigns.map(function (c) { return c.id; }); })
+      .catch(function () { return loadJSON("campaigns/index.json").then(function (ix) { return ix.campaigns || []; }); });
+  }
+  function fmtDate(d) {
+    if (!d) return "";
+    var t = new Date(d + "T12:00:00");
+    return isNaN(t) ? d : t.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+  function renderHub() {
+    document.title = "Sign the Card | Theodore Roosevelt Presidential Library";
+    var site = CFG.siteUrl || location.origin + "/";
+    root.className = "sc hub";
+    root.innerHTML = '<header class="hub-top"><img src="assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library" class="hub-mark">' +
+      '<div class="hub-intro"><p class="kicker">card.labs.trlibrary.com</p><h1 class="dh">Sign the <span class="acc">Card</span></h1>' +
+      "<p>Every sign-the-card campaign, with its link and embed code. Paste an embed code into a Drupal code block (Full HTML) or any web page.</p></div>" +
+      '<a class="btn alt" href="builder/">Open the builder</a></header>' +
+      '<section class="hub-list" aria-label="Campaigns"><div class="sc-loading" style="aspect-ratio:auto;min-height:200px"><span class="sc-spinner"></span></div></section>' +
+      '<div class="toast" role="status" aria-live="polite"></div>';
+    listCampaigns().then(function (ids) {
+      return Promise.all(ids.map(function (cid) {
+        return Promise.all([loadJSON("campaigns/" + cid + ".json"), loadJSON("data/" + cid + ".json?t=" + Math.floor(Date.now() / 60000)).catch(function () { return {}; })])
+          .catch(function () { return null; });
+      }));
+    }).then(function (rows) {
+      rows = rows.filter(Boolean);
+      var list = $(".hub-list", root);
+      if (!rows.length) { list.innerHTML = '<p class="empty-note">No campaigns yet. Start one in the builder.</p>'; return; }
+      var now = new Date();
+      list.innerHTML = rows.map(function (r) {
+        var c = r[0], d = r[1] || {}, id = c.id;
+        var opens = c.opens ? new Date(c.opens + "T00:00:00-06:00") : null, closes = c.closes ? new Date(c.closes + "T23:59:59-06:00") : null;
+        var status = closes && now > closes ? ["Closed", "closed"] : opens && now < opens ? ["Upcoming", "soon"] : ["Open", "open"];
+        var link = site + "?c=" + id, starter = link + "&starter=1";
+        var embed = '<div data-signcard="' + id + '"></div>\n<script src="' + site + 'embed.js" async></script>';
+        var total = d.total || 0;
+        var photo = get(c, "opener.photo", "");
+        return '<article class="hcard">' +
+          '<a class="hthumb" href="' + esc(link) + '" aria-label="Open ' + esc(c.name || id) + '">' +
+          '<span class="hnum">' + esc(get(c, "opener.candles", "")) + "</span>" +
+          (photo ? '<img src="' + esc(photo) + '" alt="">' : "") +
+          '<span class="htitle dh">' + esc(get(c, "card.coverTitle", c.name || id)) + "</span></a>" +
+          '<div class="hbody">' +
+          '<p class="hmeta"><span class="pill ' + status[1] + '">' + status[0] + "</span>" + esc([fmtDate(c.opens), fmtDate(c.closes)].filter(Boolean).join(" – ")) + "</p>" +
+          '<h2 class="dh">' + esc(c.name || id) + "</h2>" +
+          '<p class="hcount"><b>' + num(total) + "</b> " + (total === 1 ? "signature" : "signatures") + (d.states ? " from " + num(d.states) + " " + (d.states === 1 ? "state" : "states") : "") + "</p>" +
+          '<div class="hrow"><a class="btn" href="' + esc(link) + '" target="_blank" rel="noopener">Open the card</a>' +
+          '<button type="button" class="btn ghost" data-copy="' + esc(link) + '">Copy link</button>' +
+          (status[1] !== "closed" ? '<button type="button" class="btn ghost" data-copy="' + esc(starter) + '" title="Skips the opening, for staff adding starter wishes">Copy starter link</button>' : "") + "</div>" +
+          '<p class="hlabel">Embed code <span>ID: ' + esc(id) + "</span></p>" +
+          '<pre class="hcode">' + esc(embed.replace("\\n", "\n")) + "</pre>" +
+          '<button type="button" class="btn alt" data-copy="' + esc(embed) + '">Copy embed code</button>' +
+          "</div></article>";
+      }).join("");
+      $$("[data-copy]", list).forEach(function (b) {
+        b.addEventListener("click", function () {
+          var t = b.getAttribute("data-copy").replace(/\\n/g, "\n"), toast = $(".toast", root);
+          var done = function (m) { toast.textContent = m; toast.classList.add("on"); clearTimeout(toast._h); toast._h = setTimeout(function () { toast.classList.remove("on"); }, 2200); };
+          (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { done("Copied"); }, function () { done("Select the text and copy it by hand."); });
+        });
+      });
+    }).catch(function (e) { console.error(e); $(".hub-list", root).innerHTML = '<p class="empty-note">The campaign list could not load.</p>'; });
+  }
+
   /* ---------------- boot ---------------- */
   function boot() {
     if (PREVIEW) {
@@ -764,6 +830,7 @@
       return;
     }
     var id = qs.get("c");
+    if (!id && !EMBED && !STARTER) return renderHub();
     (id ? Promise.resolve(id) : loadJSON("campaigns/index.json").then(function (ix) { return ix["default"]; }))
       .then(function (cid) {
         if (!/^[a-z0-9-]{3,60}$/.test(cid)) throw new Error("Bad campaign id");

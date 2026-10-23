@@ -117,7 +117,10 @@
   var templates = [];
 
   function loadTemplates() {
-    return fetch("../campaigns/index.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (ix) {
+    return fetch("../campaigns/list.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (l) { return { campaigns: l.campaigns.map(function (c) { return c.id; }) }; })
+      .catch(function () { return fetch("../campaigns/index.json", { cache: "no-cache" }).then(function (r) { return r.json(); }); })
+      .then(function (ix) {
       return Promise.all((ix.campaigns || []).map(function (id) {
         return fetch("../campaigns/" + id + ".json", { cache: "no-cache" }).then(function (r) { return r.json(); }).catch(function () { return null; });
       }));
@@ -251,7 +254,7 @@
       '<li><h3>Save the campaign file</h3><p>Download <code>' + esc(c.id) + '.json</code>.</p><div class="row"><button type="button" class="b" data-dl>Download file</button><button type="button" class="b ghost" data-copy="json">Copy file contents</button></div></li>' +
       '<li><h3>Add it to the repository</h3><p>Open the campaigns folder on GitHub, choose <b>Add file → Upload files</b>, drop in the file and commit. This needs write access to the repo, which is what keeps random people from launching a card. The AI screening finds new campaign files on its own.</p>' +
       '<div class="row"><a class="b ghost" href="' + REPO + '/upload/main/campaigns" target="_blank" rel="noopener">Upload to campaigns/</a></div>' +
-      '<p class="hint">Optional: to make this the card at the plain card.labs.trlibrary.com address and the first template here, edit <a href="' + REPO + '/edit/main/campaigns/index.json" target="_blank" rel="noopener">campaigns/index.json</a>, add "' + esc(c.id) + '" to the list and set it as "default".</p></li>' +
+      '<p class="hint">About two minutes after the upload, the campaign appears on the campaigns page at card.labs.trlibrary.com with its embed code.</p></li>' +
       '<li><h3>Add starter wishes</h3><p>About a minute after the upload, have staff and friends sign at the starter link. It skips the opening so signing is quick. Their wishes appear on the card once the AI screening runs.</p>' +
       '<div class="code">' + esc(SITE + "?c=" + c.id + "&starter=1") + '</div><div class="row"><button type="button" class="b ghost" data-copy="starter">Copy starter link</button></div></li>' +
       '<li><h3>Put it on a page</h3><p>Paste this into a Drupal page using a code block (Full HTML), or into any website:</p><div class="code">' + esc(embed) + '</div>' +

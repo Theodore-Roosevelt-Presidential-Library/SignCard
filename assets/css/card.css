@@ -289,6 +289,42 @@ a{color:inherit}
 .pop-card .btn{background:var(--night-sky);font-size:28px}
 .pop-x{position:absolute;right:10px;top:8px;background:none;border:0;color:#fff;font-size:30px;line-height:1;padding:4px 8px;opacity:.85}
 
+/* =========================================================
+   CAMPAIGNS PAGE (bare address)
+   ========================================================= */
+.hub{padding:0 16px 60px;max-width:1100px}
+.hub-top{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:36px 0 30px;border-bottom:1px solid rgba(255,255,255,.15)}
+.hub-mark{width:150px}
+.hub-intro h1{font-size:clamp(48px,7vw,84px)}
+.hub-intro p:last-child{font-family:var(--serif);font-size:18px;line-height:1.4;margin:10px 0 0;max-width:34em;opacity:.9}
+.hub-list{display:grid;gap:26px;padding-top:30px}
+.hcard{display:grid;grid-template-columns:240px 1fr;gap:28px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:20px}
+.hthumb{position:relative;display:block;aspect-ratio:5/7;background:var(--deep-orange);border-radius:4px;overflow:hidden;text-decoration:none;container-type:inline-size;box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.hthumb .hnum{position:absolute;left:50%;top:24%;transform:translateX(-50%);font-family:var(--display);font-weight:800;font-size:66cqw;line-height:.8;color:var(--sunset-yellow)}
+.hthumb img{position:absolute;left:50%;bottom:0;width:96%;transform:translateX(-50%)}
+.hthumb .htitle{position:absolute;left:8%;right:8%;top:6%;font-size:13cqw;color:#fff}
+.hbody{min-width:0}
+.hmeta{display:flex;gap:10px;align-items:center;font-size:13px;opacity:.9;margin:0 0 8px}
+.pill{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:2px}
+.pill.open{background:var(--spring-green);color:var(--dark-forest)}
+.pill.soon{background:var(--sunset-yellow);color:var(--night-sky)}
+.pill.closed{background:rgba(255,255,255,.2);color:#fff}
+.hbody h2{font-size:clamp(34px,4vw,52px)}
+.hcount{font-family:var(--serif);font-size:18px;margin:8px 0 16px}
+.hcount b{font-family:var(--display);font-size:28px;color:var(--accent);letter-spacing:.02em}
+.hrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.hrow .btn,.hbody>.btn{font-size:19px;padding:10px 16px 8px}
+.hlabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;opacity:.8}
+.hlabel span{font-weight:400;letter-spacing:.04em;text-transform:none;margin-left:8px;opacity:.8}
+.hcode{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.5;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);padding:12px 14px;border-radius:4px;white-space:pre-wrap;word-break:break-all;margin:0 0 12px;color:#e9eef5}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);background:var(--sunset-yellow);color:var(--night-sky);font-weight:700;padding:10px 16px;border-radius:4px;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:760px){
+  .hub-top{grid-template-columns:1fr;gap:16px;padding-top:24px}
+  .hcard{grid-template-columns:1fr}
+  .hthumb{max-width:220px}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }

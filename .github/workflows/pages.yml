@@ -35,6 +35,24 @@ jobs:
         run: |
           mkdir -p _site
           cp -r index.html embed.js CNAME assets builder campaigns data _site/
+          # GitHub Pages cannot list a folder, so publish the list of campaign files for the
+          # campaigns page and the builder's templates.
+          python3 - <<'PY'
+          import glob, json, os
+          out = []
+          for p in glob.glob("campaigns/*.json"):
+              if os.path.basename(p) in ("index.json", "list.json"):
+                  continue
+              try:
+                  c = json.load(open(p, encoding="utf-8"))
+              except Exception:
+                  continue
+              if c.get("id"):
+                  out.append({"id": c["id"], "name": c.get("name", c["id"]), "opens": c.get("opens", ""), "closes": c.get("closes", "")})
+          out.sort(key=lambda c: c.get("opens") or "", reverse=True)
+          json.dump({"campaigns": out}, open("_site/campaigns/list.json", "w"), indent=1)
+          print(len(out), "campaign(s) listed")
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
