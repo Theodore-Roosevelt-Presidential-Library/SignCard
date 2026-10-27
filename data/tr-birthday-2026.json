@@ -1,7 +1,7 @@
 {
  "campaign": "tr-birthday-2026",
- "updated": "2026-10-27T15:00:05+00:00",
- "total": 490,
+ "updated": "2026-10-27T15:25:03+00:00",
+ "total": 526,
  "states": 46,
  "featured": [
   {
@@ -21,6 +21,30 @@
    "name": "Kathryn M.",
    "place": "Dayton, OH",
    "message": "I wish for Conservation and protection of our national parks and open spaces."
+  },
+  {
+   "id": "4ad51004a5",
+   "name": "April L.",
+   "place": "Chicago, IL",
+   "message": "I wish for Less fear and more love. I wish for the preservation of our land that you so deeply cared about and saw how healing our beautiful diverse country can be to anyone."
+  },
+  {
+   "id": "77ba2da66c",
+   "name": "Alex R.",
+   "place": "Ocala, FL",
+   "message": "I wish for a bright future for my kids and grandkids. A future where people are devoted to our country and receive a square deal for their hard work!"
+  },
+  {
+   "id": "9bc9eca9e6",
+   "name": "Kathie Z.",
+   "place": "Louisville, KY",
+   "message": "I wish for protection of our public lands and National parks. I wish for more people with your vision for our country."
+  },
+  {
+   "id": "fc28d83d44",
+   "name": "Judy D.",
+   "place": "Corona, CA",
+   "message": "I wish for more individuals to become actively participating in the National Park System and all it has to offer. Peace, wonder, irrefutable beauty."
   },
   {
    "id": "2c99a0d099",
@@ -51,84 +75,60 @@
    "name": "Chester V.",
    "place": "",
    "message": "I wish for clean environment and protected flora and fauna."
-  },
-  {
-   "id": "1cbd467ce2",
-   "name": "Lionel M.",
-   "place": "Sun Valley, CA",
-   "message": "I wish for Access to public land, conservation, and a free, democratic republic. A nation where people are civically engaged and active in their government."
-  },
-  {
-   "id": "5eb9f457ce",
-   "name": "Lisa B.",
-   "place": "Huntington Beach, CA",
-   "message": "I wish for Peaceful existence, open lands, environmental care and stewardship."
-  },
-  {
-   "id": "aa10d92527",
-   "name": "LaTara Z.",
-   "place": "Watertown, SD",
-   "message": "I wish for open land, clean rivers, and a healing of the nation that causes us to be neighbors that show up with compassion."
-  },
-  {
-   "id": "ef1a6874c7",
-   "name": "Kathy R.",
-   "place": "Atwood, KS",
-   "message": "I wish for Individual empowerment to fight for equality and protecting our environment for our grandchildren. I wish for the respect for strangers. I grew up with knowing that we’re all one family under God."
   }
  ],
  "signers": [
+  "Judy D.",
+  "Bill C.",
+  "Douglas V.",
+  "Tim U.",
+  "Gwen D.",
+  "Lorie and Gene J.",
+  "Deborah G.",
+  "Dale M.",
+  "Dr. Lynne M.",
+  "Robert L.",
+  "Jackie P.",
+  "Karla U.",
+  "Ananya S.",
+  "Kathie Z.",
+  "Robert O.",
+  "Luis L.",
+  "Cheri J.",
+  "Elaine T.",
+  "Cathy C.",
+  "Alex R.",
+  "Wayne S.",
+  "David E.",
+  "Sharon H.",
+  "Jerry S.",
+  "Cynthia R.",
+  "April L.",
+  "Eric O.",
+  "Justin H.",
+  "Bob F.",
+  "Linda O.",
+  "Josh B.",
+  "Jane E.",
+  "Carolyn K.",
+  "James J.",
   "Jim B.",
   "Helen D.",
   "Darlene M.",
   "Charlene B.",
   "Lisa S.",
-  "Rebecca T.",
-  "Susan C.",
-  "Kay I.",
-  "Nancy M.",
-  "Terry C.",
-  "Gale R.",
-  "Patrizia G.",
-  "Dan & Ann C.",
-  "Corrine C.",
-  "Jim & Linda S.",
-  "Le Roy W.",
-  "CeCe C.",
-  "Bill A.",
-  "Lynn J.",
-  "Cindy K.",
-  "David K.",
-  "Warren C.",
-  "Donald A.",
-  "Paula L.",
-  "Dale D.",
-  "Jayne G.",
-  "John William M.",
-  "Gary P.",
-  "Lana L.",
-  "Julie C.",
-  "Jerry V.",
-  "Sue H.",
-  "Joel L.",
-  "Ellie B.",
-  "Becky S.",
-  "Chester V.",
-  "Lori L.",
-  "Ernie S.",
-  "Careen J.",
-  "Larry S."
+  "Rebecca T."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   10
+   11
   ],
   [
    -100.78,
    46.84,
-   7
+   8
   ],
   [
    -100.78,
@@ -144,6 +144,11 @@
    -96.84,
    46.79,
    5
+  ],
+  [
+   -101.3,
+   48.23,
+   4
   ],
   [
    -100.68,
@@ -163,11 +168,6 @@
   [
    -103.07,
    44.12,
-   3
-  ],
-  [
-   -101.3,
-   48.23,
    3
   ],
   [
@@ -193,6 +193,11 @@
   [
    -106.97,
    44.78,
+   2
+  ],
+  [
+   -106.52,
+   35.13,
    2
   ],
   [
@@ -256,6 +261,11 @@
    2
   ],
   [
+   -95.69,
+   30.36,
+   2
+  ],
+  [
    -94.72,
    39.04,
    2
@@ -283,6 +293,11 @@
   [
    -86.83,
    34.18,
+   2
+  ],
+  [
+   -80.17,
+   26.61,
    2
   ],
   [
@@ -333,6 +348,11 @@
   [
    -122.63,
    48.5,
+   1
+  ],
+  [
+   -122.13,
+   37.38,
    1
   ],
   [
@@ -411,6 +431,11 @@
    1
   ],
   [
+   -117.57,
+   33.88,
+   1
+  ],
+  [
    -117.38,
    47.43,
    1
@@ -481,6 +506,11 @@
    1
   ],
   [
+   -112.07,
+   33.51,
+   1
+  ],
+  [
    -112.04,
    40.6,
    1
@@ -521,6 +551,11 @@
    1
   ],
   [
+   -111.75,
+   40.58,
+   1
+  ],
+  [
    -111.35,
    33.33,
    1
@@ -532,12 +567,12 @@
   ],
   [
    -110.95,
-   32.41,
+   32.25,
    1
   ],
   [
    -110.95,
-   32.25,
+   32.41,
    1
   ],
   [
@@ -548,6 +583,11 @@
   [
    -110.84,
    32.3,
+   1
+  ],
+  [
+   -110.54,
+   43.61,
    1
   ],
   [
@@ -593,11 +633,6 @@
   [
    -106.64,
    45.93,
-   1
-  ],
-  [
-   -106.52,
-   35.13,
    1
   ],
   [
@@ -672,12 +707,17 @@
   ],
   [
    -104.73,
-   47.1,
+   39.37,
    1
   ],
   [
    -104.73,
-   39.37,
+   47.1,
+   1
+  ],
+  [
+   -104.72,
+   38.97,
    1
   ],
   [
@@ -716,8 +756,18 @@
    1
   ],
   [
+   -103.43,
+   43.66,
+   1
+  ],
+  [
    -103.37,
    44.23,
+   1
+  ],
+  [
+   -103.36,
+   44.0,
    1
   ],
   [
@@ -811,6 +861,11 @@
    1
   ],
   [
+   -100.32,
+   44.37,
+   1
+  ],
+  [
    -99.33,
    39.76,
    1
@@ -861,6 +916,11 @@
    1
   ],
   [
+   -97.76,
+   32.23,
+   1
+  ],
+  [
    -97.41,
    46.98,
    1
@@ -881,6 +941,11 @@
    1
   ],
   [
+   -97.35,
+   35.33,
+   1
+  ],
+  [
    -97.29,
    32.87,
    1
@@ -892,7 +957,17 @@
   ],
   [
    -97.12,
+   46.86,
+   1
+  ],
+  [
+   -97.12,
    48.21,
+   1
+  ],
+  [
+   -97.1,
+   40.91,
    1
   ],
   [
@@ -912,12 +987,12 @@
   ],
   [
    -96.86,
-   32.87,
+   40.91,
    1
   ],
   [
    -96.86,
-   40.91,
+   32.87,
    1
   ],
   [
@@ -1006,13 +1081,13 @@
    1
   ],
   [
-   -95.71,
-   46.31,
+   -95.75,
+   37.57,
    1
   ],
   [
-   -95.69,
-   30.36,
+   -95.71,
+   46.31,
    1
   ],
   [
@@ -1038,6 +1113,11 @@
   [
    -95.48,
    40.72,
+   1
+  ],
+  [
+   -95.47,
+   30.14,
    1
   ],
   [
@@ -1081,6 +1161,11 @@
    1
   ],
   [
+   -94.87,
+   30.82,
+   1
+  ],
+  [
    -94.83,
    29.28,
    1
@@ -1092,12 +1177,12 @@
   ],
   [
    -94.78,
-   38.87,
+   47.24,
    1
   ],
   [
    -94.78,
-   47.24,
+   38.87,
    1
   ],
   [
@@ -1277,12 +1362,17 @@
   ],
   [
    -93.14,
-   45.07,
+   44.81,
    1
   ],
   [
    -93.14,
-   44.81,
+   45.07,
+   1
+  ],
+  [
+   -93.12,
+   44.94,
    1
   ],
   [
@@ -1436,6 +1526,11 @@
    1
   ],
   [
+   -90.33,
+   38.46,
+   1
+  ],
+  [
    -90.22,
    30.0,
    1
@@ -1501,6 +1596,11 @@
    1
   ],
   [
+   -88.63,
+   44.33,
+   1
+  ],
+  [
    -88.57,
    40.03,
    1
@@ -1541,6 +1641,11 @@
    1
   ],
   [
+   -88.23,
+   42.35,
+   1
+  ],
+  [
    -88.12,
    42.7,
    1
@@ -1567,12 +1672,12 @@
   ],
   [
    -87.89,
-   42.05,
+   30.62,
    1
   ],
   [
    -87.89,
-   30.62,
+   42.05,
    1
   ],
   [
@@ -1588,6 +1693,11 @@
   [
    -87.7,
    41.7,
+   1
+  ],
+  [
+   -87.65,
+   41.94,
    1
   ],
   [
@@ -1607,17 +1717,22 @@
   ],
   [
    -86.14,
-   39.83,
+   43.14,
    1
   ],
   [
    -86.14,
-   43.14,
+   39.83,
    1
   ],
   [
    -86.02,
    40.06,
+   1
+  ],
+  [
+   -85.98,
+   39.87,
    1
   ],
   [
@@ -1663,6 +1778,11 @@
   [
    -85.66,
    40.54,
+   1
+  ],
+  [
+   -85.58,
+   38.13,
    1
   ],
   [
@@ -1732,12 +1852,12 @@
   ],
   [
    -84.39,
-   33.8,
+   39.21,
    1
   ],
   [
    -84.39,
-   39.21,
+   33.8,
    1
   ],
   [
@@ -1821,6 +1941,11 @@
    1
   ],
   [
+   -82.49,
+   36.3,
+   1
+  ],
+  [
    -82.48,
    27.29,
    1
@@ -1838,6 +1963,11 @@
   [
    -82.24,
    29.12,
+   1
+  ],
+  [
+   -82.22,
+   29.26,
    1
   ],
   [
@@ -2131,8 +2261,18 @@
    1
   ],
   [
+   -73.98,
+   40.74,
+   1
+  ],
+  [
    -73.97,
    40.76,
+   1
+  ],
+  [
+   -73.94,
+   42.81,
    1
   ],
   [
@@ -2153,6 +2293,11 @@
   [
    -73.57,
    40.76,
+   1
+  ],
+  [
+   -73.53,
+   40.79,
    1
   ],
   [
@@ -2178,6 +2323,11 @@
   [
    -73.3,
    40.71,
+   1
+  ],
+  [
+   -73.12,
+   40.86,
    1
   ],
   [
