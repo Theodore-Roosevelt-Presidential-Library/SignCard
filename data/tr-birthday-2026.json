@@ -1,9 +1,15 @@
 {
  "campaign": "tr-birthday-2026",
- "updated": "2026-10-27T18:18:53+00:00",
- "total": 679,
+ "updated": "2026-10-27T18:31:13+00:00",
+ "total": 690,
  "states": 47,
  "featured": [
+  {
+   "id": "94e7f7b4a7",
+   "name": "Candee C.",
+   "place": "Kilgore, TX",
+   "message": "I wish for strong character, integrity and a moral compass in our state and federal government's leadership. This will promote compassion for our fellow man along with preservation of our country's lands and all our vast heritage."
+  },
   {
    "id": "8786750904",
    "name": "Aleah N.",
@@ -27,6 +33,12 @@
    "name": "Kathryn M.",
    "place": "Dayton, OH",
    "message": "I wish for Conservation and protection of our national parks and open spaces."
+  },
+  {
+   "id": "011270bfd9",
+   "name": "Glen L.",
+   "place": "Phoenix, AZ",
+   "message": "I wish for clean land, good air, ability for all to get out and enjoy."
   },
   {
    "id": "72abe2b657",
@@ -63,21 +75,20 @@
    "name": "James L.",
    "place": "Inman, SC",
    "message": "I wish for Out national parks and other treasures be protected for future generations"
-  },
-  {
-   "id": "4ad51004a5",
-   "name": "April L.",
-   "place": "Chicago, IL",
-   "message": "I wish for Less fear and more love. I wish for the preservation of our land that you so deeply cared about and saw how healing our beautiful diverse country can be to anyone."
-  },
-  {
-   "id": "77ba2da66c",
-   "name": "Alex R.",
-   "place": "Ocala, FL",
-   "message": "I wish for a bright future for my kids and grandkids. A future where people are devoted to our country and receive a square deal for their hard work!"
   }
  ],
  "signers": [
+  "Diane B.",
+  "Kaylee F.",
+  "Lucy R.",
+  "Candee C.",
+  "Josh B.",
+  "Edward T.",
+  "David K.",
+  "Donna L.",
+  "Donna K.",
+  "Glen L.",
+  "Annette S.",
   "Blase M.",
   "Dr. Gene T.",
   "Roland K.",
@@ -106,24 +117,13 @@
   "Dan Hochleutner D.",
   "Elardo A.",
   "Karen V.",
-  "Orion C.",
-  "Fay B.",
-  "Doug L.",
-  "David L.",
-  "Jonathan J.",
-  "Donald K.",
-  "Harmon J.",
-  "Jason S.",
-  "Michael B.",
-  "Elizabeth M.",
-  "Y P.",
-  "Grace J."
+  "Orion C."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   14
+   15
   ],
   [
    -100.78,
@@ -501,6 +501,11 @@
    1
   ],
   [
+   -122.16,
+   47.56,
+   1
+  ],
+  [
    -122.13,
    37.38,
    1
@@ -736,6 +741,11 @@
    1
   ],
   [
+   -112.03,
+   33.38,
+   1
+  ],
+  [
    -111.96,
    46.71,
    1
@@ -762,12 +772,17 @@
   ],
   [
    -111.88,
-   40.76,
+   40.51,
    1
   ],
   [
    -111.88,
-   40.51,
+   40.76,
+   1
+  ],
+  [
+   -111.86,
+   33.25,
    1
   ],
   [
@@ -776,8 +791,8 @@
    1
   ],
   [
-   -111.86,
-   33.25,
+   -111.81,
+   33.34,
    1
   ],
   [
@@ -802,12 +817,12 @@
   ],
   [
    -110.95,
-   32.41,
+   32.25,
    1
   ],
   [
    -110.95,
-   32.25,
+   32.41,
    1
   ],
   [
@@ -902,12 +917,12 @@
   ],
   [
    -105.09,
-   40.38,
+   39.62,
    1
   ],
   [
    -105.09,
-   39.62,
+   40.38,
    1
   ],
   [
@@ -917,12 +932,12 @@
   ],
   [
    -105.02,
-   39.77,
+   39.96,
    1
   ],
   [
    -105.02,
-   39.96,
+   39.77,
    1
   ],
   [
@@ -1023,6 +1038,11 @@
   [
    -103.0,
    42.82,
+   1
+  ],
+  [
+   -102.78,
+   47.41,
    1
   ],
   [
@@ -1241,6 +1261,11 @@
    1
   ],
   [
+   -97.23,
+   37.48,
+   1
+  ],
+  [
    -97.14,
    32.85,
    1
@@ -1276,6 +1301,11 @@
    1
   ],
   [
+   -96.97,
+   46.96,
+   1
+  ],
+  [
    -96.94,
    48.77,
    1
@@ -1292,7 +1322,7 @@
   ],
   [
    -96.79,
-   32.97,
+   32.9,
    1
   ],
   [
@@ -1302,12 +1332,12 @@
   ],
   [
    -96.79,
-   43.52,
+   32.97,
    1
   ],
   [
    -96.79,
-   32.9,
+   43.52,
    1
   ],
   [
@@ -1327,12 +1357,12 @@
   ],
   [
    -96.7,
-   43.48,
+   46.88,
    1
   ],
   [
    -96.7,
-   46.88,
+   43.48,
    1
   ],
   [
@@ -1482,12 +1512,12 @@
   ],
   [
    -95.04,
-   29.83,
+   46.94,
    1
   ],
   [
    -95.04,
-   46.94,
+   29.83,
    1
   ],
   [
@@ -1503,6 +1533,11 @@
   [
    -94.87,
    30.82,
+   1
+  ],
+  [
+   -94.86,
+   32.38,
    1
   ],
   [
@@ -1637,12 +1672,12 @@
   ],
   [
    -93.78,
-   41.7,
+   44.85,
    1
   ],
   [
    -93.78,
-   44.85,
+   41.7,
    1
   ],
   [
@@ -1692,12 +1727,12 @@
   ],
   [
    -93.38,
-   44.95,
+   44.5,
    1
   ],
   [
    -93.38,
-   44.5,
+   44.95,
    1
   ],
   [
@@ -1712,12 +1747,12 @@
   ],
   [
    -93.3,
-   37.05,
+   45.02,
    1
   ],
   [
    -93.3,
-   45.02,
+   37.05,
    1
   ],
   [
@@ -1777,12 +1812,12 @@
   ],
   [
    -93.1,
-   44.9,
+   45.0,
    1
   ],
   [
    -93.1,
-   45.0,
+   44.9,
    1
   ],
   [
@@ -1818,6 +1853,11 @@
   [
    -92.77,
    42.57,
+   1
+  ],
+  [
+   -92.45,
+   42.52,
    1
   ],
   [
@@ -2067,12 +2107,12 @@
   ],
   [
    -88.23,
-   43.14,
+   42.35,
    1
   ],
   [
    -88.23,
-   42.35,
+   43.14,
    1
   ],
   [
@@ -2102,17 +2142,17 @@
   ],
   [
    -87.89,
-   30.62,
-   1
-  ],
-  [
-   -87.89,
    41.85,
    1
   ],
   [
    -87.89,
    42.05,
+   1
+  ],
+  [
+   -87.89,
+   30.62,
    1
   ],
   [
@@ -2162,12 +2202,12 @@
   ],
   [
    -86.14,
-   39.83,
+   43.14,
    1
   ],
   [
    -86.14,
-   43.14,
+   39.83,
    1
   ],
   [
@@ -2222,12 +2262,12 @@
   ],
   [
    -85.66,
-   40.54,
+   38.46,
    1
   ],
   [
    -85.66,
-   38.46,
+   40.54,
    1
   ],
   [
@@ -2432,12 +2472,12 @@
   ],
   [
    -82.48,
-   27.29,
+   36.47,
    1
   ],
   [
    -82.48,
-   36.47,
+   27.29,
    1
   ],
   [
@@ -2497,12 +2537,12 @@
   ],
   [
    -81.81,
-   26.24,
+   30.55,
    1
   ],
   [
    -81.81,
-   30.55,
+   26.24,
    1
   ],
   [
@@ -2711,6 +2751,11 @@
    1
   ],
   [
+   -76.97,
+   39.46,
+   1
+  ],
+  [
    -76.76,
    37.32,
    1
@@ -2812,17 +2857,22 @@
   ],
   [
    -73.86,
-   41.69,
+   42.92,
    1
   ],
   [
    -73.86,
-   42.92,
+   41.69,
    1
   ],
   [
    -73.84,
    41.09,
+   1
+  ],
+  [
+   -73.65,
+   40.72,
    1
   ],
   [
