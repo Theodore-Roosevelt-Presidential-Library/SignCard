@@ -13,7 +13,7 @@
     "photoAlt": "Theodore Roosevelt in his buckskin hunting suit, 1885",
     "background": "assets/img/badlands-river.jpg",
     "backgroundAlt": "The Little Missouri River winding through the North Dakota Badlands",
-    "wishPrompt": "Make a wish for the country.",
+    "wishPrompt": "Make a wish for the world.",
     "blowButton": "Blow out the candles",
     "blowHint": "Tap the cake, or blow into your microphone.",
     "doneHeadline": "Wish made!",
@@ -26,11 +26,11 @@
     "coverTitle": "Happy 168th, TR",
     "coverSub": "Theodore Roosevelt was born October 27, 1858, in New York City.",
     "inviteTitle": "Sign TR's birthday card",
-    "inviteBody": "Add your name and share a wish for the country he loved.",
+    "inviteBody": "Add your name and share a wish for the world.",
     "openButton": "Open the card",
     "greeting": "Happy 168th birthday, Theodore Roosevelt.",
-    "greetingSub": "From the Badlands, with wishes for the country.",
-    "messageLabel": "Your wish for the country",
+    "greetingSub": "From the Badlands, with wishes for the world.",
+    "messageLabel": "Your wish for the world",
     "messagePrefix": "I wish for",
     "messagePlaceholder": "open land, clean rivers and neighbors who show up for each other.",
     "messageMax": 280,
@@ -47,7 +47,7 @@
   },
   "wall": {
     "show": true,
-    "title": "Wishes for the country",
+    "title": "Wishes for the world",
     "count": 12
   },
   "map": {
@@ -70,11 +70,11 @@
   },
   "share": {
     "title": "Pass the card around",
-    "text": "I signed Theodore Roosevelt's birthday card and made a wish for the country. Add your name:",
+    "text": "I signed Theodore Roosevelt's birthday card and made a wish for the world. Add your name:",
     "url": "https://card.labs.trlibrary.com/?c=tr-birthday-2026"
   },
   "ai": {
-    "topic": "wishes for the United States, written to sign Theodore Roosevelt's 168th birthday card",
+    "topic": "wishes for the world, written to sign Theodore Roosevelt's 168th birthday card",
     "guidance": "Feature wishes that are heartfelt, specific and hopeful, and that connect to values Roosevelt is known for: conservation, citizenship, courage, hard work, the strenuous life, service. Never feature partisan content, named living politicians, parties or campaigns."
   },
   "moderation": {
