@@ -16,7 +16,7 @@
  */
 (function () {
   "use strict";
-  var W = 1700, H = 500;              // landscape coordinates; the display widens or narrows W to fit its screen
+  var W = 1500, H = 1000;             // mosaic coordinates; the display widens or narrows W to fit its frame
   var REDUCED = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var o = null, C = null, D = null;
 
@@ -57,98 +57,88 @@
     return m.length > 26 ? m.slice(0, 24).replace(/\s+\S*$/, "") + "…" : m;
   }
 
-  /* ---------------- the land ---------------- */
-  // Buttes: center, width, height (share of the box), share of the width that is flat caprock.
-  var BUTTES = [[.05, .17, .5, .35], [.2, .15, .74, .3], [.335, .09, .56, .2], [.48, .24, .66, .45],
-    [.645, .1, .9, .22], [.77, .17, .7, .4], [.93, .17, .55, .3]];
-  function landHeight(x) {
-    var base = .2 + .035 * Math.sin(x * 11.3 + .7) + .02 * Math.sin(x * 29.1);
-    var h = base;
-    for (var i = 0; i < BUTTES.length; i++) {
-      var b = BUTTES[i], d = Math.abs(x - b[0]) / (b[1] / 2);
-      if (d >= 1) continue;
-      var t = d <= b[3] ? 1 : 1 - (d - b[3]) / (1 - b[3]);
-      var s = smooth(t), k = s * 5, terr = Math.floor(k) / 5 + smooth(k % 1) / 5;   // badlands terraces
-      var v = base + (b[2] - base) * (.5 * s + .5 * terr);
-      if (d <= b[3]) v += .01 * Math.sin(x * 140 + i * 9);
-      if (v > h) h = v;
+  /* ---------------- the mosaic ---------------- */
+  // The picture: a photo (landscape.image) sampled into a brick grid that covers the whole frame.
+  // Each tile takes the average color of its patch of the photo, softened toward card stock, so
+  // the photo appears as answers fill in. Empty cells show a dim copy of the photo behind them.
+  var PIX = null;
+  function loadPhoto(src) {
+    return new Promise(function (res) {
+      if (!src) return res();
+      var im = new Image();
+      im.onload = function () {
+        var w = 360, h = Math.round(w * im.naturalHeight / im.naturalWidth), cv = document.createElement("canvas");
+        cv.width = w; cv.height = h;
+        var x = cv.getContext("2d"); x.drawImage(im, 0, 0, w, h);
+        try { PIX = { w: w, h: h, d: x.getImageData(0, 0, w, h).data, src: src, nw: im.naturalWidth, nh: im.naturalHeight }; } catch (e) { PIX = null; }
+        res();
+      };
+      im.onerror = function () { res(); };
+      im.src = src;
+    });
+  }
+  // The photo is cropped to the frame like CSS "cover", centered.
+  function sample(x0, y0, x1, y1) {
+    if (!PIX) return [209, 204, 189];
+    var s = Math.max(W / PIX.w, H / PIX.h), ox = (W - PIX.w * s) / 2, oy = (H - PIX.h * s) / 2, r = 0, g = 0, b = 0, n = 0;
+    for (var i = 0; i < 5; i++) for (var j = 0; j < 4; j++) {
+      var px = Math.floor(((x0 + (x1 - x0) * (i + .5) / 5) - ox) / s), py = Math.floor(((y0 + (y1 - y0) * (j + .5) / 4) - oy) / s);
+      px = Math.max(0, Math.min(PIX.w - 1, px)); py = Math.max(0, Math.min(PIX.h - 1, py));
+      var k = (py * PIX.w + px) * 4; r += PIX.d[k]; g += PIX.d[k + 1]; b += PIX.d[k + 2]; n++;
     }
-    return h;
+    return [r / n, g / n, b / n];
   }
-  function farHeight(x) { return .34 + .16 * landHeight((x * .83 + .41) % 1) + .03 * Math.sin(x * 17); }
-  function topY(x) { return H * (1 - landHeight(x / W)); }
-
-  // Rock layers from the river bottom up (share of the box height).
-  var STRATA = [
-    [.11, "#4a3d33"], [.21, "#9aa3ab"], [.31, "#d9cbb0"], [.38, "#c25a3e"], [.49, "#e6cfa3"],
-    [.54, "#5a4a3d"], [.64, "#d6d0c4"], [.72, "#e7805d"], [.85, "#efe4cc"], [1.1, "#cdb48a"]
-  ];
-  var GRASS = ["#87bb41", "#8fc895", "#6f9d3a", "#a3c36a"];
-  var WATER = ["#99adc5", "#b7c8da", "#86a0bd"];
-  function shade(hex, f) {
-    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255;
-    var c = function (v) { return Math.max(0, Math.min(255, Math.round(v * f))); };
-    return "#" + ((1 << 24) + (c(r) << 16) + (c(g) << 8) + c(b)).toString(16).slice(1);
-  }
-  function lum(hex) { var n = parseInt(hex.slice(1), 16); return (.299 * (n >> 16) + .587 * (n >> 8 & 255) + .114 * (n & 255)) / 255; }
+  function hex(c) { return "#" + c.map(function (v) { return ("0" + Math.max(0, Math.min(255, Math.round(v))).toString(16)).slice(-2); }).join(""); }
+  function lum(h) { var n = parseInt(h.slice(1), 16); return (.299 * (n >> 16) + .587 * (n >> 8 & 255) + .114 * (n & 255)) / 255; }
   function cellColor(c) {
-    var rnd = rng(hash(c.x.toFixed(1) + "," + c.y.toFixed(1)));
-    var ry = H * (.955 - .022 * Math.sin(c.cx / W * 6.5 + .8));
-    if (Math.abs(c.cy - ry) < c.h * .55 && c.cy > H * .9) return shade(WATER[Math.floor(rnd() * 3)], .94 + rnd() * .12);
-    if (c.cy - c.top < c.h * .9) return shade(GRASS[Math.floor(rnd() * GRASS.length)], .92 + rnd() * .12);
-    var yy = (H - c.cy) / H + .022 * Math.sin(c.cx / W * 5 + 1) + .006 * Math.sin(c.cx / W * 19);
-    for (var i = 0; i < STRATA.length; i++) if (yy < STRATA[i][0]) return shade(STRATA[i][1], .96 + rnd() * .08);
-    return STRATA[STRATA.length - 1][1];
+    var rnd = rng(hash(c.x.toFixed(1) + "," + c.y.toFixed(1))), rgb = sample(c.x, c.y, c.x + c.w, c.y + c.h);
+    var paper = [251, 248, 241], f = .9 + rnd() * .14, mix = .1;   // a little card stock, a little variation
+    return hex(rgb.map(function (v, i) { return (v * (1 - mix) + paper[i] * mix) * f; }));
   }
 
-  // Cells: staggered bricks (like sediment) under the skyline, in fill order (bottom up, loosely).
-  function grid(ch) {
-    var cw = ch * 2, out = [], rows = Math.ceil(H / ch);
+  // Cells: staggered bricks over the whole frame, filled in a random order so the picture emerges everywhere at once.
+  function grid(rows) {
+    var ch = H / rows, cw = ch * 2, out = [];
     for (var r = 0; r < rows; r++) {
-      var y = H - (r + 1) * ch, cy = y + ch / 2, off = r % 2 ? cw / 2 : 0;
-      for (var x = -off; x < W; x += cw) {
+      var y = r * ch, off = r % 2 ? cw / 2 : 0;
+      for (var x = -off; x < W - 1; x += cw) {
         var x0 = Math.max(0, x), x1 = Math.min(W, x + cw);
-        if (x1 - x0 < cw * .45) continue;
-        var cx = (x0 + x1) / 2, top = topY(cx);
-        if (cy > top) out.push({ x: x0, y: y, w: x1 - x0, h: ch, cx: cx, cy: cy, r: r, top: top });
+        if (x1 - x0 < cw * .3) continue;
+        out.push({ x: x0, y: y, w: x1 - x0, h: ch, cx: (x0 + x1) / 2, cy: y + ch / 2, r: r });
       }
     }
-    return out;
+    return { cells: out, ch: ch };
   }
   var layoutCache = {};
   function layout(n) {
     n = Math.max(20, Math.round(n));
-    var key = n + "|" + W;
+    var key = n + "|" + W + "|" + (PIX ? PIX.src : "");
     if (layoutCache[key]) return layoutCache[key];
-    var area = 0, S = 300;
-    for (var i = 0; i < S; i++) area += landHeight((i + .5) / S);
-    area = area / S * W * H;
-    var ch = Math.sqrt(area / (n * 2)), cells = grid(ch);
-    for (var it = 0; it < 16 && (cells.length < n || cells.length > n * 1.03); it++) {
-      ch *= Math.sqrt(cells.length / n) * (cells.length < n ? .995 : 1.002);
-      cells = grid(ch);
-    }
-    while (cells.length < n) { ch *= .99; cells = grid(ch); }
-    var rows = Math.ceil(H / ch), jitter = Math.max(2, rows * .3), rnd = rng(1858);
-    cells.forEach(function (c) { c.k = c.r + rnd() * jitter; c.color = cellColor(c); c.dark = lum(c.color) < .5; });
-    cells.sort(function (a, b) { return a.k - b.k; });
-    return (layoutCache[key] = { cells: cells, ch: ch });
+    var rows = Math.max(3, Math.floor(Math.sqrt(n * H / (2 * W)))), G = grid(rows);
+    while (G.cells.length < n) G = grid(++rows);
+    var rnd = rng(1858);
+    G.cells.forEach(function (c) { c.k = rnd(); c.color = cellColor(c); c.dark = lum(c.color) < .55; });
+    G.cells.sort(function (a, b) { return a.k - b.k; });
+    return (layoutCache[key] = G);
   }
   function capacity(goal, count) {
-    // A full landscape holds `goal` tiles. Past that the tiles get smaller so everyone fits.
+    // A full mosaic holds about `goal` tiles. Past that the tiles get smaller so everyone fits.
     if (count <= goal) return goal;
     return Math.ceil(count / 20) * 20;
   }
 
-  function farPath() {
-    var d = "M0," + H;
-    for (var i = 0; i <= 150; i++) { var x = i / 150 * W; d += " L" + x.toFixed(1) + "," + (H * (1 - farHeight(x / W))).toFixed(1); }
-    return d + " L" + W + "," + H + " Z";
+  var maskN = 0;
+  function landSVG(cls) {
+    // Dim photo underneath; each filled tile reveals the full-color photo through a mask, with a
+    // light card tint and the place on top.
+    var id = "lsm" + (++maskN);
+    return '<svg class="' + cls + '" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A Badlands photo mosaic built from the places people named">' +
+      '<defs><mask id="' + id + '" maskUnits="userSpaceOnUse"><g class="ls-mask"></g></mask></defs>' +
+      '<image class="ls-photo" preserveAspectRatio="xMidYMid slice" x="0" y="0"/>' +
+      '<image class="ls-bright" preserveAspectRatio="xMidYMid slice" x="0" y="0" mask="url(#' + id + ')"/>' +
+      '<g class="ls-ghosts"></g><g class="ls-tiles"></g></svg>';
   }
-  function landSVG(cls, withFar) {
-    return '<svg class="' + cls + '" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="xMidYMax meet" role="img" aria-label="A Badlands landscape built from the places people named">' +
-      (withFar ? '<path class="ls-far"/>' : "") + '<g class="ls-ghosts"></g><g class="ls-tiles"></g></svg>';
-  }
+  function reveal(el, on) { if (el && el._m) el._m.setAttribute("fill", on ? "#fff" : "#000"); }
 
   // Draws tiles into an SVG made by landSVG(). Keeps tiles already drawn; redraws everything when
   // the grid changes size.
@@ -156,17 +146,18 @@
     this.svg = svg; this.opts = opts || {}; this.n = 0; this.drawn = {};
   }
   Land.prototype.draw = function (tiles, goal) {
-    var n = capacity(goal, tiles.length), L = layout(n), self = this, gap = Math.max(.7, L.ch * .055);
+    var n = capacity(goal, tiles.length), L = layout(n), self = this, gap = Math.max(.6, L.ch * .06);
     var ghosts = $(".ls-ghosts", this.svg), g = $(".ls-tiles", this.svg);
-    if (n !== this.n || W !== this.w) {
-      this.n = n; this.w = W; this.drawn = {}; g.innerHTML = "";
+    if (n !== this.n || W !== this.w || L !== this.L) {
+      this.n = n; this.w = W; this.L = L; this.drawn = {}; g.innerHTML = "";
       this.svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-      var far = $(".ls-far", this.svg); if (far) far.setAttribute("d", farPath());
+      $$("image", this.svg).forEach(function (ph) { if (PIX) { ph.setAttribute("href", PIX.src); ph.setAttribute("width", W); ph.setAttribute("height", H); } });
+      $(".ls-mask", this.svg).innerHTML = "";
       ghosts.innerHTML = L.cells.map(function (c) {
-        return '<rect x="' + (c.x + gap).toFixed(1) + '" y="' + (c.y + gap).toFixed(1) + '" width="' + (c.w - 2 * gap).toFixed(1) + '" height="' + (c.h - 2 * gap).toFixed(1) + '" fill="' + c.color + '"/>';
+        return '<rect x="' + (c.x + gap / 2).toFixed(1) + '" y="' + (c.y + gap / 2).toFixed(1) + '" width="' + (c.w - gap).toFixed(1) + '" height="' + (c.h - gap).toFixed(1) + '"/>';
       }).join("");
     }
-    var fresh = [], showText = this.opts.text && L.ch >= 14, fs = L.ch * .44;
+    var fresh = [], showText = this.opts.text && L.ch >= 14, fs = L.ch * .36;
     var ids = {};
     tiles.forEach(function (t, i) {
       ids[t.id] = 1;
@@ -174,24 +165,27 @@
       if (!c) return;
       var el = self.drawn[t.id];
       if (el && el._i === i) return;
-      if (el) el.remove();
+      if (el) { el.remove(); if (el._m) el._m.remove(); }
       el = document.createElementNS("http://www.w3.org/2000/svg", "g");
       el.setAttribute("class", "ls-tile" + (t.mine ? " mine" : "") + (t.pending ? " pending" : ""));
       el._i = i; el._t = t; el._c = c;
       var txt = "", lab = "", maxW = 0;
       if (showText) {
-        lab = labelOf(t); maxW = c.w - gap * 2 - L.ch * .28;
-        txt = '<text x="' + c.cx.toFixed(1) + '" y="' + (c.cy + fs * .36).toFixed(1) + '" font-size="' + fs.toFixed(1) + '" fill="' + (c.dark ? "#ffffff" : "#25282a") + '"></text>';
+        lab = labelOf(t); maxW = c.w - gap - L.ch * .3;
+        txt = '<text x="' + c.cx.toFixed(1) + '" y="' + (c.cy + fs * .36).toFixed(1) + '" font-size="' + fs.toFixed(1) + '" fill="#ffffff"></text>';
       }
-      el.innerHTML = '<rect x="' + (c.x + gap).toFixed(1) + '" y="' + (c.y + gap).toFixed(1) + '" width="' + (c.w - 2 * gap).toFixed(1) + '" height="' + (c.h - 2 * gap).toFixed(1) + '" rx="' + (gap * .8).toFixed(1) + '" fill="' + c.color + '"/>' + txt;
+      el.innerHTML = '<rect x="' + (c.x + gap / 2).toFixed(1) + '" y="' + (c.y + gap / 2).toFixed(1) + '" width="' + (c.w - gap).toFixed(1) + '" height="' + (c.h - gap).toFixed(1) + '" rx="' + (gap * .5).toFixed(1) + '" fill="' + c.color + '"/>' + txt;
       g.appendChild(el);
+      var m = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      m.setAttribute("x", c.x.toFixed(1)); m.setAttribute("y", c.y.toFixed(1)); m.setAttribute("width", c.w.toFixed(1)); m.setAttribute("height", c.h.toFixed(1)); m.setAttribute("fill", "#fff");
+      $(".ls-mask", self.svg).appendChild(m); el._m = m;
       if (showText) { el._lab = lab; el._maxW = maxW; fit(el); }
       el.classList.add("enter");
       setTimeout(function () { el.classList.remove("enter"); }, 1000);
       self.drawn[t.id] = el;
       fresh.push(el);
     });
-    Object.keys(this.drawn).forEach(function (id) { if (!ids[id]) { self.drawn[id].remove(); delete self.drawn[id]; } });
+    Object.keys(this.drawn).forEach(function (id) { if (!ids[id]) { var d = self.drawn[id]; d.remove(); if (d._m) d._m.remove(); delete self.drawn[id]; } });
     return fresh;
   };
   // Fit a label in its tile: squeeze it up to a third narrower, and shorten it past that.
@@ -262,7 +256,7 @@
     var qs = opts.qs;
     o.root.className = "sc ls" + (qs.has("display") ? " ls-display" : " ls-phone");
     document.title = (get(C, "landscape.qrLabel", "Add your place")) + " | Theodore Roosevelt Presidential Library";
-    if (qs.has("display")) display(qs); else phone(qs);
+    loadPhoto(get(C, "landscape.image", "")).then(function () { if (qs.has("display")) display(qs); else phone(qs); });
   }
 
   /* =========================================================
@@ -275,51 +269,55 @@
     var logo = get(C, "landscape.partnerLogo", "");
     o.root.innerHTML =
       '<div class="lsd">' +
-      '<div class="lsd-sky" aria-hidden="true"><svg class="lsd-stars" viewBox="0 0 100 60" preserveAspectRatio="none"></svg><div class="lsd-glow"></div></div>' +
       '<header class="lsd-top">' +
-      '<div class="lsd-q"><p class="kicker">' + esc(get(C, "landscape.kicker", "")) + (get(C, "landscape.displayTagline") ? '<span class="sep">·</span>' + esc(C.landscape.displayTagline) : "") + "</p>" +
-      '<h1 class="dh">' + accentQuestion(get(C, "landscape.question", "")) + "</h1></div>" +
-      '<div class="lsd-qr"><div class="qr" aria-hidden="true"></div><div><p class="dh">' + esc(get(C, "landscape.qrLabel", "Add your place")) + '</p><p class="lsd-url">Scan with your phone camera</p></div></div>' +
+      '<p class="kicker">' + esc(get(C, "landscape.kicker", "")) + (get(C, "landscape.displayTagline") ? '<span class="sep">·</span>' + esc(C.landscape.displayTagline) : "") + "</p>" +
+      '<h1 class="dh">' + accentQuestion(get(C, "landscape.question", "")) + "</h1>" +
       "</header>" +
+      '<div class="lsd-main">' +
+      '<div class="lsd-wall"><div class="lsd-frame">' + landSVG("ls-svg") + "</div></div>" +
+      '<aside class="lsd-side">' +
+      '<div class="lsd-qr"><div class="qr" aria-hidden="true"></div><div><p class="dh">' + esc(get(C, "landscape.qrLabel", "Add your place")) + '</p><p class="lsd-url">Scan with your phone camera</p></div></div>' +
       '<div class="lsd-spot" aria-live="polite"></div>' +
-      '<div class="lsd-land">' + landSVG("ls-svg", true) + "</div>" +
+      '<div class="lsd-count"><p><b class="n">0</b> <span class="w">places and counting</span></p><div class="bar"><i></i></div></div>' +
+      "</aside></div>" +
       '<footer class="lsd-foot">' +
       '<img class="lsd-mark" src="assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library">' +
-      '<div class="lsd-count"><p><b class="n">0</b> <span class="w">places and counting</span></p><div class="bar"><i></i></div></div>' +
+      '<p class="lsd-credit">' + esc(get(C, "landscape.imageCredit", "")) + "</p>" +
       (logo ? '<img class="lsd-partner" src="' + esc(logo) + '" alt="' + esc(get(C, "landscape.partnerLogoAlt", "")) + '">' : "<span></span>") +
       "</footer>" +
       (demo ? '<span class="lsd-demo">Demo · sample answers</span>' : "") +
       '<button type="button" class="lsd-fs" aria-label="Full screen">⤢ Full screen</button>' +
       "</div>";
-    stars();
     // QR code (qrcode-generator, MIT).
     loadScript("https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js").then(function () {
       var q = window.qrcode(0, "M"); q.addData(joinUrl); q.make();
       $(".lsd-qr .qr").innerHTML = q.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
     }).catch(function () { $(".lsd-qr .qr").innerHTML = '<span class="lsd-url">' + esc(shortUrl) + "</span>"; });
 
-    // Fit the land to the screen: about 52% of the height, full width (16:9 is about 3.4:1, a 3:2 Hub about 2.9:1).
-    var fitW = function () { var land = $(".lsd-land"), r = o.root.getBoundingClientRect(); return Math.round(Math.max(600, Math.min(2200, H * r.width / (window.innerHeight * .52)))); };
+    // Fit the mosaic to its frame on this screen (coordinates are H tall; W follows the frame's shape).
+    var fitW = function () { var r = $(".lsd-wall").getBoundingClientRect(); return Math.round(Math.max(500, Math.min(3000, H * r.width / Math.max(1, r.height)))); };
     W = fitW();
-    var land = new Land($(".lsd-land svg"), { text: true });
+    var land = new Land($(".lsd-wall svg"), { text: true });
     var rz;
-    window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(function () { var w = fitW(); if (Math.abs(w - W) > 20) { W = w; land.draw(tiles, goal); } }, 400); });
+    var refitWall = function () { clearTimeout(rz); rz = setTimeout(function () { var w = fitW(); if (Math.abs(w - W) > 10) { W = w; land.draw(tiles, goal); land.refit(); } }, 250); };
+    if ("ResizeObserver" in window) new ResizeObserver(refitWall).observe($(".lsd-wall")); else window.addEventListener("resize", refitWall);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { land.refit(); });
     var tiles = [], queue = [], known = {}, spotTimer = null, first = true, lastSpot = null;
 
     function counter() {
       var n = tiles.length, el = $(".lsd-count");
       $(".n", el).textContent = num(n);
-      $(".w", el).textContent = n === 1 ? "place and counting" : (n >= goal ? "places. The landscape is complete, and still growing." : "places and counting");
+      $(".w", el).textContent = n === 1 ? "place and counting" : (n >= goal ? "places. The mosaic is complete, and still growing." : "places and counting");
       $(".bar i", el).style.width = Math.min(100, n / goal * 100) + "%";
       el.classList.toggle("done", n >= goal);
+      $(".lsd-wall svg").classList.toggle("complete", n >= goal);   // fill any cells left over at the goal
     }
     function apply(list) {
       var added = [];
       list.forEach(function (t) { if (!known[t.id]) { known[t.id] = 1; if (!first) added.push(t); } });
       tiles = list;
       land.draw(tiles, goal);
-      added.forEach(function (t) { var el = land.el(t.id); if (el) { el.classList.remove("enter"); el.classList.add("waiting"); } });
+      added.forEach(function (t) { var el = land.el(t.id); if (el) { el.classList.remove("enter"); el.classList.add("waiting"); reveal(el, false); } });
       queue = queue.concat(added);
       first = false;
       counter();
@@ -351,7 +349,7 @@
       requestAnimationFrame(function () { requestAnimationFrame(function () { card.classList.add("on"); }); });
       var el = land.el(t.id);
       if (el && isNew && !REDUCED) setTimeout(function () { fly(card, el); }, 1300);
-      else if (el) { el.classList.remove("waiting"); el.classList.add("lit"); }
+      else if (el) { el.classList.remove("waiting"); reveal(el, true); el.classList.add("lit"); }
       spotTimer = setTimeout(spotlight, isNew ? (queue.length > 3 ? 4200 : 7000) : 8000);
     }
     function fly(card, el) {
@@ -365,11 +363,11 @@
         { left: a.left + "px", top: a.top + "px", width: a.width + "px", height: a.height + "px", opacity: .9, borderRadius: "6px" },
         { left: b.left + "px", top: b.top + "px", width: b.width + "px", height: b.height + "px", opacity: 1, borderRadius: "2px" }
       ], { duration: 1100, easing: "cubic-bezier(.5,0,.2,1)", fill: "forwards" });
-      anim.onfinish = function () { f.remove(); el.classList.remove("waiting"); el.classList.add("landed", "lit"); setTimeout(function () { el.classList.remove("landed"); }, 1600); };
+      anim.onfinish = function () { f.remove(); el.classList.remove("waiting"); reveal(el, true); el.classList.add("landed", "lit"); setTimeout(function () { el.classList.remove("landed"); }, 1600); };
     }
 
     // Tap a tile on the Hub to read it.
-    $(".lsd-land svg").addEventListener("click", function (e) {
+    $(".lsd-wall svg").addEventListener("click", function (e) {
       var g = e.target.closest && e.target.closest(".ls-tile");
       if (g && g._t) show(g._t, false);
     });
@@ -402,15 +400,6 @@
     setTimeout(function () { location.reload(); }, 6 * 3600 * 1000);
   }
 
-  function stars() {
-    var svg = $(".lsd-stars"), r = rng(27), out = "";
-    for (var i = 0; i < 110; i++) {
-      var x = r() * 100, y = r() * 44, s = .05 + r() * .14;
-      out += '<circle cx="' + x.toFixed(2) + '" cy="' + y.toFixed(2) + '" r="' + s.toFixed(3) + '" style="animation-delay:' + (r() * 6).toFixed(2) + 's"/>';
-    }
-    svg.innerHTML = out;
-  }
-
   /* =========================================================
      PHONE (scan the code, name a place)
      ========================================================= */
@@ -425,7 +414,7 @@
       '<p class="kicker">' + esc(get(C, "landscape.kicker", "")) + "</p>" +
       '<h1 class="dh">' + accentQuestion(get(C, "landscape.question", "")) + "</h1>" +
       '<p class="lsp-intro">' + esc(closed ? get(C, "card.closedBody", "") : get(C, "landscape.intro", "")) + "</p>" +
-      '<div class="lsp-land">' + landSVG("ls-svg", false) + '<p class="lsp-count"></p></div>' +
+      '<div class="lsp-land"><div class="lsp-frame">' + landSVG("ls-svg") + '</div><p class="lsp-count"></p></div>' +
       '<div class="lsp-body">' + (closed ? '<h2 class="dh">' + esc(get(C, "card.closedTitle", "")) + "</h2>" : formHTML()) + "</div>" +
       '<p class="credits">Theodore Roosevelt Presidential Library · <a href="https://www.trlibrary.com" target="_blank" rel="noopener">trlibrary.com</a></p>' +
       "</div>";

@@ -32,7 +32,9 @@ Moderation by hand: every featured message in `data/<id>.json` has an `id`. Add 
 
 ## Landscape mode (America the Beautiful)
 
-A campaign with `"mode": "landscape"` (see `campaigns/atb-landscape-2026.json`) is a group art piece instead of a card. People scan a QR code, name a place they hope is still protected 100 years from now, and each approved answer becomes one tile in a Badlands landscape on a big screen. Tiles fill from the river bottom up, colored by the Badlands rock layers, with the place printed on each tile.
+A campaign with `"mode": "landscape"` (see `campaigns/atb-landscape-2026.json`) is a group photo mosaic instead of a card. People scan a QR code, name a place they hope is still protected 100 years from now, and each approved answer becomes one card-shaped tile on a big screen. A dim copy of the photo (`landscape.image`) shows the picture to complete; each tile reveals its patch of the photo in full color, in random order, with the place printed on it. At `landscape.goal` answers the picture is complete; past that the tiles get smaller so everyone fits.
+
+To change the photo, add a wide image to `assets/img/` (at least 1600 pixels across; it is cropped to the screen from the center) and set `landscape.image` and `landscape.imageCredit`.
 
 - Phone form: `?c=atb-landscape-2026` (the QR code adds `&src=qr`, saved in `source`)
 - Big screen: `?c=atb-landscape-2026&display=1`. Open it in Edge on the Surface Hub and click **Full screen** (bottom right; move the pointer to show it). Tap any tile to read it.
