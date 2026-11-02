@@ -3,9 +3,9 @@
 
 /* ---------- shared: the land ---------- */
 .ls-svg{display:block;width:100%;height:auto;overflow:visible}
-.ls-photo{opacity:.32;filter:saturate(.5) brightness(.75)}
+.ls-photo{display:none}   /* the picture appears only through filled tiles */
 .ls-svg.complete .ls-bright{mask:none}
-.ls-ghosts rect{fill:none;stroke:rgba(255,255,255,.1);stroke-width:1px;vector-effect:non-scaling-stroke}
+.ls-ghosts rect{fill:rgba(255,255,255,.035);stroke:rgba(255,255,255,.09);stroke-width:1px;vector-effect:non-scaling-stroke}
 .ls-tile rect{fill-opacity:0;stroke:rgba(9,22,38,.55);stroke-width:1px;vector-effect:non-scaling-stroke;transition:opacity .6s ease}
 .ls-tile text{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.02em;text-anchor:middle;pointer-events:none;
   fill-opacity:.82;paint-order:stroke;stroke:rgba(9,22,38,.55);stroke-width:1.6px;stroke-linejoin:round;vector-effect:non-scaling-stroke}

@@ -103,8 +103,8 @@ def review(items, campaign, key):
         "slogans or hot-button policy fights). Empty message: false\n"
         "- score: 0 to 10, how worth featuring it is: heartfelt, specific, hopeful, well written and "
         "connected to the topic. Generic one-liners score 3 or less. Not approved: 0\n"
-        "- label: the place they named, in 1 to 4 words and at most 24 characters, in title case "
-        "(e.g. Little Missouri River, Grandma's Farm). Empty string if no place is named\n"
+        "- label: a short label for the answer, in 1 to 4 words and at most 24 characters, in title case: "
+        "the place, thing or idea it names (e.g. Little Missouri River, Grandma's Farm, Clean Rivers)\n"
         "- reason: at most 12 words\n"
         'Reply with JSON only: {"items": [...]}'
     )

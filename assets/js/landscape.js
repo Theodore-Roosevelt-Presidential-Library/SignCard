@@ -20,7 +20,7 @@
   var REDUCED = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var o = null, C = null, D = null;
 
-  window.SignCardLandscape = { start: start, layout: layout };
+  window.SignCardLandscape = { start: start, stop: function () { gen++; timers.forEach(clearTimeout); timers.forEach(clearInterval); timers = []; }, layout: layout };
 
   /* ---------------- helpers ---------------- */
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -70,7 +70,7 @@
         var w = 360, h = Math.round(w * im.naturalHeight / im.naturalWidth), cv = document.createElement("canvas");
         cv.width = w; cv.height = h;
         var x = cv.getContext("2d"); x.drawImage(im, 0, 0, w, h);
-        try { PIX = { w: w, h: h, d: x.getImageData(0, 0, w, h).data, src: src, nw: im.naturalWidth, nh: im.naturalHeight }; } catch (e) { PIX = null; }
+        try { PIX = { w: w, h: h, d: x.getImageData(0, 0, w, h).data, src: src, nw: im.naturalWidth, nh: im.naturalHeight }; } catch (e) { PIX = { w: w, h: h, d: null, src: src }; }   // another site's photo: shown, not sampled
         res();
       };
       im.onerror = function () { res(); };
@@ -79,7 +79,7 @@
   }
   // The photo is cropped to the frame like CSS "cover", centered.
   function sample(x0, y0, x1, y1) {
-    if (!PIX) return [209, 204, 189];
+    if (!PIX || !PIX.d) return [209, 204, 189];
     var s = Math.max(W / PIX.w, H / PIX.h), ox = (W - PIX.w * s) / 2, oy = (H - PIX.h * s) / 2, r = 0, g = 0, b = 0, n = 0;
     for (var i = 0; i < 5; i++) for (var j = 0; j < 4; j++) {
       var px = Math.floor(((x0 + (x1 - x0) * (i + .5) / 5) - ox) / s), py = Math.floor(((y0 + (y1 - y0) * (j + .5) / 4) - oy) / s);
@@ -251,7 +251,10 @@
   /* =========================================================
      START
      ========================================================= */
+  var gen = 0, timers = [];
+  function later(fn, ms) { var g = gen, id = setTimeout(function () { if (g === gen) fn(); }, ms); timers.push(id); return id; }
   function start(opts) {
+    gen++; timers.forEach(clearTimeout); timers.forEach(clearInterval); timers = [];
     o = opts; C = opts.C; D = opts.D || {};
     var qs = opts.qs;
     o.root.className = "sc ls" + (qs.has("display") ? " ls-display" : " ls-phone");
@@ -299,7 +302,8 @@
     W = fitW();
     var land = new Land($(".lsd-wall svg"), { text: true });
     var rz;
-    var refitWall = function () { clearTimeout(rz); rz = setTimeout(function () { var w = fitW(); if (Math.abs(w - W) > 10) { W = w; land.draw(tiles, goal); land.refit(); } }, 250); };
+    var myGen = gen;
+    var refitWall = function () { if (myGen !== gen) return; clearTimeout(rz); rz = setTimeout(function () { var w = fitW(); if (Math.abs(w - W) > 10) { W = w; land.draw(tiles, goal); land.refit(); } }, 250); };
     if ("ResizeObserver" in window) new ResizeObserver(refitWall).observe($(".lsd-wall")); else window.addEventListener("resize", refitWall);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { land.refit(); });
     var tiles = [], queue = [], known = {}, spotTimer = null, first = true, lastSpot = null;
@@ -307,7 +311,7 @@
     function counter() {
       var n = tiles.length, el = $(".lsd-count");
       $(".n", el).textContent = num(n);
-      $(".w", el).textContent = n === 1 ? "place and counting" : (n >= goal ? "places. The mosaic is complete, and still growing." : "places and counting");
+      $(".w", el).textContent = n === 1 ? "answer and counting" : (n >= goal ? "answers. The mosaic is complete, and still growing." : "answers and counting");
       $(".bar i", el).style.width = Math.min(100, n / goal * 100) + "%";
       el.classList.toggle("done", n >= goal);
       $(".lsd-wall svg").classList.toggle("complete", n >= goal);   // fill any cells left over at the goal
@@ -336,12 +340,12 @@
       clearTimeout(spotTimer);
       var spot = $(".lsd-spot");
       $$(".ls-tile.lit").forEach(function (e) { e.classList.remove("lit"); });
-      if (!t) { spot.innerHTML = '<div class="spot-card on empty"><p class="spot-msg short">Be the first to add a place.</p><p class="spot-who">Scan the code to start the landscape.</p></div>'; spotTimer = setTimeout(spotlight, 5000); return; }
+      if (!t) { spot.innerHTML = '<div class="spot-card on empty"><p class="spot-msg short">Be the first to add an answer.</p><p class="spot-who">Scan the code to start the mosaic.</p></div>'; spotTimer = later(spotlight, 5000); return; }
       lastSpot = t;
       var msg = String(t.message || ""), long = msg.length > 46;
       var card = document.createElement("div");
       card.className = "spot-card";
-      card.innerHTML = '<p class="kicker">' + (isNew ? "Just added" : "A place worth protecting") + "</p>" +
+      card.innerHTML = '<p class="kicker">' + (isNew ? "Just added" : esc(get(C, "landscape.spotLabel", "From the mosaic"))) + "</p>" +
         '<p class="spot-msg ' + (long ? "long" : "short") + '">' + esc(msg) + "</p>" +
         '<p class="spot-who">' + esc(t.name) + (t.place ? '<span class="sep">·</span>' + esc(t.place) : "") + "</p>";
       $$(".spot-card", spot).forEach(function (old) { old.classList.remove("on"); old.classList.add("off"); setTimeout(function () { old.remove(); }, 900); });
@@ -350,7 +354,7 @@
       var el = land.el(t.id);
       if (el && isNew && !REDUCED) setTimeout(function () { fly(card, el); }, 1300);
       else if (el) { el.classList.remove("waiting"); reveal(el, true); el.classList.add("lit"); }
-      spotTimer = setTimeout(spotlight, isNew ? (queue.length > 3 ? 4200 : 7000) : 8000);
+      spotTimer = later(spotlight, isNew ? (queue.length > 3 ? 4200 : 7000) : 8000);
     }
     function fly(card, el) {
       var rect = $("rect", el), a = card.getBoundingClientRect(), b = rect.getBoundingClientRect();
@@ -385,17 +389,17 @@
       for (var i = 0; i < n0; i++) list.push(sampleTile(i));
       apply(list);
       var k = n0;
-      setInterval(function () { apply(tiles.concat([sampleTile(k++)])); }, 5200);
-      setTimeout(spotlight, 600);
+      timers.push(setInterval(function () { apply(tiles.concat([sampleTile(k++)])); }, 5200));
+      later(spotlight, 600);
       return;
     }
     apply(tilesOf(D));
-    setTimeout(spotlight, 900);
+    later(spotlight, 900);
     var poll = function () {
       fetchData().then(function (d) { if (d) { D = d; apply(tilesOf(d)); } }).catch(function (e) { console.warn(e); })
-        .then(function () { setTimeout(poll, liveOk ? 8000 : 60000); });
+        .then(function () { later(poll, liveOk ? 8000 : 60000); });
     };
-    setTimeout(poll, 3000);
+    later(poll, 3000);
     // Reload once a night so the display picks up any changes to the page itself.
     setTimeout(function () { location.reload(); }, 6 * 3600 * 1000);
   }
@@ -425,7 +429,7 @@
       pending.forEach(function (p) { if (!have[p.id]) list.push({ id: p.id, message: p.message, mine: true, pending: true }); });
       land.draw(list, goal);
       var n = tilesOf(D).length;
-      $(".lsp-count").textContent = n ? num(n) + (n === 1 ? " place so far" : " places so far") : "Be one of the first to add a place.";
+      $(".lsp-count").textContent = n ? num(n) + (n === 1 ? " answer so far" : " answers so far") : "Be one of the first to add an answer.";
       return have;
     }
     draw();
@@ -460,7 +464,7 @@
           if (res[0] === "already") {
             btn.disabled = false; btn.textContent = get(C, "card.submitLabel", "Add my place");
             errBox.hidden = false;
-            errBox.textContent = "This email has already added a place. Each person adds one. Adding for someone else? Use their email.";
+            errBox.textContent = "This email has already added an answer. Each person adds one. Adding for someone else? Use their email.";
             return;
           }
           var me = { id: res[1].slice(0, 10), name: o.displayName(rec.first, rec.last), first: rec.first, message: rec.message, at: Date.now() };
@@ -474,7 +478,7 @@
           console.error(err);
           btn.disabled = false; btn.textContent = get(C, "card.submitLabel", "Add my place");
           errBox.hidden = false;
-          errBox.textContent = "Something went wrong and your place wasn't saved. Please try again in a moment.";
+          errBox.textContent = "Something went wrong and your answer wasn't saved. Please try again in a moment.";
         });
     }
     function done(me) {
@@ -536,7 +540,7 @@
   function validate(form) {
     var ok = true, v = function (n) { return (form[n] && form[n].value || "").trim(); };
     var checks = {
-      message: v("message") ? "" : "Name a place.",
+      message: v("message") ? "" : "Add your answer.",
       first: v("first") ? "" : "Add your first name.",
       last: v("last") ? "" : "Add your last name.",
       email: /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v("email")) ? "" : "Check your email address.",
