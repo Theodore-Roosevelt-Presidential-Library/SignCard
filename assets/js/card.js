@@ -787,16 +787,17 @@
         var photo = get(c, "opener.photo", "");
         return '<article class="hcard">' +
           '<a class="hthumb" href="' + esc(link) + '" aria-label="Open ' + esc(c.name || id) + '">' +
-          '<span class="hnum">' + esc(get(c, "opener.candles", "")) + "</span>" +
+          '<span class="hnum">' + esc(get(c, "opener.candles", c.mode === "landscape" ? get(c, "landscape.goal", "") : "")) + "</span>" +
           (photo ? '<img src="' + esc(photo) + '" alt="">' : "") +
-          '<span class="htitle dh">' + esc(get(c, "card.coverTitle", c.name || id)) + "</span></a>" +
+          '<span class="htitle dh">' + esc(get(c, "card.coverTitle", c.mode === "landscape" ? get(c, "landscape.qrLabel", c.name || id) : c.name || id)) + "</span></a>" +
           '<div class="hbody">' +
           '<p class="hmeta"><span class="pill ' + status[1] + '">' + status[0] + "</span>" + esc([fmtDate(c.opens), fmtDate(c.closes)].filter(Boolean).join(" – ")) + "</p>" +
           '<h2 class="dh">' + esc(c.name || id) + "</h2>" +
           '<p class="hcount"><b>' + num(total) + "</b> " + (total === 1 ? "signature" : "signatures") + (d.states ? " from " + num(d.states) + " " + (d.states === 1 ? "state" : "states") : "") + "</p>" +
           '<div class="hrow"><a class="btn" href="' + esc(link) + '" target="_blank" rel="noopener">Open the card</a>' +
           '<button type="button" class="btn ghost" data-copy="' + esc(link) + '">Copy link</button>' +
-          (status[1] !== "closed" ? '<button type="button" class="btn ghost" data-copy="' + esc(starter) + '" title="Skips the opening, for staff adding starter wishes">Copy starter link</button>' : "") + "</div>" +
+          (c.mode === "landscape" ? '<a class="btn ghost" href="' + esc(link + "&display=1") + '" target="_blank" rel="noopener" title="For the Surface Hub or any big screen">Open the display</a>' :
+          status[1] !== "closed" ? '<button type="button" class="btn ghost" data-copy="' + esc(starter) + '" title="Skips the opening, for staff adding starter wishes">Copy starter link</button>' : "") + "</div>" +
           '<p class="hlabel">Embed code <span>ID: ' + esc(id) + "</span></p>" +
           '<pre class="hcode">' + esc(embed.replace("\\n", "\n")) + "</pre>" +
           '<button type="button" class="btn alt" data-copy="' + esc(embed) + '">Copy embed code</button>' +
@@ -812,6 +813,22 @@
     }).catch(function (e) { console.error(e); $(".hub-list", root).innerHTML = '<p class="empty-note">The campaign list could not load.</p>'; });
   }
 
+  /* ---------------- landscape mode (assets/js/landscape.js) ---------------- */
+  var lsReady = null;
+  function landscape() {
+    if (!lsReady) {
+      var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "assets/css/landscape.css"; document.head.appendChild(l);
+      lsReady = loadScript("assets/js/landscape.js");
+    }
+    return lsReady.then(function () {
+      // Saving goes through save() above, so landscape answers use the same fields as every card.
+      window.SignCardLandscape.start({
+        root: root, C: C, D: D, qs: qs, CFG: CFG, PREVIEW: PREVIEW, EMBED: EMBED,
+        save: save, sha256: sha256, store: store, post: post, displayName: displayName, isClosed: isClosed, ctaUrl: ctaUrl
+      });
+    });
+  }
+
   /* ---------------- boot ---------------- */
   function boot() {
     if (PREVIEW) {
@@ -819,6 +836,7 @@
         if (!e.data || e.data.type !== "signcard:config") return;
         C = e.data.config; D = sampleData(); me = null;
         if (micStop) micStop();
+        if (C.mode === "landscape") { landscape(); return; }
         render();
         if (e.data.jump === "card") { go("card"); }
         if (e.data.jump === "reveal" || e.data.jump === "join") {
@@ -836,7 +854,7 @@
         if (!/^[a-z0-9-]{3,60}$/.test(cid)) throw new Error("Bad campaign id");
         return Promise.all([loadJSON("campaigns/" + cid + ".json"), loadJSON("data/" + cid + ".json?t=" + Math.floor(Date.now() / 60000)).catch(function () { return {}; })]);
       })
-      .then(function (r) { C = r[0]; D = r[1] || {}; render(); })
+      .then(function (r) { C = r[0]; D = r[1] || {}; if (C.mode === "landscape") return landscape(); render(); })
       .catch(function (e) {
         console.error(e);
         root.innerHTML = '<div class="stage"><p class="empty-note" style="margin:auto">This card could not be found.</p></div>';

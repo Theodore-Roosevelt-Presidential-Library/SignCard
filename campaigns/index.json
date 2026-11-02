@@ -1,4 +1,7 @@
 {
   "default": "tr-birthday-2026",
-  "campaigns": ["tr-birthday-2026"]
+  "campaigns": [
+    "tr-birthday-2026",
+    "atb-landscape-2026"
+  ]
 }
