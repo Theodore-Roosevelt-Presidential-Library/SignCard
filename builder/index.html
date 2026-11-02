@@ -13,7 +13,7 @@
   <img src="../assets/img/trpl-wordmark-white.svg" alt="Theodore Roosevelt Presidential Library" class="mark">
   <div>
     <h1>Card Builder</h1>
-    <p>Set up a new sign-the-card campaign. Nothing goes live until the finished file is added to the SignCard repository.</p>
+    <p>Set up a new sign-the-card campaign or event photo mosaic. Nothing goes live until the finished file is added to the SignCard repository.</p>
   </div>
 </header>
 <div class="wrap">
@@ -25,19 +25,14 @@
   <section class="previewcol" aria-label="Live preview">
     <div class="pvbar">
       <span>Preview</span>
-      <div class="seg" role="group" aria-label="Show part of the card">
-        <button type="button" data-jump="start" class="on">Opening</button>
-        <button type="button" data-jump="card">Card</button>
-        <button type="button" data-jump="reveal">After signing</button>
-        <button type="button" data-jump="join">Call to action</button>
-      </div>
+      <div class="seg" role="group" aria-label="Show part of the campaign" data-jumps></div>
       <div class="seg" role="group" aria-label="Screen size">
         <button type="button" data-size="desk" class="on">Desktop</button>
         <button type="button" data-size="mob">Phone</button>
       </div>
     </div>
     <div class="pvframe"><iframe id="pv" src="../?preview=1" title="Card preview" allow="microphone"></iframe></div>
-    <p class="pvnote">The preview uses sample signatures and never saves anything.</p>
+    <p class="pvnote">The preview uses sample signatures and answers and never saves anything.</p>
   </section>
 </div>
 <div class="toast" role="status" aria-live="polite"></div>

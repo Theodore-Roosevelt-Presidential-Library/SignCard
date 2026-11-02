@@ -34,6 +34,10 @@ Moderation by hand: every featured message in `data/<id>.json` has an `id`. Add 
 
 A campaign with `"mode": "landscape"` (see `campaigns/atb-landscape-2026.json`) is a group photo mosaic instead of a card. People scan a QR code, name a place they hope is still protected 100 years from now, and each approved answer becomes one card-shaped tile on a big screen. A dim copy of the photo (`landscape.image`) shows the picture to complete; each tile reveals its patch of the photo in full color, in random order, with the place printed on it. At `landscape.goal` answers the picture is complete; past that the tiles get smaller so everyone fits.
 
+**Builder.** Pick "Blank photo mosaic" (or copy an existing mosaic) under Start from. The mosaic gets its own steps (Mosaic, Phone, After adding) and the preview switches between the big screen and the phone. Publish gives the rehearsal, screen and phone links.
+
+The picture appears only through filled tiles: empty cells show as a faint grid, and each approved answer reveals its patch of the photo.
+
 To change the photo, add a wide image to `assets/img/` (at least 1600 pixels across; it is cropped to the screen from the center) and set `landscape.image` and `landscape.imageCredit`.
 
 - Phone form: `?c=atb-landscape-2026` (the QR code adds `&src=qr`, saved in `source`)

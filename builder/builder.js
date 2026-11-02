@@ -31,9 +31,9 @@
       { k: "id", t: "text", label: "Campaign ID", hint: "Lowercase letters, numbers and dashes. It becomes the file name and the link, e.g. tr-birthday-2027. Pick a new one for every campaign." },
       { k: "opens", t: "date", label: "Opens", hint: "Informational. Staff can sign before this date to add starter wishes." },
       { k: "closes", t: "date", label: "Closes", hint: "After this day (Mountain Time) the card shows a thank-you instead of the form." },
-      { k: "theme", t: "select", label: "Background color", opts: [["night-sky", "Night Sky (navy)"], ["dark-forest", "Dark Forest (green)"], ["dark-gray", "Dark Gray"]] }
+      { k: "theme", t: "select", modes: ["card"], label: "Background color", opts: [["night-sky", "Night Sky (navy)"], ["dark-forest", "Dark Forest (green)"], ["dark-gray", "Dark Gray"]] }
     ]},
-    { title: "Opening", jump: "start", intro: "What plays before visitors sign. The birthday cake is an animation visitors blow out by tapping or with their microphone.", fields: [
+    { title: "Opening", jump: "start", modes: ["card"], intro: "What plays before visitors sign. The birthday cake is an animation visitors blow out by tapping or with their microphone.", fields: [
       { k: "opener.type", t: "radio", label: "Opening", opts: [["cake", "Birthday cake animation"], ["video", "A video I upload"], ["none", "No opening, start at the card"]] },
       { k: "opener.headline", t: "text", label: "Headline", show: "cake", hint: "The last word is set in the accent color." },
       { k: "opener.kicker", t: "text", label: "Small label under the logo", show: "cake" },
@@ -52,7 +52,7 @@
       { k: "opener.poster", t: "url", label: "Still image shown before the video plays", show: "video" },
       { k: "opener.photo", t: "url", label: "Cut-out photo for the card cover", show: "video,none", hint: "Optional." }
     ]},
-    { title: "Card", jump: "card", intro: "The invitation, the front of the card and the inside where people sign.", fields: [
+    { title: "Card", jump: "card", modes: ["card"], intro: "The invitation, the front of the card and the inside where people sign.", fields: [
       { k: "card.inviteTitle", t: "text", label: "Invitation headline" },
       { k: "card.inviteBody", t: "area", label: "Invitation text" },
       { k: "card.openButton", t: "text", label: "Open button" },
@@ -74,7 +74,7 @@
       { k: "card.closedTitle", t: "text", label: "Headline after the card closes" },
       { k: "card.closedBody", t: "text", label: "Line after the card closes" }
     ]},
-    { title: "After signing", jump: "join", intro: "What people see once they sign: the best wishes, the map, the call to action and sharing.", fields: [
+    { title: "After signing", jump: "join", modes: ["card"], intro: "What people see once they sign: the best wishes, the map, the call to action and sharing.", fields: [
       { k: "wall.show", t: "check", label: "Show the best messages" },
       { k: "wall.title", t: "text", label: "Messages headline" },
       { k: "wall.count", t: "num", label: "How many messages to feature", min: 3, max: 40 },
@@ -93,6 +93,45 @@
       { k: "cta.utmMedium", t: "text", label: "UTM medium" },
       { k: "cta.utmCampaign", t: "text", label: "UTM campaign", hint: "Leave blank to use the campaign ID." },
       { k: "share.title", t: "text", label: "Share headline" },
+      { k: "share.text", t: "area", label: "Text that goes with a shared link" }
+    ]},
+    // Photo mosaic campaigns ("mode": "landscape"): answers build a photo on a big screen.
+    { title: "Mosaic", jump: "display", modes: ["landscape"], intro: "The big screen. Each approved answer reveals one tile of the photo, with the answer printed on it. The full photo appears once the goal is reached.", fields: [
+      { k: "landscape.question", t: "area", label: "Question", hint: "The headline on the screen and the phone. If it ends in “100 years from now?” that part is set in yellow; otherwise the last word is." },
+      { k: "landscape.kicker", t: "text", label: "Small label above the question", hint: "e.g. the program or film name" },
+      { k: "landscape.displayTagline", t: "text", label: "Tagline next to the small label (big screen only)", hint: "Optional." },
+      { k: "landscape.image", t: "url", label: "Mosaic photo", hint: "A wide photo, at least 1600 pixels across (2400 or more looks sharpest on a Surface Hub). Use a Library photo from the Acquia DAM or a public-domain image. Upload it to trlibrary.com/media/add/image and paste the file link." },
+      { k: "landscape.imageCredit", t: "text", label: "Photo credit", hint: "Shown small under the mosaic." },
+      { k: "landscape.goal", t: "num", label: "Answers in a finished picture", min: 50, max: 2000, hint: "Set this near the number of people you expect. Fewer answers mean bigger tiles. Past this number the tiles get smaller so everyone fits." },
+      { k: "landscape.qrLabel", t: "text", label: "Label next to the QR code" },
+      { k: "landscape.spotLabel", t: "text", label: "Small label over featured answers", hint: "Shown when the screen features an earlier answer, e.g. A place worth protecting. New answers are labeled Just added." },
+      { k: "landscape.partnerLogo", t: "url", label: "Partner logo (optional)", hint: "A transparent PNG or WebP, shown bottom right of the screen and at the top of the phone page." },
+      { k: "landscape.partnerLogoAlt", t: "text", label: "Describe the partner logo" },
+      { k: "live.hours", t: "text", label: "Live hours (Mountain Time)", hint: "e.g. 08:00-22:00. During these hours on open days, new answers reach the screen in about 30 seconds. Outside them, in 10 to 15 minutes." }
+    ]},
+    { title: "Phone", jump: "phone", modes: ["landscape"], intro: "What people see after scanning the QR code: the question, a small copy of the mosaic and the form.", fields: [
+      { k: "landscape.intro", t: "area", label: "Line under the question" },
+      { k: "card.messageLabel", t: "text", label: "Answer label" },
+      { k: "card.messagePlaceholder", t: "text", label: "Answer placeholder", hint: "Faint example text in the answer box." },
+      { k: "card.messageMax", t: "num", label: "Longest answer (characters)", min: 40, max: 280 },
+      { k: "card.optInLabel", t: "text", label: "Email sign-up checkbox" },
+      { k: "card.optInDefault", t: "check", label: "Checkbox starts checked" },
+      { k: "card.privacyNote", t: "area", label: "Privacy note" },
+      { k: "card.submitLabel", t: "text", label: "Submit button" },
+      { k: "card.signedTitle", t: "text", label: "Small label after submitting", hint: "e.g. Look up at the screen" },
+      { k: "card.signedBody", t: "text", label: "Line after submitting" },
+      { k: "card.closedTitle", t: "text", label: "Headline after the campaign closes" },
+      { k: "card.closedBody", t: "text", label: "Line after the campaign closes" }
+    ]},
+    { title: "After adding", jump: "phone", modes: ["landscape"], intro: "Shown on the phone under the thank-you, with a button to add someone else's answer.", fields: [
+      { k: "cta.title", t: "text", label: "Call to action headline" },
+      { k: "cta.body", t: "area", label: "Call to action text" },
+      { k: "cta.button", t: "text", label: "Call to action button" },
+      { k: "cta.url", t: "url", label: "Button link" },
+      { k: "cta.utmSource", t: "text", label: "UTM source" },
+      { k: "cta.utmMedium", t: "text", label: "UTM medium" },
+      { k: "cta.utmCampaign", t: "text", label: "UTM campaign", hint: "Leave blank to use the campaign ID." },
+      { k: "share.title", t: "text", label: "Share link label" },
       { k: "share.text", t: "area", label: "Text that goes with a shared link" }
     ]},
     { title: "AI picks", jump: "reveal", intro: "Every few minutes an AI model screens new messages, hides anything inappropriate and picks the best ones to feature. Tell it what this card is about.", fields: [
@@ -114,6 +153,22 @@
     cta: { popup: true, popupDelay: 8, kicker: "Before you go", dismiss: "Maybe later", title: "", body: "", button: "Become a member", url: "https://www.trlibrary.com/membership", utmSource: "signcard", utmMedium: "card", utmCampaign: "" },
     share: { title: "Pass the card around", text: "", url: "" }, ai: { topic: "", guidance: "" }, moderation: { hide: [], pin: [] }
   };
+  var BLANK_MOSAIC = {
+    id: "", name: "", mode: "landscape", opens: "", closes: "", theme: "night-sky",
+    live: { hours: "08:00-22:00", timezone: "America/Denver" },
+    landscape: { kicker: "", question: "", intro: "Name one place. Each answer becomes one piece of the mosaic, and together they build the picture on the screen.",
+      displayTagline: "", goal: 300, image: "assets/img/badlands-mosaic.jpg", imageCredit: "", qrLabel: "Add your answer", spotLabel: "From the mosaic", partnerLogo: "", partnerLogoAlt: "" },
+    card: { messageLabel: "Your answer", messagePrefix: "", messagePlaceholder: "", messageMax: 140, messageRequired: true, showMessage: true,
+      optInLabel: "Send me news and stories from the Theodore Roosevelt Presidential Library.", optInDefault: true,
+      privacyNote: "Your first name, last initial, hometown and answer may appear on the screen. Your email and ZIP code are never shown.",
+      submitLabel: "Add my answer", signedTitle: "Look up at the screen", signedBody: "Your piece of the mosaic is on its way to the screen.",
+      closedTitle: "The mosaic is complete", closedBody: "Thank you to everyone who added an answer." },
+    cta: { title: "Keep exploring", body: "", button: "Visit trlibrary.com", url: "https://www.trlibrary.com/", utmSource: "signcard", utmMedium: "landscape", utmCampaign: "" },
+    share: { title: "Pass it on", text: "", url: "" }, wall: { count: 12 }, ai: { topic: "", guidance: "" }, moderation: { hide: [], pin: [] }
+  };
+  function mode() { return cfg && cfg.mode === "landscape" ? "landscape" : "card"; }
+  function inMode(x) { return !x.modes || x.modes.indexOf(mode()) >= 0; }
+  function steps() { return STEPS.filter(inMode); }
   var templates = [];
 
   function loadTemplates() {
@@ -128,9 +183,9 @@
   }
 
   function fromTemplate(key) {
-    var base = key === "blank" ? BLANK : (templates.filter(function (t) { return t.id === key; })[0] || BLANK);
+    var base = key === "blank" ? BLANK : key === "blank-mosaic" ? BLANK_MOSAIC : (templates.filter(function (t) { return t.id === key; })[0] || BLANK);
     var c = JSON.parse(JSON.stringify(base));
-    c.id = ""; c.name = key === "blank" ? "" : "Copy of " + (base.name || base.id);
+    c.id = ""; c.name = /^blank/.test(key) ? "" : "Copy of " + (base.name || base.id);
     c.opens = ""; c.closes = "";
     if (c.cta) c.cta.utmCampaign = "";
     if (c.share) c.share.url = "";
@@ -147,8 +202,10 @@
     var attrs = ' id="' + id + '" data-k="' + f.k + '" data-t="' + f.t + '"';
     var show = f.show ? ' data-show="' + f.show + '"' : "";
     if (f.t === "template") {
-      var opts = templates.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(t.name || t.id) + "</option>"; }).join("") + '<option value="blank">Blank card</option>';
-      return '<div class="f"' + show + ">" + lab + '<select id="' + id + '" data-template>' + opts + "</select>" + '<p class="hint">Starts a new campaign from a copy. The original is never changed.</p></div>';
+      var opts = templates.map(function (t) { return '<option value="' + esc(t.id) + '">' + esc(t.name || t.id) + (t.mode === "landscape" ? " (photo mosaic)" : " (card)") + "</option>"; }).join("") +
+        '<option value="blank">Blank card</option><option value="blank-mosaic">Blank photo mosaic</option>';
+      return '<div class="f"' + show + ">" + lab + '<select id="' + id + '" data-template>' + opts + "</select>" +
+        '<p class="hint">Starts a new campaign from a copy. The original is never changed. A card is signed on a web page, like TR\'s birthday card. A photo mosaic is for events: people scan a QR code and each answer reveals a piece of a photo on a big screen.</p></div>';
     }
     if (f.t === "area") return '<div class="f"' + show + ">" + lab + "<textarea" + attrs + ' rows="3">' + esc(v) + "</textarea>" + hint + "</div>";
     if (f.t === "check") return '<div class="f chk"' + show + '><label><input type="checkbox"' + attrs + (v ? " checked" : "") + "> " + esc(f.label) + "</label>" + hint + "</div>";
@@ -161,12 +218,15 @@
   }
 
   function renderStep() {
-    var st = STEPS[stepIx];
-    $(".steps").innerHTML = STEPS.map(function (s, i) {
+    var ST = steps();
+    if (stepIx >= ST.length) stepIx = ST.length - 1;
+    var st = ST[stepIx];
+    renderJumps();
+    $(".steps").innerHTML = ST.map(function (s, i) {
       return '<button type="button" role="tab" aria-selected="' + (i === stepIx) + '" class="' + (i === stepIx ? "on" : i < stepIx ? "done" : "") + '" data-step="' + i + '"><b>' + (i + 1) + "</b>" + esc(s.title) + "</button>";
     }).join("");
     $$("[data-step]").forEach(function (b) { b.addEventListener("click", function () { go(+b.getAttribute("data-step")); }); });
-    form.innerHTML = '<h2>' + esc(st.title) + "</h2>" + (st.intro ? '<p class="intro">' + esc(st.intro) + "</p>" : "") + (st.publish ? publishHTML() : st.fields.map(fieldHTML).join(""));
+    form.innerHTML = '<h2>' + esc(st.title) + "</h2>" + (st.intro ? '<p class="intro">' + esc(st.intro) + "</p>" : "") + (st.publish ? publishHTML() : st.fields.filter(inMode).map(fieldHTML).join(""));
     $("[data-back]").style.visibility = stepIx === 0 ? "hidden" : "visible";
     $("[data-next]").style.display = st.publish ? "none" : "";
     var tsel = $("[data-template]");
@@ -198,7 +258,7 @@
     $$("[data-show]", form).forEach(function (el) { el.hidden = el.getAttribute("data-show").split(",").indexOf(type) < 0; });
   }
 
-  function go(i) { stepIx = Math.max(0, Math.min(STEPS.length - 1, i)); renderStep(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  function go(i) { stepIx = Math.max(0, Math.min(steps().length - 1, i)); renderStep(); window.scrollTo({ top: 0, behavior: "smooth" }); }
 
   /* ---------- preview ---------- */
   var timer = null;
@@ -210,6 +270,7 @@
     if (c.cta && !c.cta.utmCampaign) c.cta.utmCampaign = c.id;
     if (c.share && !c.share.url) c.share.url = SITE + "?c=" + c.id;
     if (c.opener && c.opener.type === "cake" && !c.opener.photo) c.opener.photo = "assets/img/tr-buckskin-bust.webp";
+    if (c.mode === "landscape") { delete c.opener; delete c.map; if (c.live && !c.live.timezone) c.live.timezone = "America/Denver"; }
     return c;
   }
   function push() { if (pvReady) pv.contentWindow.postMessage({ type: "signcard:config", config: output(), jump: jump }, "*"); }
@@ -219,7 +280,15 @@
     push();
   }
   window.addEventListener("message", function (e) { if (e.source === pv.contentWindow && e.data && e.data.type === "signcard:ready") { pvReady = true; push(); } });
-  $$("[data-jump]").forEach(function (b) { b.addEventListener("click", function () { jumpTo(b.getAttribute("data-jump")); }); });
+  var JUMPS = { card: [["start", "Opening"], ["card", "Card"], ["reveal", "After signing"], ["join", "Call to action"]], landscape: [["display", "Big screen"], ["phone", "Phone"]] };
+  var jumpMode = "";
+  function renderJumps() {
+    if (jumpMode === mode()) return;
+    jumpMode = mode();
+    var seg = $("[data-jumps]");
+    seg.innerHTML = JUMPS[jumpMode].map(function (j) { return '<button type="button" data-jump="' + j[0] + '">' + esc(j[1]) + "</button>"; }).join("");
+    $$("[data-jump]", seg).forEach(function (b) { b.addEventListener("click", function () { jumpTo(b.getAttribute("data-jump")); }); });
+  }
   $$("[data-size]").forEach(function (b) {
     b.addEventListener("click", function () {
       $$("[data-size]").forEach(function (x) { x.classList.toggle("on", x === b); });
@@ -233,10 +302,19 @@
     if (!/^[a-z0-9-]{3,60}$/.test(c.id || "")) out.push(["Start", "Add a campaign ID (at least 3 characters: lowercase letters, numbers, dashes)."]);
     if (templates.some(function (t) { return t.id === c.id; })) out.push(["Start", "The ID “" + c.id + "” is already used by a live campaign. Pick a new one."]);
     if (!c.closes) out.push(["Start", "Add a closing date."]);
-    if (get(c, "opener.type") === "video" && !/^https:\/\/.+\.mp4(\?.*)?$/i.test(get(c, "opener.video") || "")) out.push(["Opening", "Add a link to an .mp4 video that starts with https://"]);
-    if (!get(c, "card.inviteTitle")) out.push(["Card", "Add an invitation headline."]);
-    if (!get(c, "card.greeting")) out.push(["Card", "Add the printed greeting inside the card."]);
-    if (get(c, "cta.url") && !/^https:\/\//.test(get(c, "cta.url"))) out.push(["After signing", "The button link should start with https://"]);
+    var after = mode() === "landscape" ? "After adding" : "After signing";
+    if (mode() === "landscape") {
+      if (!get(c, "landscape.question")) out.push(["Mosaic", "Add the question."]);
+      if (!get(c, "landscape.image")) out.push(["Mosaic", "Add the mosaic photo."]);
+      if (!(+get(c, "landscape.goal") >= 50)) out.push(["Mosaic", "Set how many answers make a finished picture (50 or more)."]);
+      if (get(c, "live.hours") && !/^\d\d:\d\d-\d\d:\d\d$/.test(get(c, "live.hours"))) out.push(["Mosaic", "Write live hours like 08:00-22:00."]);
+      if (!get(c, "card.messageLabel")) out.push(["Phone", "Add the answer label."]);
+    } else {
+      if (get(c, "opener.type") === "video" && !/^https:\/\/.+\.mp4(\?.*)?$/i.test(get(c, "opener.video") || "")) out.push(["Opening", "Add a link to an .mp4 video that starts with https://"]);
+      if (!get(c, "card.inviteTitle")) out.push(["Card", "Add an invitation headline."]);
+      if (!get(c, "card.greeting")) out.push(["Card", "Add the printed greeting inside the card."]);
+    }
+    if (get(c, "cta.url") && !/^https:\/\//.test(get(c, "cta.url"))) out.push([after, "The button link should start with https://"]);
     if (!get(c, "ai.topic")) out.push(["AI picks", "Tell the AI what people are writing."]);
     return out;
   }
@@ -255,14 +333,25 @@
       '<li><h3>Add it to the repository</h3><p>Open the campaigns folder on GitHub, choose <b>Add file → Upload files</b>, drop in the file and commit. This needs write access to the repo, which is what keeps random people from launching a card. The AI screening finds new campaign files on its own.</p>' +
       '<div class="row"><a class="b ghost" href="' + REPO + '/upload/main/campaigns" target="_blank" rel="noopener">Upload to campaigns/</a></div>' +
       '<p class="hint">About two minutes after the upload, the campaign appears on the campaigns page at card.labs.trlibrary.com with its embed code.</p></li>' +
+      (mode() === "landscape" ? mosaicPublishHTML(c) :
       '<li><h3>Add starter wishes</h3><p>About a minute after the upload, have staff and friends sign at the starter link. It skips the opening so signing is quick. Their wishes appear on the card once the AI screening runs.</p>' +
       '<div class="code">' + esc(SITE + "?c=" + c.id + "&starter=1") + '</div><div class="row"><button type="button" class="b ghost" data-copy="starter">Copy starter link</button></div></li>' +
       '<li><h3>Put it on a page</h3><p>Paste this into a Drupal page using a code block (Full HTML), or into any website:</p><div class="code">' + esc(embed) + '</div>' +
       '<div class="row"><button type="button" class="b ghost" data-copy="embed">Copy embed code</button></div>' +
-      '<p class="hint">Or share the card on its own page: <code>' + esc(SITE + "?c=" + c.id) + "</code></p></li>" +
+      '<p class="hint">Or share the card on its own page: <code>' + esc(SITE + "?c=" + c.id) + "</code></p></li>") +
       "</ol>";
     html += '<textarea class="hidden-json" hidden>' + esc(json) + "</textarea>";
     return html;
+  }
+
+  function mosaicPublishHTML(c) {
+    var phone = SITE + "?c=" + c.id, screen = phone + "&display=1";
+    return '<li><h3>Rehearse on the big screen</h3><p>Open this on the Surface Hub (or any screen) in Edge and click <b>Full screen</b> in the bottom corner. Sample answers fill in so you can check the look; a DEMO badge shows.</p>' +
+      '<div class="code">' + esc(screen + "&demo=1") + '</div><div class="row"><button type="button" class="b ghost" data-copy="demo">Copy rehearsal link</button></div></li>' +
+      '<li><h3>On the day</h3><p>Open the live screen. Its QR code sends people to the phone page, and each approved answer appears in about 30 seconds during live hours. Tap any tile to read it.</p>' +
+      '<div class="code">' + esc(screen) + '</div><div class="row"><button type="button" class="b ghost" data-copy="screen">Copy screen link</button><a class="b ghost" href="' + esc(screen + "&demo=1") + '" target="_blank" rel="noopener">Open rehearsal</a></div>' +
+      '<p class="hint">Phone page, for signs and table tents: <code>' + esc(phone + "&src=qr") + "</code></p>" +
+      '<div class="row"><button type="button" class="b ghost" data-copy="phone">Copy phone link</button></div></li>';
   }
 
   function wirePublish() {
@@ -270,6 +359,9 @@
     var texts = {
       json: JSON.stringify(c, null, 2) + "\n",
       starter: SITE + "?c=" + c.id + "&starter=1",
+      demo: SITE + "?c=" + c.id + "&display=1&demo=1",
+      screen: SITE + "?c=" + c.id + "&display=1",
+      phone: SITE + "?c=" + c.id + "&src=qr",
       embed: '<div data-signcard="' + c.id + '"></div>\n<script src="' + SITE + 'embed.js" async></script>'
     };
     $$("[data-copy]", form).forEach(function (b) {
@@ -285,7 +377,7 @@
       document.body.appendChild(a); a.click(); a.remove(); toast("Downloaded " + c.id + ".json");
     });
     $$("[data-goto]", form).forEach(function (b) {
-      b.addEventListener("click", function () { var n = b.getAttribute("data-goto"); go(STEPS.findIndex(function (s) { return s.title === n; })); });
+      b.addEventListener("click", function () { var n = b.getAttribute("data-goto"); go(steps().findIndex(function (s) { return s.title === n; })); });
     });
   }
 

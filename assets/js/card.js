@@ -142,6 +142,7 @@
      RENDER
      ========================================================= */
   function render() {
+    if (window.SignCardLandscape) window.SignCardLandscape.stop();
     root.className = "sc theme-" + get(C, "theme", "night-sky");
     opened = false; blown = false; step = "";
     clearInterval(deckTimer); clearTimeout(autoTimer); clearTimeout(popTimer); popTimer = null; popShown = false;
@@ -815,15 +816,18 @@
 
   /* ---------------- landscape mode (assets/js/landscape.js) ---------------- */
   var lsReady = null;
-  function landscape() {
+  function landscape(jump) {
     if (!lsReady) {
       var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "assets/css/landscape.css"; document.head.appendChild(l);
       lsReady = loadScript("assets/js/landscape.js");
     }
     return lsReady.then(function () {
       // Saving goes through save() above, so landscape answers use the same fields as every card.
+      // In the builder preview, the "Big screen" tab shows the display with sample answers.
+      var q = qs;
+      if (PREVIEW) { q = new URLSearchParams(qs); if (jump === "display") { q.set("display", "1"); q.set("demo", "1"); } }
       window.SignCardLandscape.start({
-        root: root, C: C, D: D, qs: qs, CFG: CFG, PREVIEW: PREVIEW, EMBED: EMBED,
+        root: root, C: C, D: D, qs: q, CFG: CFG, PREVIEW: PREVIEW, EMBED: EMBED,
         save: save, sha256: sha256, store: store, post: post, displayName: displayName, isClosed: isClosed, ctaUrl: ctaUrl
       });
     });
@@ -836,7 +840,7 @@
         if (!e.data || e.data.type !== "signcard:config") return;
         C = e.data.config; D = sampleData(); me = null;
         if (micStop) micStop();
-        if (C.mode === "landscape") { landscape(); return; }
+        if (C.mode === "landscape") { landscape(e.data.jump); return; }
         render();
         if (e.data.jump === "card") { go("card"); }
         if (e.data.jump === "reveal" || e.data.jump === "join") {
