@@ -818,8 +818,9 @@
   var lsReady = null;
   function landscape(jump) {
     if (!lsReady) {
-      var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "assets/css/landscape.css"; document.head.appendChild(l);
-      lsReady = loadScript("assets/js/landscape.js");
+      // __BUILD__ becomes the commit at deploy (pages.yml), so screens pick up new versions right away.
+      var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "assets/css/landscape.css?v=__BUILD__"; document.head.appendChild(l);
+      lsReady = loadScript("assets/js/landscape.js?v=__BUILD__");
     }
     return lsReady.then(function () {
       // Saving goes through save() above, so landscape answers use the same fields as every card.
