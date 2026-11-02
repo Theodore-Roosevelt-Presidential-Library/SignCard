@@ -35,6 +35,8 @@ jobs:
         run: |
           mkdir -p _site
           cp -r index.html embed.js CNAME assets builder campaigns data _site/
+          # Stamp file links with this commit so browsers fetch new versions right after a deploy.
+          sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" _site/index.html _site/builder/index.html _site/assets/js/card.js
           # GitHub Pages cannot list a folder, so publish the list of campaign files for the
           # campaigns page and the builder's templates.
           python3 - <<'PY'
