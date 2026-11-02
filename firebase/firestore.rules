@@ -25,6 +25,14 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // Landscape campaigns: the GitHub Action copies the public numbers (the same data as
+    // data/<campaign>.json: first name + last initial, city, approved answer) to live/<campaign>
+    // so the display updates within seconds. Anyone may read one of these; nobody may write.
+    match /live/{campaign} {
+      allow get: if campaign.matches('^[a-z0-9-]{3,60}$');
+      allow list, write: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

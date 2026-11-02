@@ -30,6 +30,18 @@ Each campaign is one file in `campaigns/`. The builder produces it; it goes live
 
 Moderation by hand: every featured message in `data/<id>.json` has an `id`. Add it to `moderation.hide` in the campaign file to remove it, or to `moderation.pin` to keep it at the front. The next run (within 10 minutes) applies it.
 
+## Landscape mode (America the Beautiful)
+
+A campaign with `"mode": "landscape"` (see `campaigns/atb-landscape-2026.json`) is a group art piece instead of a card. People scan a QR code, name a place they hope is still protected 100 years from now, and each approved answer becomes one tile in a Badlands landscape on a big screen. Tiles fill from the river bottom up, colored by the Badlands rock layers, with the place printed on each tile.
+
+- Phone form: `?c=atb-landscape-2026` (the QR code adds `&src=qr`, saved in `source`)
+- Big screen: `?c=atb-landscape-2026&display=1`. Open it in Edge on the Surface Hub and click **Full screen** (bottom right; move the pointer to show it). Tap any tile to read it.
+- Rehearsal: add `&demo=1` for sample answers (a DEMO badge shows; `&fill=0.9` sets how full). `&goal=150` overrides the tiles in a full landscape.
+
+Same signature fields as every campaign: the place goes in `message`. Screening works the same way (OpenAI moderation, then the review model, which also returns a short `label` printed on the tile). Nothing reaches the screen until it is approved; hide a tile by adding its `id` to `moderation.hide`.
+
+**Speed.** During `live.hours` (Mountain Time) on open days, each scheduled run stays on for `SIGNCARD_LIVE_MINUTES` (9) and checks for new answers every 15 seconds, then writes the public numbers to `live/<campaign>` in Firestore. The display reads that document every 8 seconds, so a tile appears about 20–40 seconds after someone submits. This needs the `live/{campaign}` read rule in `firebase/firestore.rules` published once (`firebase deploy --only firestore:rules`). Without it the display falls back to `data/<campaign>.json`, which updates every 10–15 minutes.
+
 ## Embedding
 
 ```html
@@ -59,6 +71,8 @@ OPENAI_KEY=sk-... python3 scripts/process_signatures.py --dry-run
 
 - Theodore Roosevelt in buckskin, 1885. Library of Congress, Prints & Photographs Division, LC-USZ62-23232 (public domain).
 - Badlands view: National Park Service, via Wikimedia Commons (public domain).
+- America the Beautiful logo: from the film's partner media kit.
+- QR codes: qrcode-generator (MIT), loaded from cdnjs.
 - ZIP code centroids: GeoNames (CC BY 4.0), `scripts/zips.json.gz`.
 - US states: us-atlas (ISC), `assets/data/us-states.json`.
 - Fonts are served from trlibrary.com (Dharma Gothic E, Clearface, Frutiger) and Google Fonts (Mrs Saint Delafield).

@@ -30,6 +30,8 @@ concurrency:
 jobs:
   process:
     runs-on: ubuntu-latest
+    # Landscape campaigns stay on for SIGNCARD_LIVE_MINUTES during their live hours (see scripts/process_signatures.py).
+    timeout-minutes: 25
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:

@@ -42,6 +42,9 @@ BATCH = 20            # signatures per chat-model call
 MAX_PER_RUN = 600     # signatures read per run
 POOL_SIZE = 200       # approved messages kept per campaign
 SIGNERS_KEPT = 60     # recent names kept for the card
+TILES_KEPT = 3000     # landscape campaigns: every approved entry is a tile on the display
+LIVE_POLL = 15        # seconds between Firestore checks while a landscape campaign is live
+LIVE_MINUTES = float(os.environ.get("SIGNCARD_LIVE_MINUTES", "9"))
 DRY = "--dry-run" in sys.argv
 
 
@@ -100,6 +103,8 @@ def review(items, campaign, key):
         "slogans or hot-button policy fights). Empty message: false\n"
         "- score: 0 to 10, how worth featuring it is: heartfelt, specific, hopeful, well written and "
         "connected to the topic. Generic one-liners score 3 or less. Not approved: 0\n"
+        "- label: the place they named, in 1 to 4 words and at most 24 characters, in title case "
+        "(e.g. Little Missouri River, Grandma's Farm). Empty string if no place is named\n"
         "- reason: at most 12 words\n"
         'Reply with JSON only: {"items": [...]}'
     )
@@ -119,6 +124,7 @@ def review(items, campaign, key):
                 "approve": bool(r.get("approve")),
                 "score": max(0, min(10, float(r.get("score") or 0))),
                 "reason": str(r.get("reason", ""))[:120],
+                "label": " ".join(str(r.get("label") or "").split())[:30],
             }
         except (KeyError, TypeError, ValueError):
             continue
@@ -196,7 +202,7 @@ def public_json(cid, campaign, agg, zips):
         states.add(g[3])
         k = (round(g[1], 2), round(g[0], 2))
         pts[k] = pts.get(k, 0) + n
-    return {
+    out = {
         "campaign": cid,
         "updated": None,
         "total": int(agg.get("total", 0)),
@@ -205,6 +211,40 @@ def public_json(cid, campaign, agg, zips):
         "signers": (agg.get("signers") or [])[:40],
         "points": sorted([[k[0], k[1], n] for k, n in pts.items()], key=lambda p: (-p[2], p[0])),
     }
+    if is_landscape(campaign):
+        # Every approved entry, oldest first, so each keeps its place in the landscape.
+        hide = set((campaign.get("moderation") or {}).get("hide", []))
+        out["tiles"] = [{"id": t["id"], "name": t["name"], "place": t["place"], "message": t["message"],
+                         "label": t.get("label", ""), "score": round(t.get("score", 0))}
+                        for t in (agg.get("tiles") or []) if t["id"] not in hide]
+    return out
+
+
+def is_landscape(campaign):
+    return campaign.get("mode") == "landscape"
+
+
+def live_now(campaign, now=None):
+    """A landscape campaign is 'live' while it is open and inside its daily hours (live.hours, Mountain Time).
+    While live, the processor keeps checking every few seconds so new entries reach the display quickly."""
+    if not is_landscape(campaign):
+        return False
+    from zoneinfo import ZoneInfo
+    tz = ZoneInfo((campaign.get("live") or {}).get("timezone") or "America/Denver")
+    now = (now or datetime.now(timezone.utc)).astimezone(tz)
+    day = now.strftime("%Y-%m-%d")
+    if campaign.get("opens") and day < campaign["opens"]:
+        return False
+    if campaign.get("closes") and day > campaign["closes"]:
+        return False
+    hours = str((campaign.get("live") or {}).get("hours") or "").strip()
+    if not hours:
+        return False
+    try:
+        a, b = [h.strip() for h in hours.split("-")]
+        return a <= now.strftime("%H:%M") <= b
+    except ValueError:
+        return False
 
 
 def write_public(cid, data):
@@ -230,30 +270,12 @@ def write_public(cid, data):
 
 # ---------------------------------------------------------------- main
 
-def main():
-    sa, key = os.environ.get("FIREBASE_SERVICE_ACCOUNT", ""), os.environ.get("OPENAI_KEY", "")
-    if os.environ.get("GOOGLE_SIGNIN") not in (None, "", "success") and not sa:
-        log("Google sign-in did not work yet (Workload Identity Federation not set up?). See firebase/setup-wif.sh. Nothing to do.")
-        return 0
-    if not key:
-        log("OPENAI_KEY is not set; signatures stay unscreened until it is added.")
-        return 0
-
-    import firebase_admin
-    from firebase_admin import credentials, firestore
-    from google.cloud.firestore_v1.base_query import FieldFilter
-
-    if sa:
-        firebase_admin.initialize_app(credentials.Certificate(json.loads(sa)))
-    else:
-        firebase_admin.initialize_app(credentials.ApplicationDefault(), {"projectId": PROJECT})
-    db = firestore.client()
-    campaigns = load_campaigns()
-    zips = json.load(gzip.open(os.path.join(ROOT, "scripts", "zips.json.gz"), "rt", encoding="utf-8"))
-
+def process_new(db, firestore, FieldFilter, campaigns, zips, key):
+    """Screen every new signature once. Returns the set of campaign IDs whose totals changed."""
     q = db.collection("signatures").where(filter=FieldFilter("status", "==", "new")).limit(MAX_PER_RUN)
     snaps = list(q.stream())
-    log(f"{len(snaps)} new signature(s)")
+    if snaps:
+        log(f"{len(snaps)} new signature(s)")
 
     by_c = {}
     for s in snaps:
@@ -289,6 +311,8 @@ def main():
         agg.setdefault("zips", {})
         agg.setdefault("pool", [])
         agg.setdefault("signers", [])
+        if is_landscape(campaign):
+            agg.setdefault("tiles", [])
 
         batch, n_in_batch = (db.batch() if not DRY else None), 0
         for i, (s, d) in enumerate(rows):
@@ -308,8 +332,12 @@ def main():
                 agg["signers"] = [name] + [x for x in agg["signers"] if x != name]
                 agg["signers"] = agg["signers"][:SIGNERS_KEPT]
             if rv["approve"] and rv["name_ok"] and not fl and msg:
-                agg["pool"].append({"id": s.id[:10], "name": name, "place": place, "st": g[3] if g else "",
-                                    "message": msg, "score": rv["score"], "ts": int(time.time())})
+                entry = {"id": s.id[:10], "name": name, "place": place, "st": g[3] if g else "",
+                         "message": msg, "label": rv.get("label", ""), "score": rv["score"], "ts": int(time.time())}
+                agg["pool"].append(entry)
+                if is_landscape(campaign):
+                    agg["tiles"] = [t for t in agg["tiles"] if t["id"] != entry["id"]] + [entry]
+                    agg["tiles"] = agg["tiles"][-TILES_KEPT:]
             log(f"  {s.id[:10]} {name:<18} flagged={fl} name_ok={rv['name_ok']} approve={rv['approve']} score={rv['score']:.0f} {rv['reason']}")
             if not DRY:
                 batch.update(s.reference, {
@@ -329,6 +357,68 @@ def main():
             if n_in_batch:
                 batch.commit()
         touched.add(cid)
+    return touched
+
+
+def publish_live(db, cid, campaign, zips, last):
+    """Landscape campaigns: copy the public numbers to live/<campaign> in Firestore. The display reads
+    that one document every few seconds (anyone may read it; it holds only what the public file holds),
+    so new tiles appear without waiting for the website to redeploy."""
+    snap = db.collection("aggregates").document(cid).get()
+    agg = snap.to_dict() if snap.exists else {"total": 0}
+    data = public_json(cid, campaign, agg, zips)
+    body = json.dumps(data, ensure_ascii=False, sort_keys=True)
+    if body == last.get(cid):
+        return
+    data["updated"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    db.collection("live").document(cid).set({"json": json.dumps(data, ensure_ascii=False), "updatedAt": datetime.now(timezone.utc)})
+    last[cid] = body
+    log(f"Live: {cid} now {len(data.get('tiles', []))} tile(s)")
+
+
+def main():
+    sa, key = os.environ.get("FIREBASE_SERVICE_ACCOUNT", ""), os.environ.get("OPENAI_KEY", "")
+    if os.environ.get("GOOGLE_SIGNIN") not in (None, "", "success") and not sa:
+        log("Google sign-in did not work yet (Workload Identity Federation not set up?). See firebase/setup-wif.sh. Nothing to do.")
+        return 0
+    if not key:
+        log("OPENAI_KEY is not set; signatures stay unscreened until it is added.")
+        return 0
+
+    import firebase_admin
+    from firebase_admin import credentials, firestore
+    from google.cloud.firestore_v1.base_query import FieldFilter
+
+    if sa:
+        firebase_admin.initialize_app(credentials.Certificate(json.loads(sa)))
+    else:
+        firebase_admin.initialize_app(credentials.ApplicationDefault(), {"projectId": PROJECT})
+    db = firestore.client()
+    campaigns = load_campaigns()
+    zips = json.load(gzip.open(os.path.join(ROOT, "scripts", "zips.json.gz"), "rt", encoding="utf-8"))
+
+    process_new(db, firestore, FieldFilter, campaigns, zips, key)
+
+    # Landscape campaigns during their live hours: keep checking every few seconds for the rest of
+    # this run (the next scheduled run picks up where this one stops), and push each change to the
+    # live document the display reads.
+    live = [cid for cid, c in campaigns.items() if live_now(c)]
+    if live and not DRY:
+        last = {}
+        stop = time.time() + LIVE_MINUTES * 60
+        log(f"Live mode for {', '.join(live)} until {datetime.fromtimestamp(stop, timezone.utc):%H:%M} UTC")
+        for cid in live:
+            publish_live(db, cid, campaigns[cid], zips, last)
+        while time.time() < stop:
+            time.sleep(LIVE_POLL)
+            for cid in process_new(db, firestore, FieldFilter, campaigns, zips, key) & set(live):
+                publish_live(db, cid, campaigns[cid], zips, last)
+    elif not DRY:
+        # Outside live hours, still keep the live document current after moderation edits.
+        last = {}
+        for cid, c in campaigns.items():
+            if is_landscape(c):
+                publish_live(db, cid, c, zips, last)
 
     # Rebuild public files for every live campaign, so moderation edits (hide/pin) apply too.
     changed = 0

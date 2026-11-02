@@ -1,0 +1,63 @@
+{
+  "id": "atb-landscape-2026",
+  "name": "America the Beautiful: Places to Protect",
+  "mode": "landscape",
+  "opens": "2026-11-09",
+  "closes": "2026-12-31",
+  "theme": "night-sky",
+  "live": {
+    "hours": "08:00-22:00",
+    "timezone": "America/Denver"
+  },
+  "landscape": {
+    "kicker": "America the Beautiful",
+    "question": "What place do you hope is still protected for people 100 years from now?",
+    "intro": "Name one place. Each answer becomes a piece of the Badlands, and together they build the landscape on the screen.",
+    "displayTagline": "100 years back. 100 years ahead.",
+    "goal": 300,
+    "qrLabel": "Add your place",
+    "partnerLogo": "assets/img/atb-logo.webp",
+    "partnerLogoAlt": "America the Beautiful: Our Natural Wonders, narrated by Kelsey Grammer"
+  },
+  "card": {
+    "messageLabel": "A place you hope is still protected",
+    "messagePrefix": "",
+    "messagePlaceholder": "The Little Missouri River, the creek behind Grandma's farm…",
+    "messageMax": 140,
+    "messageRequired": true,
+    "showMessage": true,
+    "optInLabel": "Send me news and stories from the Theodore Roosevelt Presidential Library.",
+    "optInDefault": true,
+    "privacyNote": "Your first name, last initial, hometown and answer may appear on the screen. Your email and ZIP code are never shown.",
+    "submitLabel": "Add my place",
+    "signedTitle": "Look up at the screen",
+    "signedBody": "Your piece of the Badlands is on its way to the landscape.",
+    "closedTitle": "The landscape is complete",
+    "closedBody": "Thank you to everyone who named a place worth protecting."
+  },
+  "cta": {
+    "title": "Keep exploring",
+    "body": "Theodore Roosevelt found his footing in the North Dakota Badlands. See where it happened at the Theodore Roosevelt Presidential Library in Medora.",
+    "button": "Visit trlibrary.com",
+    "url": "https://www.trlibrary.com/",
+    "utmSource": "signcard",
+    "utmMedium": "landscape",
+    "utmCampaign": "atb-landscape-2026"
+  },
+  "share": {
+    "title": "Pass it on",
+    "text": "I named a place I hope is still protected 100 years from now. Add yours to the Badlands landscape:",
+    "url": "https://card.labs.trlibrary.com/?c=atb-landscape-2026"
+  },
+  "wall": {
+    "count": 12
+  },
+  "ai": {
+    "topic": "places people hope are still protected for people 100 years from now, shared at screenings of the conservation film America the Beautiful",
+    "guidance": "Approve any answer that names a place or a kind of place worth protecting: a national or state park, a river, lake, coast, forest, prairie, mountain, a hometown creek, a family ranch or farm, a neighborhood park, or a short reason with it. Feature answers that are specific and heartfelt. Never approve partisan content, named living politicians, parties, campaigns or policy fights, and never approve jokes, insults or places named to mock someone."
+  },
+  "moderation": {
+    "hide": [],
+    "pin": []
+  }
+}
