@@ -12,11 +12,11 @@
   "landscape": {
     "kicker": "America the Beautiful",
     "question": "What place do you hope is still protected for people 100 years from now?",
-    "intro": "Name one place. Each answer becomes one piece of a Badlands mosaic, and together they build the picture on the screen.",
+    "intro": "Name one place. Each answer becomes one piece of a mosaic, and together they reveal a picture on the screen.",
     "displayTagline": "100 years back. 100 years ahead.",
     "goal": 300,
     "image": "assets/img/badlands-mosaic.jpg",
-    "imageCredit": "Mosaic photo: the North Dakota Badlands.",
+    "imageCredit": "",
     "qrLabel": "Add your place",
     "spotLabel": "A place worth protecting",
     "partnerLogo": "assets/img/atb-logo.webp",
@@ -34,7 +34,7 @@
     "privacyNote": "Your first name, last initial, hometown and answer may appear on the screen. Your email and ZIP code are never shown.",
     "submitLabel": "Add my place",
     "signedTitle": "Look up at the screen",
-    "signedBody": "Your piece of the Badlands is on its way to the landscape.",
+    "signedBody": "Your piece of the picture is on its way to the screen.",
     "closedTitle": "The landscape is complete",
     "closedBody": "Thank you to everyone who named a place worth protecting."
   },
