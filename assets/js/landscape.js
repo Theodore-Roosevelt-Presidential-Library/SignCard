@@ -157,7 +157,7 @@
         return '<rect x="' + (c.x + gap / 2).toFixed(1) + '" y="' + (c.y + gap / 2).toFixed(1) + '" width="' + (c.w - gap).toFixed(1) + '" height="' + (c.h - gap).toFixed(1) + '"/>';
       }).join("");
     }
-    var fresh = [], showText = this.opts.text && L.ch >= 14, fs = L.ch * .44;
+    var fresh = [], showText = this.opts.text && L.ch >= 14, fs = L.ch * .36;
     var ids = {};
     tiles.forEach(function (t, i) {
       ids[t.id] = 1;
