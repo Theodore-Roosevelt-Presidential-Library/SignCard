@@ -1,10 +1,48 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-02T22:57:30+00:00",
- "total": 0,
- "states": 0,
- "featured": [],
- "signers": [],
- "points": [],
- "tiles": []
+ "updated": "2026-11-03T15:37:08+00:00",
+ "total": 2,
+ "states": 1,
+ "featured": [
+  {
+   "id": "bbf7bf1ee7",
+   "name": "Addison O.",
+   "place": "Dickinson, ND",
+   "message": "Spearfish Canyon with its mountain goats and big horn sheep"
+  },
+  {
+   "id": "292e1c12ae",
+   "name": "Addison O.",
+   "place": "Dickinson, ND",
+   "message": "Spearfish Canyon"
+  }
+ ],
+ "signers": [
+  "Addison O."
+ ],
+ "points": [
+  [
+   -102.76,
+   46.81,
+   2
+  ]
+ ],
+ "tiles": [
+  {
+   "id": "292e1c12ae",
+   "name": "Addison O.",
+   "place": "Dickinson, ND",
+   "message": "Spearfish Canyon",
+   "label": "Spearfish Canyon",
+   "score": 7
+  },
+  {
+   "id": "bbf7bf1ee7",
+   "name": "Addison O.",
+   "place": "Dickinson, ND",
+   "message": "Spearfish Canyon with its mountain goats and big horn sheep",
+   "label": "Spearfish Canyon Wildlife",
+   "score": 9
+  }
+ ]
 }
