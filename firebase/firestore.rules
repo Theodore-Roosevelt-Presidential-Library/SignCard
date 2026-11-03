@@ -33,6 +33,20 @@ service cloud.firestore {
       allow list, write: if false;
     }
 
+    // Landscape campaigns: when someone submits, their phone also writes a marker with no content
+    // (campaign + time) so the big screen can light up their tile at once. The answer itself is
+    // shown only after the AI screening. Same ID as the signature, so one marker per signature.
+    match /pending/{sigId} {
+      allow create: if sigId.matches('^[0-9a-f]{64}$')
+        && request.resource.data.keys().hasOnly(['campaign', 'at'])
+        && request.resource.data.campaign is string && request.resource.data.campaign.matches('^[a-z0-9-]{3,60}$')
+        && request.resource.data.at is timestamp
+        && request.resource.data.at > request.time - duration.value(5, 'm')
+        && request.resource.data.at < request.time + duration.value(5, 'm');
+      allow get, list: if true;
+      allow update, delete: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

@@ -46,7 +46,11 @@ To change the photo, add a wide image to `assets/img/` (at least 1600 pixels acr
 
 Same signature fields as every campaign: the place goes in `message`. Screening works the same way (OpenAI moderation, then the review model, which also returns a short `label` printed on the tile). Nothing reaches the screen until it is approved; hide a tile by adding its `id` to `moderation.hide`.
 
-**Speed.** During `live.hours` (Mountain Time) on open days, each scheduled run stays on for `SIGNCARD_LIVE_MINUTES` (9) and checks for new answers every 15 seconds, then writes the public numbers to `live/<campaign>` in Firestore. The display reads that document every 8 seconds, so a tile appears about 20–40 seconds after someone submits. This needs the `live/{campaign}` read rule in `firebase/firestore.rules` published once (`firebase deploy --only firestore:rules`). Without it the display falls back to `data/<campaign>.json`, which updates every 10–15 minutes.
+**Instant tiles.** When someone submits, their phone also writes a marker with no content (`pending/<id>`: campaign and time). The display polls those every 4 seconds and lights up the new tile at once, photo only. The answer and name appear once the AI screening approves it; a tile not approved within 4 minutes goes away. The processor deletes each marker when it screens the signature.
+
+**Spam checks never drop an entry.** A filled hidden field or a too-fast submit is noted in `source` (`:hp`, `:fast`) and the entry still goes to the screening. (Phone autofill can fill hidden fields, which used to make an entry vanish silently.)
+
+**Speed.** During `live.hours` (Mountain Time) on open days, each scheduled run stays on for `SIGNCARD_LIVE_MINUTES` (9) and checks for new answers every 15 seconds, then writes the public numbers to `live/<campaign>` in Firestore. The display reads that document every 8 seconds, so a tile appears about 20–40 seconds after someone submits. This needs the `live/{campaign}` and `pending/{id}` rules in `firebase/firestore.rules` published once (`firebase deploy --only firestore:rules`). Without it the display falls back to `data/<campaign>.json`, which updates every 10–15 minutes.
 
 ## Embedding
 

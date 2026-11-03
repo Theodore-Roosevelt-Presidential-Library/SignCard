@@ -164,7 +164,7 @@
       var c = L.cells[i];
       if (!c) return;
       var el = self.drawn[t.id];
-      if (el && el._i === i) return;
+      if (el && el._i === i && !!(el._t && el._t.pending) === !!t.pending) return;
       if (el) { el.remove(); if (el._m) el._m.remove(); }
       el = document.createElementNS("http://www.w3.org/2000/svg", "g");
       el.setAttribute("class", "ls-tile" + (t.mine ? " mine" : "") + (t.pending ? " pending" : ""));
@@ -316,12 +316,28 @@
       el.classList.toggle("done", n >= goal);
       $(".lsd-wall svg").classList.toggle("complete", n >= goal);   // fill any cells left over at the goal
     }
+    // Pending: answers submitted in the last few minutes that the screening has not passed yet.
+    // Their tiles reveal the photo at once, with no words; the answer appears once approved,
+    // and a tile that is not approved within a few minutes goes away again.
+    var pending = {}, approved = [], seenPending = {};
+    function merged() {
+      var have = {}, now = Date.now(), out = approved.slice();
+      approved.forEach(function (t) { have[t.id] = 1; });
+      Object.keys(pending).forEach(function (id) {
+        if (now - pending[id] > 4 * 60000) { delete pending[id]; return; }
+        if (!have[id]) out.push({ id: id, pending: true, message: "", name: "" });
+      });
+      return out;
+    }
     function apply(list) {
+      if (list) approved = list;
+      list = merged();
       var added = [];
-      list.forEach(function (t) { if (!known[t.id]) { known[t.id] = 1; if (!first) added.push(t); } });
-      tiles = list;
-      land.draw(tiles, goal);
-      added.forEach(function (t) { var el = land.el(t.id); if (el) { el.classList.remove("enter"); el.classList.add("waiting"); reveal(el, false); } });
+      list.forEach(function (t) { if (!t.pending && !known[t.id]) { known[t.id] = 1; if (!first) added.push(t); } });
+      tiles = approved;
+      land.draw(list, goal);
+      list.forEach(function (t) { if (t.pending && !seenPending[t.id]) { seenPending[t.id] = 1; var el = land.el(t.id); if (el) { el.classList.add("landed"); setTimeout(function () { el.classList.remove("landed"); }, 1600); } } });
+      added.forEach(function (t) { var el = land.el(t.id); if (el && !seenPending[t.id]) { el.classList.remove("enter"); el.classList.add("waiting"); reveal(el, false); } });
       queue = queue.concat(added);
       first = false;
       counter();
@@ -352,7 +368,7 @@
       spot.appendChild(card);
       requestAnimationFrame(function () { requestAnimationFrame(function () { card.classList.add("on"); }); });
       var el = land.el(t.id);
-      if (el && isNew && !REDUCED) setTimeout(function () { fly(card, el); }, 1300);
+      if (el && isNew && !REDUCED && el.classList.contains("waiting")) setTimeout(function () { fly(card, el); }, 1300);
       else if (el) { el.classList.remove("waiting"); reveal(el, true); el.classList.add("lit"); }
       spotTimer = later(spotlight, isNew ? (queue.length > 3 ? 4200 : 7000) : 8000);
     }
@@ -395,6 +411,27 @@
     }
     apply(tilesOf(D));
     later(spotlight, 900);
+    var pendOk = true;
+    var pollPending = function () {
+      var fb = (o.CFG && o.CFG.firebase) || {};
+      if (!pendOk || !fb.projectId) return;
+      var since = new Date(Date.now() - 4 * 60000).toISOString();
+      fetch("https://firestore.googleapis.com/v1/projects/" + encodeURIComponent(fb.projectId) + "/databases/(default)/documents:runQuery?key=" + encodeURIComponent(fb.apiKey), {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ structuredQuery: { from: [{ collectionId: "pending" }], where: { fieldFilter: { field: { fieldPath: "at" }, op: "GREATER_THAN", value: { timestampValue: since } } }, limit: 200 } })
+      }).then(function (r) { if (r.status === 403) { pendOk = false; throw new Error("pending 403"); } return r.json(); })
+        .then(function (rows) {
+          var changed = false;
+          (rows || []).forEach(function (row) {
+            var d = row.document; if (!d || !d.fields || !d.fields.campaign || d.fields.campaign.stringValue !== C.id) return;
+            var id = d.name.split("/").pop().slice(0, 10);
+            if (!pending[id]) { pending[id] = Date.parse(d.fields.at.timestampValue) || Date.now(); changed = true; }
+          });
+          if (changed) apply();
+        }).catch(function () {})
+        .then(function () { later(pollPending, 4000); });
+    };
+    later(pollPending, 1500);
     var poll = function () {
       fetchData().then(function (d) { if (d) { D = d; apply(tilesOf(d)); } }).catch(function (e) { console.warn(e); })
         .then(function () { later(poll, liveOk ? 8000 : 60000); });
@@ -457,9 +494,10 @@
         optIn: !!form.optIn.checked,
         source: (o.EMBED ? "embed:" + (ref || "unknown") : (qs.get("src") === "qr" ? "qr" : "site"))
       };
-      var bot = form.website.value || Date.now() - form._t0 < 2500;
+      if (form.sc_hpx.value) rec.source += ":hp";          // flagged for the screening, never dropped
+      if (Date.now() - form._t0 < 2500) rec.source += ":fast";
       btn.disabled = true; btn.textContent = "Adding…";
-      Promise.all([bot ? new Promise(function (r) { setTimeout(function () { r("skipped"); }, 800); }) : o.save(rec), o.sha256(rec.campaign + "|" + rec.email.toLowerCase())])
+      Promise.all([o.save(rec), o.sha256(rec.campaign + "|" + rec.email.toLowerCase())])
         .then(function (res) {
           if (res[0] === "already") {
             btn.disabled = false; btn.textContent = get(C, "card.submitLabel", "Add my place");
@@ -467,6 +505,7 @@
             errBox.textContent = "This email has already added an answer. Each person adds one. Adding for someone else? Use their email.";
             return;
           }
+          if (res[0] === "saved" && o.markPending) o.markPending(C.id, res[1]);
           var me = { id: res[1].slice(0, 10), name: o.displayName(rec.first, rec.last), first: rec.first, message: rec.message, at: Date.now() };
           if (!o.PREVIEW) mine((mine() || []).concat([me]));
           pending.push(me);
@@ -528,7 +567,7 @@
       '<div class="two">' + fld("first", "First name", "text", "given-name") + fld("last", "Last name", "text", "family-name") + "</div>" +
       '<div class="two">' + fld("email", "Email", "email", "email") + fld("zip", "ZIP code", "text", "postal-code", 'inputmode="numeric" maxlength="5"') + "</div>" +
       '<label class="check"><input type="checkbox" name="optIn"' + (get(C, "card.optInDefault", true) ? " checked" : "") + "><span>" + esc(get(C, "card.optInLabel", "")) + "</span></label>" +
-      '<div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>' +
+      '<div class="hp" aria-hidden="true"><label>Leave this empty <input name="sc_hpx" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore></label></div>' +
       '<p class="fine">' + esc(get(C, "card.privacyNote", "")) + "</p>" +
       '<div class="form-err" hidden></div>' +
       '<button class="btn" type="submit">' + esc(get(C, "card.submitLabel", "Add my place")) + "</button>" +
