@@ -35,7 +35,11 @@ jobs:
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:
+      # Check out the latest main, not the commit this run was queued on. Runs are serialized,
+      # so by the time a queued run starts the previous one has usually pushed newer data/.
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -64,7 +68,23 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Update card data"
-            git push || (git pull --rebase origin main && git push)
+            # On a rejected push, rebase onto the newer main and retry. -X theirs keeps this
+            # run's data/ files, which are built from the latest Firestore totals.
+            pushed=false
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                pushed=true
+                break
+              fi
+              if [ "$attempt" -lt 3 ]; then
+                echo "Push rejected (attempt $attempt of 3); rebasing onto origin/main"
+                git pull --rebase -X theirs origin main
+              fi
+            done
+            if [ "$pushed" != "true" ]; then
+              echo "::error::Could not push card data after 3 attempts"
+              exit 1
+            fi
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
