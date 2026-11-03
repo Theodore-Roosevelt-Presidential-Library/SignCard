@@ -1,14 +1,20 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-03T15:37:08+00:00",
- "total": 2,
- "states": 1,
+ "updated": "2026-11-03T15:48:27+00:00",
+ "total": 3,
+ "states": 2,
  "featured": [
   {
    "id": "bbf7bf1ee7",
    "name": "Addison O.",
    "place": "Dickinson, ND",
    "message": "Spearfish Canyon with its mountain goats and big horn sheep"
+  },
+  {
+   "id": "fe9f89676b",
+   "name": "Peter T.",
+   "place": "Marion, IN",
+   "message": "Arches"
   },
   {
    "id": "292e1c12ae",
@@ -18,6 +24,7 @@
   }
  ],
  "signers": [
+  "Peter T.",
   "Addison O."
  ],
  "points": [
@@ -25,6 +32,11 @@
    -102.76,
    46.81,
    2
+  ],
+  [
+   -85.66,
+   40.54,
+   1
   ]
  ],
  "tiles": [
@@ -43,6 +55,14 @@
    "message": "Spearfish Canyon with its mountain goats and big horn sheep",
    "label": "Spearfish Canyon Wildlife",
    "score": 9
+  },
+  {
+   "id": "fe9f89676b",
+   "name": "Peter T.",
+   "place": "Marion, IN",
+   "message": "Arches",
+   "label": "Arches National Park",
+   "score": 7
   }
  ]
 }
