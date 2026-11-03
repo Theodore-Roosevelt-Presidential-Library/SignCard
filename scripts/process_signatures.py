@@ -344,8 +344,10 @@ def process_new(db, firestore, FieldFilter, campaigns, zips, key):
                     "status": "done", "flagged": fl, "review": rv, "place": place,
                     "processedAt": firestore.SERVER_TIMESTAMP,
                 })
+                if is_landscape(campaign):
+                    batch.delete(db.collection("pending").document(s.id))   # the screen's "just submitted" marker
                 n_in_batch += 1
-                if n_in_batch >= 400:
+                if n_in_batch >= 200:
                     batch.commit()
                     batch, n_in_batch = db.batch(), 0
         agg["pool"] = sorted(agg["pool"], key=lambda p: (-p["score"], -p["ts"]))[:POOL_SIZE]

@@ -376,7 +376,7 @@
         (prefix ? ' aria-label="' + esc(get(C, "card.messageLabel", "Message") + ": " + prefix + "…") + '"' : "") + (msgReq ? " required" : "") + "></textarea></div>" +
         '<div class="msg"></div></div>' : "") +
       '<label class="check"><input type="checkbox" name="optIn"' + (get(C, "card.optInDefault", true) ? " checked" : "") + "><span>" + esc(get(C, "card.optInLabel", "")) + "</span></label>" +
-      '<div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>' +
+      '<div class="hp" aria-hidden="true"><label>Leave this empty <input name="sc_hpx" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore></label></div>' +
       '<p class="fine">' + esc(get(C, "card.privacyNote", "")) + "</p>" +
       '<div class="form-err" hidden></div>' +
       '<button class="btn" type="submit">' + esc(get(C, "card.submitLabel", "Sign")) + "</button>" +
@@ -482,6 +482,16 @@
         });
     });
   }
+  // Landscape campaigns: a public, content-free marker (campaign + time) so the big screen can
+  // reveal the new tile right away. The answer itself appears only after the AI screening.
+  function markPending(campaign, id) {
+    var fb = CFG.firebase || {};
+    if (PREVIEW || !fb.projectId || !fb.apiKey || !/^[0-9a-f]{64}$/.test(id)) return Promise.resolve();
+    var url = "https://firestore.googleapis.com/v1/projects/" + encodeURIComponent(fb.projectId) +
+      "/databases/(default)/documents/pending?documentId=" + id + "&key=" + encodeURIComponent(fb.apiKey);
+    return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields: { campaign: { stringValue: campaign }, at: { timestampValue: new Date().toISOString() } } }) }).catch(function () {});
+  }
   function submit(form) {
     var errBox = $(".form-err", form), btn = $("button[type=submit]", form);
     errBox.hidden = true;
@@ -496,9 +506,12 @@
       optIn: !!form.optIn.checked,
       source: (EMBED ? "embed:" + (ref || "unknown") : "site") + (STARTER ? ":starter" : "")
     };
-    var bot = form.website.value || Date.now() - form._t0 < 2500;
+    // Spam checks never drop an entry silently (phone autofill can trip them); they flag it in
+    // `source` and the AI screening decides.
+    if (form.sc_hpx.value) rec.source += ":hp";
+    if (Date.now() - form._t0 < 2500) rec.source += ":fast";
     btn.disabled = true; btn.textContent = "Signing…";
-    (bot ? wait(800).then(function () { return "skipped"; }) : save(rec)).then(function (result) {
+    save(rec).then(function (result) {
       me = { name: displayName(rec.first, rec.last), full: rec.first + " " + rec.last, first: rec.first, message: rec.message, at: Date.now(), result: result };
       if (!PREVIEW) store("signcard:" + C.id, me);
       showSigned(false);
@@ -829,7 +842,7 @@
       if (PREVIEW) { q = new URLSearchParams(qs); if (jump === "display") { q.set("display", "1"); q.set("demo", "1"); } }
       window.SignCardLandscape.start({
         root: root, C: C, D: D, qs: q, CFG: CFG, PREVIEW: PREVIEW, EMBED: EMBED,
-        save: save, sha256: sha256, store: store, post: post, displayName: displayName, isClosed: isClosed, ctaUrl: ctaUrl
+        save: save, sha256: sha256, markPending: markPending, store: store, post: post, displayName: displayName, isClosed: isClosed, ctaUrl: ctaUrl
       });
     });
   }

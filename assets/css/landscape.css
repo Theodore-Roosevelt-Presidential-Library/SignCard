@@ -18,6 +18,7 @@
 .ls-tile.lit rect{stroke:#F9D635;stroke-width:4px;vector-effect:non-scaling-stroke;paint-order:stroke}
 .ls-tile.mine rect{stroke:#F9D635;stroke-width:3px;vector-effect:non-scaling-stroke;animation:lsMine 1.4s ease-in-out infinite alternate}
 .ls-tile.pending rect{stroke-dasharray:6 4}
+.ls-display .ls-tile.pending rect{stroke:#F9D635;stroke-dasharray:none;stroke-width:2px;animation:lsMine 1.4s ease-in-out infinite alternate}
 @keyframes lsMine{from{stroke-opacity:1}to{stroke-opacity:.25}}
 @media (prefers-reduced-motion:reduce){.ls-tile.enter,.ls-tile.mine rect,.ls-tile.landed rect{animation:none}}
 
