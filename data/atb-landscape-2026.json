@@ -1,14 +1,20 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-03T15:48:27+00:00",
- "total": 3,
- "states": 2,
+ "updated": "2026-11-10T17:19:31+00:00",
+ "total": 8,
+ "states": 4,
  "featured": [
   {
    "id": "bbf7bf1ee7",
    "name": "Addison O.",
    "place": "Dickinson, ND",
    "message": "Spearfish Canyon with its mountain goats and big horn sheep"
+  },
+  {
+   "id": "dc9023ab69",
+   "name": "Kristine T.",
+   "place": "Davenport, IA",
+   "message": "The Mississippi River, especially the Iowa/Illinois bend."
   },
   {
    "id": "fe9f89676b",
@@ -21,21 +27,52 @@
    "name": "Addison O.",
    "place": "Dickinson, ND",
    "message": "Spearfish Canyon"
+  },
+  {
+   "id": "c75b38bb96",
+   "name": "Emily C.",
+   "place": "",
+   "message": "Missouri River"
+  },
+  {
+   "id": "b23d601262",
+   "name": "Patrick R.",
+   "place": "Westlake, OH",
+   "message": "The Cleveland Metroparks"
   }
  ],
  "signers": [
+  "Emily C.",
+  "Jaden O.",
+  "Kristine T.",
+  "Patrick R.",
   "Peter T.",
   "Addison O."
  ],
  "points": [
+  [
+   -103.56,
+   46.94,
+   2
+  ],
   [
    -102.76,
    46.81,
    2
   ],
   [
+   -90.54,
+   41.56,
+   1
+  ],
+  [
    -85.66,
    40.54,
+   1
+  ],
+  [
+   -81.92,
+   41.45,
    1
   ]
  ],
@@ -63,6 +100,30 @@
    "message": "Arches",
    "label": "Arches National Park",
    "score": 7
+  },
+  {
+   "id": "b23d601262",
+   "name": "Patrick R.",
+   "place": "Westlake, OH",
+   "message": "The Cleveland Metroparks",
+   "label": "Cleveland Metroparks",
+   "score": 6
+  },
+  {
+   "id": "dc9023ab69",
+   "name": "Kristine T.",
+   "place": "Davenport, IA",
+   "message": "The Mississippi River, especially the Iowa/Illinois bend.",
+   "label": "Mississippi River Bend",
+   "score": 7
+  },
+  {
+   "id": "c75b38bb96",
+   "name": "Emily C.",
+   "place": "",
+   "message": "Missouri River",
+   "label": "Missouri River",
+   "score": 6
   }
  ]
 }
