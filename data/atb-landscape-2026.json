@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-11T19:20:14+00:00",
- "total": 9,
+ "updated": "2026-11-11T19:34:05+00:00",
+ "total": 10,
  "states": 4,
  "featured": [
   {
@@ -9,6 +9,12 @@
    "name": "Addison O.",
    "place": "Dickinson, ND",
    "message": "Spearfish Canyon with its mountain goats and big horn sheep"
+  },
+  {
+   "id": "12a87552eb",
+   "name": "Marcie W.",
+   "place": "Mandan, ND",
+   "message": "The finger lakes of western New York"
   },
   {
    "id": "dc9023ab69",
@@ -23,12 +29,6 @@
    "message": "Arches"
   },
   {
-   "id": "292e1c12ae",
-   "name": "Addison O.",
-   "place": "Dickinson, ND",
-   "message": "Spearfish Canyon"
-  },
-  {
    "id": "c75b38bb96",
    "name": "Emily C.",
    "place": "",
@@ -41,6 +41,12 @@
    "message": "The Cleveland Metroparks"
   },
   {
+   "id": "292e1c12ae",
+   "name": "Addison O.",
+   "place": "Dickinson, ND",
+   "message": "Spearfish Canyon"
+  },
+  {
    "id": "2b9b178071",
    "name": "Alice W.",
    "place": "Dickinson, ND",
@@ -48,6 +54,7 @@
   }
  ],
  "signers": [
+  "Marcie W.",
   "Alice W.",
   "Emily C.",
   "Jaden O.",
@@ -66,6 +73,11 @@
    -103.56,
    46.94,
    2
+  ],
+  [
+   -100.91,
+   46.83,
+   1
   ],
   [
    -90.54,
@@ -139,6 +151,14 @@
    "message": "Canandaigua Lake",
    "label": "Canandaigua Lake",
    "score": 6
+  },
+  {
+   "id": "12a87552eb",
+   "name": "Marcie W.",
+   "place": "Mandan, ND",
+   "message": "The finger lakes of western New York",
+   "label": "Finger Lakes, NY",
+   "score": 7
   }
  ]
 }
