@@ -1,9 +1,15 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-12T02:27:27+00:00",
- "total": 13,
- "states": 5,
+ "updated": "2026-11-12T02:38:50+00:00",
+ "total": 29,
+ "states": 9,
  "featured": [
+  {
+   "id": "54024b840d",
+   "name": "Ryan T.",
+   "place": "Bismarck, ND",
+   "message": "The Sandhills and native grass pastures, meadows and wetlands on the Taylor Ranch, McHenry County."
+  },
   {
    "id": "bbf7bf1ee7",
    "name": "Addison O.",
@@ -11,10 +17,28 @@
    "message": "Spearfish Canyon with its mountain goats and big horn sheep"
   },
   {
-   "id": "0175bc1723",
-   "name": "Chris B.",
-   "place": "Medora, ND",
-   "message": "Peak One - Frisco, Colorado"
+   "id": "ef3631d5ce",
+   "name": "Kristine T.",
+   "place": "Davenport, IA",
+   "message": "The Mississippi River"
+  },
+  {
+   "id": "a687975a30",
+   "name": "Nadeen K.",
+   "place": "Columbus, MT",
+   "message": "Hyaline Canyon Bozeman Montana"
+  },
+  {
+   "id": "5c10acda4f",
+   "name": "Joan W.",
+   "place": "",
+   "message": "North shore of Lake Superior"
+  },
+  {
+   "id": "5e63f3fc38",
+   "name": "Lance S.",
+   "place": "Missoula, MT",
+   "message": "Sleeping Bear Dunes Michigan"
   },
   {
    "id": "b2bb010051",
@@ -35,43 +59,41 @@
    "message": "Arches"
   },
   {
+   "id": "81f14cf7a1",
+   "name": "Kale E.",
+   "place": "Ramona, OK",
+   "message": "Granny Kay’s Ramona Oklahoma"
+  },
+  {
+   "id": "e13e6e869f",
+   "name": "Sarah M.",
+   "place": "Boulder, CO",
+   "message": "Shanahan Ridge"
+  },
+  {
    "id": "c75b38bb96",
    "name": "Emily C.",
    "place": "",
    "message": "Missouri River"
-  },
-  {
-   "id": "b23d601262",
-   "name": "Patrick R.",
-   "place": "Westlake, OH",
-   "message": "The Cleveland Metroparks"
-  },
-  {
-   "id": "12a87552eb",
-   "name": "Marcie W.",
-   "place": "Mandan, ND",
-   "message": "The finger lakes of western New York"
-  },
-  {
-   "id": "292e1c12ae",
-   "name": "Addison O.",
-   "place": "Dickinson, ND",
-   "message": "Spearfish Canyon"
-  },
-  {
-   "id": "df0ae4a25e",
-   "name": "Jenn C.",
-   "place": "Beach, ND",
-   "message": "Outer Banks, NC"
-  },
-  {
-   "id": "2b9b178071",
-   "name": "Alice W.",
-   "place": "Dickinson, ND",
-   "message": "Canandaigua Lake"
   }
  ],
  "signers": [
+  "Nadeen K.",
+  "Diana S.",
+  "Joan W.",
+  "Kale E.",
+  "Landon J.",
+  "Marcia P.",
+  "Kristine T.",
+  "Sarah M.",
+  "Kristen H.",
+  "Nikki T.",
+  "Judy J.",
+  "Kylie S.",
+  "Debbie Q.",
+  "Lance S.",
+  "Ryan T.",
+  "Madison W.",
   "Chris B.",
   "Katie R.",
   "Jenn C.",
@@ -79,7 +101,6 @@
   "Alice W.",
   "Emily C.",
   "Jaden O.",
-  "Kristine T.",
   "Patrick R.",
   "Peter T.",
   "Addison O."
@@ -88,7 +109,7 @@
   [
    -103.56,
    46.94,
-   3
+   5
   ],
   [
    -102.76,
@@ -98,6 +119,41 @@
   [
    -103.98,
    46.93,
+   2
+  ],
+  [
+   -100.78,
+   46.81,
+   2
+  ],
+  [
+   -90.54,
+   41.56,
+   2
+  ],
+  [
+   -114.03,
+   46.86,
+   1
+  ],
+  [
+   -109.26,
+   45.63,
+   1
+  ],
+  [
+   -105.25,
+   39.98,
+   1
+  ],
+  [
+   -103.8,
+   46.83,
+   1
+  ],
+  [
+   -101.81,
+   47.27,
    1
   ],
   [
@@ -106,8 +162,23 @@
    1
   ],
   [
-   -90.54,
-   41.56,
+   -100.78,
+   46.84,
+   1
+  ],
+  [
+   -100.68,
+   46.72,
+   1
+  ],
+  [
+   -99.04,
+   29.94,
+   1
+  ],
+  [
+   -95.9,
+   36.58,
    1
   ],
   [
@@ -213,6 +284,134 @@
    "place": "Medora, ND",
    "message": "Peak One - Frisco, Colorado",
    "label": "Peak One, Colorado",
+   "score": 7
+  },
+  {
+   "id": "46eef3c1d3",
+   "name": "Madison W.",
+   "place": "Center Point, TX",
+   "message": "Kerrville texas",
+   "label": "Kerrville Texas",
+   "score": 5
+  },
+  {
+   "id": "54024b840d",
+   "name": "Ryan T.",
+   "place": "Bismarck, ND",
+   "message": "The Sandhills and native grass pastures, meadows and wetlands on the Taylor Ranch, McHenry County.",
+   "label": "Sandhills Taylor Ranch",
+   "score": 9
+  },
+  {
+   "id": "5e63f3fc38",
+   "name": "Lance S.",
+   "place": "Missoula, MT",
+   "message": "Sleeping Bear Dunes Michigan",
+   "label": "Sleeping Bear Dunes",
+   "score": 7
+  },
+  {
+   "id": "61d4506170",
+   "name": "Debbie Q.",
+   "place": "Medora, ND",
+   "message": "A little farm in west Wales",
+   "label": "Farm In West Wales",
+   "score": 6
+  },
+  {
+   "id": "65e0d88ba0",
+   "name": "Kylie S.",
+   "place": "Beach, ND",
+   "message": "Eagle River, WI",
+   "label": "Eagle River WI",
+   "score": 5
+  },
+  {
+   "id": "7019845d53",
+   "name": "Judy J.",
+   "place": "Sentinel Butte, ND",
+   "message": "The badlands of western North Dakota where we ranch.",
+   "label": "Badlands ND Ranch",
+   "score": 7
+  },
+  {
+   "id": "8302cb943e",
+   "name": "Nikki T.",
+   "place": "Bismarck, ND",
+   "message": "The North Unit of Theodore Roosevelt National Park",
+   "label": "North Unit TR Park",
+   "score": 8
+  },
+  {
+   "id": "ad01ba19fd",
+   "name": "Kristen H.",
+   "place": "Bismarck, ND",
+   "message": "Apple Creek in Bismarck, ND",
+   "label": "Apple Creek Bismarck",
+   "score": 7
+  },
+  {
+   "id": "e13e6e869f",
+   "name": "Sarah M.",
+   "place": "Boulder, CO",
+   "message": "Shanahan Ridge",
+   "label": "Shanahan Ridge",
+   "score": 6
+  },
+  {
+   "id": "ef3631d5ce",
+   "name": "Kristine T.",
+   "place": "Davenport, IA",
+   "message": "The Mississippi River",
+   "label": "Mississippi River",
+   "score": 8
+  },
+  {
+   "id": "09a3c70946",
+   "name": "Marcia P.",
+   "place": "Bismarck, ND",
+   "message": "The Missouri River especially the natural area .",
+   "label": "Missouri River Natural Area",
+   "score": 7
+  },
+  {
+   "id": "1c4016607d",
+   "name": "Landon J.",
+   "place": "Beulah, ND",
+   "message": "Grasslands of northwestern North Dakota",
+   "label": "Grasslands of North Dakota",
+   "score": 7
+  },
+  {
+   "id": "81f14cf7a1",
+   "name": "Kale E.",
+   "place": "Ramona, OK",
+   "message": "Granny Kay’s Ramona Oklahoma",
+   "label": "Granny Kay's Ramona",
+   "score": 6
+  },
+  {
+   "id": "5c10acda4f",
+   "name": "Joan W.",
+   "place": "",
+   "message": "North shore of Lake Superior",
+   "label": "North Shore of Lake Superior",
+   "score": 7
+  },
+  {
+   "id": "1a96e99641",
+   "name": "Diana S.",
+   "place": "Medora, ND",
+   "message": "Crescent Lake Oregon",
+   "label": "Crescent Lake Oregon",
+   "score": 7
+  },
+  {
+   "id": "a687975a30",
+   "name": "Nadeen K.",
+   "place": "Columbus, MT",
+   "message": "Hyaline Canyon Bozeman Montana",
+   "label": "Hyaline Canyon",
    "score": 7
   }
  ]
