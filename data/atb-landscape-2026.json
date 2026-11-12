@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-12T02:38:50+00:00",
- "total": 29,
- "states": 9,
+ "updated": "2026-11-12T21:55:14+00:00",
+ "total": 31,
+ "states": 10,
  "featured": [
   {
    "id": "54024b840d",
@@ -21,6 +21,18 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "e58afbb148",
+   "name": "Randi O.",
+   "place": "Whitewood, SD",
+   "message": "Pactola reservoir in the black hill Pearl creek on the James river"
+  },
+  {
+   "id": "902afd2d9a",
+   "name": "Joel Z.",
+   "place": "Custer, SD",
+   "message": "Redfish Lake, Idaho"
   },
   {
    "id": "a687975a30",
@@ -63,21 +75,11 @@
    "name": "Kale E.",
    "place": "Ramona, OK",
    "message": "Granny Kay’s Ramona Oklahoma"
-  },
-  {
-   "id": "e13e6e869f",
-   "name": "Sarah M.",
-   "place": "Boulder, CO",
-   "message": "Shanahan Ridge"
-  },
-  {
-   "id": "c75b38bb96",
-   "name": "Emily C.",
-   "place": "",
-   "message": "Missouri River"
   }
  ],
  "signers": [
+  "Randi O.",
+  "Joel Z.",
   "Nadeen K.",
   "Diana S.",
   "Joan W.",
@@ -149,6 +151,16 @@
   [
    -103.8,
    46.83,
+   1
+  ],
+  [
+   -103.64,
+   44.46,
+   1
+  ],
+  [
+   -103.43,
+   43.66,
    1
   ],
   [
@@ -412,6 +424,22 @@
    "place": "Columbus, MT",
    "message": "Hyaline Canyon Bozeman Montana",
    "label": "Hyaline Canyon",
+   "score": 7
+  },
+  {
+   "id": "902afd2d9a",
+   "name": "Joel Z.",
+   "place": "Custer, SD",
+   "message": "Redfish Lake, Idaho",
+   "label": "Redfish Lake, Idaho",
+   "score": 7
+  },
+  {
+   "id": "e58afbb148",
+   "name": "Randi O.",
+   "place": "Whitewood, SD",
+   "message": "Pactola reservoir in the black hill Pearl creek on the James river",
+   "label": "Pactola Reservoir & Pearl Cree",
    "score": 7
   }
  ]
