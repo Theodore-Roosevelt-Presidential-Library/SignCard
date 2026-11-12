@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-11T19:34:05+00:00",
- "total": 10,
- "states": 4,
+ "updated": "2026-11-12T02:27:27+00:00",
+ "total": 13,
+ "states": 5,
  "featured": [
   {
    "id": "bbf7bf1ee7",
@@ -11,10 +11,16 @@
    "message": "Spearfish Canyon with its mountain goats and big horn sheep"
   },
   {
-   "id": "12a87552eb",
-   "name": "Marcie W.",
-   "place": "Mandan, ND",
-   "message": "The finger lakes of western New York"
+   "id": "0175bc1723",
+   "name": "Chris B.",
+   "place": "Medora, ND",
+   "message": "Peak One - Frisco, Colorado"
+  },
+  {
+   "id": "b2bb010051",
+   "name": "Katie R.",
+   "place": "Alpharetta, GA",
+   "message": "The Chattahoochee River"
   },
   {
    "id": "dc9023ab69",
@@ -41,10 +47,22 @@
    "message": "The Cleveland Metroparks"
   },
   {
+   "id": "12a87552eb",
+   "name": "Marcie W.",
+   "place": "Mandan, ND",
+   "message": "The finger lakes of western New York"
+  },
+  {
    "id": "292e1c12ae",
    "name": "Addison O.",
    "place": "Dickinson, ND",
    "message": "Spearfish Canyon"
+  },
+  {
+   "id": "df0ae4a25e",
+   "name": "Jenn C.",
+   "place": "Beach, ND",
+   "message": "Outer Banks, NC"
   },
   {
    "id": "2b9b178071",
@@ -54,6 +72,9 @@
   }
  ],
  "signers": [
+  "Chris B.",
+  "Katie R.",
+  "Jenn C.",
   "Marcie W.",
   "Alice W.",
   "Emily C.",
@@ -65,14 +86,19 @@
  ],
  "points": [
   [
+   -103.56,
+   46.94,
+   3
+  ],
+  [
    -102.76,
    46.81,
    3
   ],
   [
-   -103.56,
-   46.94,
-   2
+   -103.98,
+   46.93,
+   1
   ],
   [
    -100.91,
@@ -87,6 +113,11 @@
   [
    -85.66,
    40.54,
+   1
+  ],
+  [
+   -84.24,
+   34.03,
    1
   ],
   [
@@ -158,6 +189,30 @@
    "place": "Mandan, ND",
    "message": "The finger lakes of western New York",
    "label": "Finger Lakes, NY",
+   "score": 7
+  },
+  {
+   "id": "df0ae4a25e",
+   "name": "Jenn C.",
+   "place": "Beach, ND",
+   "message": "Outer Banks, NC",
+   "label": "Outer Banks, NC",
+   "score": 6
+  },
+  {
+   "id": "b2bb010051",
+   "name": "Katie R.",
+   "place": "Alpharetta, GA",
+   "message": "The Chattahoochee River",
+   "label": "Chattahoochee River",
+   "score": 7
+  },
+  {
+   "id": "0175bc1723",
+   "name": "Chris B.",
+   "place": "Medora, ND",
+   "message": "Peak One - Frisco, Colorado",
+   "label": "Peak One, Colorado",
    "score": 7
   }
  ]
