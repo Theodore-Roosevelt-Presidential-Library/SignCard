@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-12T21:55:14+00:00",
- "total": 31,
- "states": 10,
+ "updated": "2026-11-12T22:05:02+00:00",
+ "total": 33,
+ "states": 11,
  "featured": [
   {
    "id": "54024b840d",
@@ -23,16 +23,16 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "39311e1902",
+   "name": "Sharon Z.",
+   "place": "Custer, SD",
+   "message": "Sylvan Lake. Custer State Park South Dakotah"
+  },
+  {
    "id": "e58afbb148",
    "name": "Randi O.",
    "place": "Whitewood, SD",
    "message": "Pactola reservoir in the black hill Pearl creek on the James river"
-  },
-  {
-   "id": "902afd2d9a",
-   "name": "Joel Z.",
-   "place": "Custer, SD",
-   "message": "Redfish Lake, Idaho"
   },
   {
    "id": "a687975a30",
@@ -71,13 +71,15 @@
    "message": "Arches"
   },
   {
-   "id": "81f14cf7a1",
-   "name": "Kale E.",
-   "place": "Ramona, OK",
-   "message": "Granny Kay’s Ramona Oklahoma"
+   "id": "55f4abeaf9",
+   "name": "Demi H.",
+   "place": "Genoa, NV",
+   "message": "Lake Tahoe"
   }
  ],
  "signers": [
+  "Demi H.",
+  "Sharon Z.",
   "Randi O.",
   "Joel Z.",
   "Nadeen K.",
@@ -124,6 +126,11 @@
    2
   ],
   [
+   -103.43,
+   43.66,
+   2
+  ],
+  [
    -100.78,
    46.81,
    2
@@ -132,6 +139,11 @@
    -90.54,
    41.56,
    2
+  ],
+  [
+   -119.82,
+   39.03,
+   1
   ],
   [
    -114.03,
@@ -156,11 +168,6 @@
   [
    -103.64,
    44.46,
-   1
-  ],
-  [
-   -103.43,
-   43.66,
    1
   ],
   [
@@ -441,6 +448,22 @@
    "message": "Pactola reservoir in the black hill Pearl creek on the James river",
    "label": "Pactola Reservoir & Pearl Cree",
    "score": 7
+  },
+  {
+   "id": "39311e1902",
+   "name": "Sharon Z.",
+   "place": "Custer, SD",
+   "message": "Sylvan Lake. Custer State Park South Dakotah",
+   "label": "Sylvan Lake, Custer State Park",
+   "score": 7
+  },
+  {
+   "id": "55f4abeaf9",
+   "name": "Demi H.",
+   "place": "Genoa, NV",
+   "message": "Lake Tahoe",
+   "label": "Lake Tahoe",
+   "score": 6
   }
  ]
 }
