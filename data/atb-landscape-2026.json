@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-13T21:58:56+00:00",
- "total": 40,
+ "updated": "2026-11-13T22:08:53+00:00",
+ "total": 42,
  "states": 13,
  "featured": [
   {
@@ -78,6 +78,8 @@
   }
  ],
  "signers": [
+  "Mike C.",
+  "I. S.",
   "Patricia C.",
   "Dawn K.",
   "Tim K.",
@@ -133,6 +135,11 @@
    3
   ],
   [
+   -100.78,
+   46.84,
+   3
+  ],
+  [
    -103.98,
    46.93,
    2
@@ -140,11 +147,6 @@
   [
    -103.43,
    43.66,
-   2
-  ],
-  [
-   -100.78,
-   46.84,
    2
   ],
   [
@@ -528,6 +530,22 @@
    "place": "Bismarck, ND",
    "message": "The Black Hills of SD",
    "label": "Black Hills of SD",
+   "score": 7
+  },
+  {
+   "id": "8028216ead",
+   "name": "I. S.",
+   "place": "",
+   "message": "Sheridan County in ND",
+   "label": "Sheridan County, ND",
+   "score": 6
+  },
+  {
+   "id": "51b5357772",
+   "name": "Mike C.",
+   "place": "Bismarck, ND",
+   "message": "Alaska's Mount Denali",
+   "label": "Mount Denali",
    "score": 7
   }
  ]
