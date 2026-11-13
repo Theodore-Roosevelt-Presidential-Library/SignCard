@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-12T22:05:02+00:00",
- "total": 33,
- "states": 11,
+ "updated": "2026-11-13T21:58:56+00:00",
+ "total": 40,
+ "states": 13,
  "featured": [
   {
    "id": "54024b840d",
@@ -21,6 +21,24 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "554413fb31",
+   "name": "Dawn K.",
+   "place": "Homestead, FL",
+   "message": "The Redlands and farmlands of South Florida"
+  },
+  {
+   "id": "f6afcd4720",
+   "name": "Tim K.",
+   "place": "Homestead, FL",
+   "message": "Ocala national forest"
+  },
+  {
+   "id": "a7f8dc4070",
+   "name": "Jeffrey E.",
+   "place": "Glencoe, IL",
+   "message": "Adirondack Park"
   },
   {
    "id": "39311e1902",
@@ -57,27 +75,16 @@
    "name": "Katie R.",
    "place": "Alpharetta, GA",
    "message": "The Chattahoochee River"
-  },
-  {
-   "id": "dc9023ab69",
-   "name": "Kristine T.",
-   "place": "Davenport, IA",
-   "message": "The Mississippi River, especially the Iowa/Illinois bend."
-  },
-  {
-   "id": "fe9f89676b",
-   "name": "Peter T.",
-   "place": "Marion, IN",
-   "message": "Arches"
-  },
-  {
-   "id": "55f4abeaf9",
-   "name": "Demi H.",
-   "place": "Genoa, NV",
-   "message": "Lake Tahoe"
   }
  ],
  "signers": [
+  "Patricia C.",
+  "Dawn K.",
+  "Tim K.",
+  "Mary B.",
+  "Andy B.",
+  "Jeffrey E.",
+  "Stephanie E.",
   "Demi H.",
   "Sharon Z.",
   "Randi O.",
@@ -116,6 +123,11 @@
    5
   ],
   [
+   -100.78,
+   46.81,
+   4
+  ],
+  [
    -102.76,
    46.81,
    3
@@ -132,12 +144,22 @@
   ],
   [
    -100.78,
-   46.81,
+   46.84,
    2
   ],
   [
    -90.54,
    41.56,
+   2
+  ],
+  [
+   -87.76,
+   42.13,
+   2
+  ],
+  [
+   -80.48,
+   25.48,
    2
   ],
   [
@@ -178,11 +200,6 @@
   [
    -100.91,
    46.83,
-   1
-  ],
-  [
-   -100.78,
-   46.84,
    1
   ],
   [
@@ -464,6 +481,54 @@
    "message": "Lake Tahoe",
    "label": "Lake Tahoe",
    "score": 6
+  },
+  {
+   "id": "a7f8dc4070",
+   "name": "Jeffrey E.",
+   "place": "Glencoe, IL",
+   "message": "Adirondack Park",
+   "label": "Adirondack Park",
+   "score": 7
+  },
+  {
+   "id": "ad7bf6bdaf",
+   "name": "Andy B.",
+   "place": "Bismarck, ND",
+   "message": "Rocky Mountain National Park",
+   "label": "Rocky Mountain National Park",
+   "score": 7
+  },
+  {
+   "id": "85d0272e77",
+   "name": "Mary B.",
+   "place": "Bismarck, ND",
+   "message": "Grand Canyon National Park",
+   "label": "Grand Canyon National Park",
+   "score": 7
+  },
+  {
+   "id": "f6afcd4720",
+   "name": "Tim K.",
+   "place": "Homestead, FL",
+   "message": "Ocala national forest",
+   "label": "Ocala National Forest",
+   "score": 7
+  },
+  {
+   "id": "554413fb31",
+   "name": "Dawn K.",
+   "place": "Homestead, FL",
+   "message": "The Redlands and farmlands of South Florida",
+   "label": "Redlands and Farmlands",
+   "score": 7
+  },
+  {
+   "id": "a3dca9571e",
+   "name": "Patricia C.",
+   "place": "Bismarck, ND",
+   "message": "The Black Hills of SD",
+   "label": "Black Hills of SD",
+   "score": 7
   }
  ]
 }
