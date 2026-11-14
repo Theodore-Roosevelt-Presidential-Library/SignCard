@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-14T22:07:53+00:00",
- "total": 48,
+ "updated": "2026-11-14T23:29:09+00:00",
+ "total": 49,
  "states": 13,
  "featured": [
   {
@@ -23,16 +23,16 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "40051452dd",
+   "name": "Chris D.",
+   "place": "Glendive, MT",
+   "message": "Giant Springs State Park"
+  },
+  {
    "id": "0f70e056de",
    "name": "Lisa D.",
    "place": "Glendive, MT",
    "message": "Custer State Park, Black Hills South Dakota"
-  },
-  {
-   "id": "bd566cf97c",
-   "name": "Sawyer D.",
-   "place": "Glendive, MT",
-   "message": "Mount St. Helens"
   },
   {
    "id": "554413fb31",
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Chris D.",
   "Lisa D.",
   "Sawyer D.",
   "Colter D.",
@@ -116,8 +117,7 @@
   "Chris B.",
   "Katie R.",
   "Jenn C.",
-  "Marcie W.",
-  "Alice W."
+  "Marcie W."
  ],
  "points": [
   [
@@ -126,14 +126,14 @@
    5
   ],
   [
-   -100.78,
-   46.81,
+   -104.73,
+   47.1,
    4
   ],
   [
-   -104.73,
-   47.1,
-   3
+   -100.78,
+   46.81,
+   4
   ],
   [
    -102.76,
@@ -610,6 +610,14 @@
    "place": "Glendive, MT",
    "message": "Custer State Park, Black Hills South Dakota",
    "label": "Custer State Park",
+   "score": 7
+  },
+  {
+   "id": "40051452dd",
+   "name": "Chris D.",
+   "place": "Glendive, MT",
+   "message": "Giant Springs State Park",
+   "label": "Giant Springs State Park",
    "score": 7
   }
  ]
