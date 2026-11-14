@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-13T22:08:53+00:00",
- "total": 42,
+ "updated": "2026-11-14T21:58:06+00:00",
+ "total": 47,
  "states": 13,
  "featured": [
   {
@@ -21,6 +21,18 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "bd566cf97c",
+   "name": "Sawyer D.",
+   "place": "Glendive, MT",
+   "message": "Mount St. Helens"
+  },
+  {
+   "id": "060b60a350",
+   "name": "Colter D.",
+   "place": "Glendive, MT",
+   "message": "Makoshika State Park, Glendive MT"
   },
   {
    "id": "554413fb31",
@@ -53,22 +65,10 @@
    "message": "Pactola reservoir in the black hill Pearl creek on the James river"
   },
   {
-   "id": "a687975a30",
-   "name": "Nadeen K.",
-   "place": "Columbus, MT",
-   "message": "Hyaline Canyon Bozeman Montana"
-  },
-  {
    "id": "5c10acda4f",
    "name": "Joan W.",
    "place": "",
    "message": "North shore of Lake Superior"
-  },
-  {
-   "id": "5e63f3fc38",
-   "name": "Lance S.",
-   "place": "Missoula, MT",
-   "message": "Sleeping Bear Dunes Michigan"
   },
   {
    "id": "b2bb010051",
@@ -78,6 +78,11 @@
   }
  ],
  "signers": [
+  "Sawyer D.",
+  "Colter D.",
+  "Paul T.",
+  "Nick R.",
+  "Jill R.",
   "Mike C.",
   "I. S.",
   "Patricia C.",
@@ -112,11 +117,7 @@
   "Jenn C.",
   "Marcie W.",
   "Alice W.",
-  "Emily C.",
-  "Jaden O.",
-  "Patrick R.",
-  "Peter T.",
-  "Addison O."
+  "Emily C."
  ],
  "points": [
   [
@@ -140,6 +141,11 @@
    3
   ],
   [
+   -104.73,
+   47.1,
+   2
+  ],
+  [
    -103.98,
    46.93,
    2
@@ -147,6 +153,11 @@
   [
    -103.43,
    43.66,
+   2
+  ],
+  [
+   -103.26,
+   47.8,
    2
   ],
   [
@@ -197,6 +208,11 @@
   [
    -101.81,
    47.27,
+   1
+  ],
+  [
+   -101.76,
+   46.37,
    1
   ],
   [
@@ -546,6 +562,46 @@
    "place": "Bismarck, ND",
    "message": "Alaska's Mount Denali",
    "label": "Mount Denali",
+   "score": 7
+  },
+  {
+   "id": "31f0b1ccf5",
+   "name": "Jill R.",
+   "place": "Watford City, ND",
+   "message": "Lake Superior",
+   "label": "Lake Superior",
+   "score": 6
+  },
+  {
+   "id": "1a600d3069",
+   "name": "Nick R.",
+   "place": "Watford City, ND",
+   "message": "The Pacific Northwest",
+   "label": "Pacific Northwest",
+   "score": 6
+  },
+  {
+   "id": "e55cbf0a16",
+   "name": "Paul T.",
+   "place": "Elgin, ND",
+   "message": "Multnomah Falls Oregon",
+   "label": "Multnomah Falls Oregon",
+   "score": 7
+  },
+  {
+   "id": "060b60a350",
+   "name": "Colter D.",
+   "place": "Glendive, MT",
+   "message": "Makoshika State Park, Glendive MT",
+   "label": "Makoshika State Park",
+   "score": 7
+  },
+  {
+   "id": "bd566cf97c",
+   "name": "Sawyer D.",
+   "place": "Glendive, MT",
+   "message": "Mount St. Helens",
+   "label": "Mount St. Helens",
    "score": 7
   }
  ]
