@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-15T02:27:30+00:00",
- "total": 56,
+ "updated": "2026-11-15T21:58:23+00:00",
+ "total": 62,
  "states": 13,
  "featured": [
   {
@@ -23,16 +23,16 @@
    "message": "The Mississippi River"
   },
   {
-   "id": "5fea3b6931",
-   "name": "Foster M.",
-   "place": "Belgrade, MT",
-   "message": "Yellowstone National Park"
+   "id": "e73e0bc6f2",
+   "name": "Jasmine E.",
+   "place": "Baker, MT",
+   "message": "Medicine Rocks State Park"
   },
   {
-   "id": "7a1c629e36",
-   "name": "Rylan M.",
-   "place": "Wibaux, MT",
-   "message": "Glacier national park"
+   "id": "ea4e906339",
+   "name": "Rhonda W.",
+   "place": "Fairview, MT",
+   "message": "Gila National Forest"
   },
   {
    "id": "554413fb31",
@@ -78,6 +78,12 @@
   }
  ],
  "signers": [
+  "Jasmine E.",
+  "Mark Z.",
+  "Glee M.",
+  "Terry K.",
+  "Bobbi C.",
+  "Rhonda W.",
   "Kevin P.",
   "Landon P.",
   "Molly S.",
@@ -111,13 +117,7 @@
   "Kale E.",
   "Landon J.",
   "Marcia P.",
-  "Kristine T.",
-  "Sarah M.",
-  "Kristen H.",
-  "Nikki T.",
-  "Judy J.",
-  "Kylie S.",
-  "Debbie Q."
+  "Kristine T."
  ],
  "points": [
   [
@@ -156,6 +156,11 @@
    2
   ],
   [
+   -104.23,
+   47.89,
+   2
+  ],
+  [
    -103.43,
    43.66,
    2
@@ -163,6 +168,11 @@
   [
    -103.26,
    47.8,
+   2
+  ],
+  [
+   -100.68,
+   46.72,
    2
   ],
   [
@@ -206,6 +216,11 @@
    1
   ],
   [
+   -104.27,
+   46.35,
+   1
+  ],
+  [
    -104.19,
    46.97,
    1
@@ -231,18 +246,23 @@
    1
   ],
   [
+   -101.3,
+   48.23,
+   1
+  ],
+  [
    -100.91,
    46.83,
    1
   ],
   [
-   -100.68,
-   46.72,
+   -99.04,
+   29.94,
    1
   ],
   [
-   -99.04,
-   29.94,
+   -96.93,
+   46.89,
    1
   ],
   [
@@ -689,6 +709,54 @@
    "place": "Dickinson, ND",
    "message": "The Grand Tetons",
    "label": "Grand Tetons",
+   "score": 7
+  },
+  {
+   "id": "ea4e906339",
+   "name": "Rhonda W.",
+   "place": "Fairview, MT",
+   "message": "Gila National Forest",
+   "label": "Gila National Forest",
+   "score": 7
+  },
+  {
+   "id": "55a17d6add",
+   "name": "Bobbi C.",
+   "place": "Fairview, MT",
+   "message": "Fort Peck, Montana",
+   "label": "Fort Peck, Montana",
+   "score": 6
+  },
+  {
+   "id": "68212f2cfb",
+   "name": "Terry K.",
+   "place": "West Fargo, ND",
+   "message": "Granite Peak and Mystic Lake MT",
+   "label": "Granite Peak and Mystic Lake",
+   "score": 7
+  },
+  {
+   "id": "f167c6118b",
+   "name": "Glee M.",
+   "place": "Minot, ND",
+   "message": "Angels Landing Zion National Park",
+   "label": "Zion National Park",
+   "score": 8
+  },
+  {
+   "id": "3520407b6f",
+   "name": "Mark Z.",
+   "place": "Bismarck, ND",
+   "message": "Audubon National Wildlife Refuge",
+   "label": "Audubon National Wildlife Refu",
+   "score": 7
+  },
+  {
+   "id": "e73e0bc6f2",
+   "name": "Jasmine E.",
+   "place": "Baker, MT",
+   "message": "Medicine Rocks State Park",
+   "label": "Medicine Rocks State Park",
    "score": 7
   }
  ]
