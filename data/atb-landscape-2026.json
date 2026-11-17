@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-17T21:55:20+00:00",
- "total": 66,
+ "updated": "2026-11-17T22:05:11+00:00",
+ "total": 68,
  "states": 14,
  "featured": [
   {
@@ -23,16 +23,16 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "672fdc41aa",
+   "name": "Cedric R.",
+   "place": "Perham, MN",
+   "message": "Ottertail River Minnesota"
+  },
+  {
    "id": "03fb7259a0",
    "name": "Ellen K.",
    "place": "Detroit Lakes, MN",
    "message": "Yellowstone National Park"
-  },
-  {
-   "id": "553a86aa64",
-   "name": "Lee K.",
-   "place": "Detroit Lakes, MN",
-   "message": "Tamarac National Wildlife Refuge Minnesota"
   },
   {
    "id": "e73e0bc6f2",
@@ -78,6 +78,8 @@
   }
  ],
  "signers": [
+  "Amy P.",
+  "Cedric R.",
   "Ellen K.",
   "Amiel and Connie S.",
   "Reggie P.",
@@ -115,9 +117,7 @@
   "Sharon Z.",
   "Randi O.",
   "Joel Z.",
-  "Nadeen K.",
-  "Diana S.",
-  "Joan W."
+  "Nadeen K."
  ],
  "points": [
   [
@@ -131,13 +131,13 @@
    5
   ],
   [
-   -104.73,
-   47.1,
-   4
-  ],
-  [
    -100.78,
    46.84,
+   5
+  ],
+  [
+   -104.73,
+   47.1,
    4
   ],
   [
@@ -273,6 +273,11 @@
   [
    -95.9,
    36.58,
+   1
+  ],
+  [
+   -95.58,
+   46.6,
    1
   ],
   [
@@ -794,6 +799,22 @@
    "place": "Detroit Lakes, MN",
    "message": "Yellowstone National Park",
    "label": "Yellowstone National Park",
+   "score": 7
+  },
+  {
+   "id": "672fdc41aa",
+   "name": "Cedric R.",
+   "place": "Perham, MN",
+   "message": "Ottertail River Minnesota",
+   "label": "Ottertail River Minnesota",
+   "score": 7
+  },
+  {
+   "id": "3083a6fe48",
+   "name": "Amy P.",
+   "place": "Bismarck, ND",
+   "message": "Crater Lake. Oregon",
+   "label": "Crater Lake, Oregon",
    "score": 7
   }
  ]
