@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-15T21:58:23+00:00",
- "total": 62,
- "states": 13,
+ "updated": "2026-11-17T21:55:20+00:00",
+ "total": 66,
+ "states": 14,
  "featured": [
   {
    "id": "54024b840d",
@@ -21,6 +21,18 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "03fb7259a0",
+   "name": "Ellen K.",
+   "place": "Detroit Lakes, MN",
+   "message": "Yellowstone National Park"
+  },
+  {
+   "id": "553a86aa64",
+   "name": "Lee K.",
+   "place": "Detroit Lakes, MN",
+   "message": "Tamarac National Wildlife Refuge Minnesota"
   },
   {
    "id": "e73e0bc6f2",
@@ -63,21 +75,13 @@
    "name": "Randi O.",
    "place": "Whitewood, SD",
    "message": "Pactola reservoir in the black hill Pearl creek on the James river"
-  },
-  {
-   "id": "5c10acda4f",
-   "name": "Joan W.",
-   "place": "",
-   "message": "North shore of Lake Superior"
-  },
-  {
-   "id": "b2bb010051",
-   "name": "Katie R.",
-   "place": "Alpharetta, GA",
-   "message": "The Chattahoochee River"
   }
  ],
  "signers": [
+  "Ellen K.",
+  "Amiel and Connie S.",
+  "Reggie P.",
+  "Lee K.",
   "Jasmine E.",
   "Mark Z.",
   "Glee M.",
@@ -113,26 +117,27 @@
   "Joel Z.",
   "Nadeen K.",
   "Diana S.",
-  "Joan W.",
-  "Kale E.",
-  "Landon J.",
-  "Marcia P.",
-  "Kristine T."
+  "Joan W."
  ],
  "points": [
+  [
+   -102.76,
+   46.81,
+   6
+  ],
   [
    -103.56,
    46.94,
    5
   ],
   [
-   -102.76,
-   46.81,
-   5
-  ],
-  [
    -104.73,
    47.1,
+   4
+  ],
+  [
+   -100.78,
+   46.84,
    4
   ],
   [
@@ -143,11 +148,6 @@
   [
    -103.98,
    46.93,
-   3
-  ],
-  [
-   -100.78,
-   46.84,
    3
   ],
   [
@@ -173,6 +173,11 @@
   [
    -100.68,
    46.72,
+   2
+  ],
+  [
+   -95.84,
+   46.82,
    2
   ],
   [
@@ -757,6 +762,38 @@
    "place": "Baker, MT",
    "message": "Medicine Rocks State Park",
    "label": "Medicine Rocks State Park",
+   "score": 7
+  },
+  {
+   "id": "553a86aa64",
+   "name": "Lee K.",
+   "place": "Detroit Lakes, MN",
+   "message": "Tamarac National Wildlife Refuge Minnesota",
+   "label": "Tamarac National Wildlife Refu",
+   "score": 7
+  },
+  {
+   "id": "780139fa12",
+   "name": "Reggie P.",
+   "place": "Bismarck, ND",
+   "message": "The Beartooth Mountains",
+   "label": "Beartooth Mountains",
+   "score": 7
+  },
+  {
+   "id": "af0d540d3b",
+   "name": "Amiel and Connie S.",
+   "place": "Dickinson, ND",
+   "message": "Terry peak in the northern black hills",
+   "label": "Terry Peak",
+   "score": 7
+  },
+  {
+   "id": "03fb7259a0",
+   "name": "Ellen K.",
+   "place": "Detroit Lakes, MN",
+   "message": "Yellowstone National Park",
+   "label": "Yellowstone National Park",
    "score": 7
   }
  ]
