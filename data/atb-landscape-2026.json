@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-18T21:55:28+00:00",
- "total": 71,
- "states": 15,
+ "updated": "2026-11-18T22:05:12+00:00",
+ "total": 73,
+ "states": 16,
  "featured": [
   {
    "id": "54024b840d",
@@ -23,6 +23,18 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "8798d79ee9",
+   "name": "John E.",
+   "place": "Garfield, MN",
+   "message": "Boundary Waters"
+  },
+  {
+   "id": "f0fec07c31",
+   "name": "Kevin C.",
+   "place": "Overland Park, KS",
+   "message": "Cunningham Falls State Park, MD"
+  },
+  {
    "id": "25db2c929b",
    "name": "Joyce E.",
    "place": "Garfield, MN",
@@ -33,12 +45,6 @@
    "name": "Neil S.",
    "place": "Menomonee Falls, WI",
    "message": "Monument Valley"
-  },
-  {
-   "id": "672fdc41aa",
-   "name": "Cedric R.",
-   "place": "Perham, MN",
-   "message": "Ottertail River Minnesota"
   },
   {
    "id": "e73e0bc6f2",
@@ -69,15 +75,11 @@
    "name": "Jeffrey E.",
    "place": "Glencoe, IL",
    "message": "Adirondack Park"
-  },
-  {
-   "id": "39311e1902",
-   "name": "Sharon Z.",
-   "place": "Custer, SD",
-   "message": "Sylvan Lake. Custer State Park South Dakotah"
   }
  ],
  "signers": [
+  "Kevin C.",
+  "John E.",
   "Joyce E.",
   "Neil S.",
   "Zion H.",
@@ -115,9 +117,7 @@
   "Mary B.",
   "Andy B.",
   "Jeffrey E.",
-  "Stephanie E.",
-  "Demi H.",
-  "Sharon Z."
+  "Stephanie E."
  ],
  "points": [
   [
@@ -178,6 +178,11 @@
   [
    -95.84,
    46.82,
+   2
+  ],
+  [
+   -95.51,
+   45.98,
    2
   ],
   [
@@ -281,8 +286,8 @@
    1
   ],
   [
-   -95.51,
-   45.98,
+   -94.63,
+   38.86,
    1
   ],
   [
@@ -849,6 +854,22 @@
    "place": "Garfield, MN",
    "message": "Isle Royale",
    "label": "Isle Royale",
+   "score": 7
+  },
+  {
+   "id": "8798d79ee9",
+   "name": "John E.",
+   "place": "Garfield, MN",
+   "message": "Boundary Waters",
+   "label": "Boundary Waters",
+   "score": 7
+  },
+  {
+   "id": "f0fec07c31",
+   "name": "Kevin C.",
+   "place": "Overland Park, KS",
+   "message": "Cunningham Falls State Park, MD",
+   "label": "Cunningham Falls State Park",
    "score": 7
   }
  ]
