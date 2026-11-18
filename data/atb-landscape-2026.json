@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-17T22:05:11+00:00",
- "total": 68,
+ "updated": "2026-11-18T20:55:15+00:00",
+ "total": 69,
  "states": 14,
  "featured": [
   {
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Zion H.",
   "Amy P.",
   "Cedric R.",
   "Ellen K.",
@@ -116,14 +117,13 @@
   "Demi H.",
   "Sharon Z.",
   "Randi O.",
-  "Joel Z.",
-  "Nadeen K."
+  "Joel Z."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   6
+   7
   ],
   [
    -103.56,
@@ -816,6 +816,14 @@
    "message": "Crater Lake. Oregon",
    "label": "Crater Lake, Oregon",
    "score": 7
+  },
+  {
+   "id": "d21f9f12a5",
+   "name": "Zion H.",
+   "place": "Dickinson, ND",
+   "message": "Public lands",
+   "label": "Public Lands",
+   "score": 4
   }
  ]
 }
