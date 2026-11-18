@@ -1,8 +1,8 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-18T20:55:15+00:00",
- "total": 69,
- "states": 14,
+ "updated": "2026-11-18T21:55:28+00:00",
+ "total": 71,
+ "states": 15,
  "featured": [
   {
    "id": "54024b840d",
@@ -23,16 +23,22 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "25db2c929b",
+   "name": "Joyce E.",
+   "place": "Garfield, MN",
+   "message": "Isle Royale"
+  },
+  {
+   "id": "c6b1be04af",
+   "name": "Neil S.",
+   "place": "Menomonee Falls, WI",
+   "message": "Monument Valley"
+  },
+  {
    "id": "672fdc41aa",
    "name": "Cedric R.",
    "place": "Perham, MN",
    "message": "Ottertail River Minnesota"
-  },
-  {
-   "id": "03fb7259a0",
-   "name": "Ellen K.",
-   "place": "Detroit Lakes, MN",
-   "message": "Yellowstone National Park"
   },
   {
    "id": "e73e0bc6f2",
@@ -69,15 +75,11 @@
    "name": "Sharon Z.",
    "place": "Custer, SD",
    "message": "Sylvan Lake. Custer State Park South Dakotah"
-  },
-  {
-   "id": "e58afbb148",
-   "name": "Randi O.",
-   "place": "Whitewood, SD",
-   "message": "Pactola reservoir in the black hill Pearl creek on the James river"
   }
  ],
  "signers": [
+  "Joyce E.",
+  "Neil S.",
   "Zion H.",
   "Amy P.",
   "Cedric R.",
@@ -115,9 +117,7 @@
   "Jeffrey E.",
   "Stephanie E.",
   "Demi H.",
-  "Sharon Z.",
-  "Randi O.",
-  "Joel Z."
+  "Sharon Z."
  ],
  "points": [
   [
@@ -278,6 +278,16 @@
   [
    -95.58,
    46.6,
+   1
+  ],
+  [
+   -95.51,
+   45.98,
+   1
+  ],
+  [
+   -88.11,
+   43.16,
    1
   ],
   [
@@ -824,6 +834,22 @@
    "message": "Public lands",
    "label": "Public Lands",
    "score": 4
+  },
+  {
+   "id": "c6b1be04af",
+   "name": "Neil S.",
+   "place": "Menomonee Falls, WI",
+   "message": "Monument Valley",
+   "label": "Monument Valley",
+   "score": 7
+  },
+  {
+   "id": "25db2c929b",
+   "name": "Joyce E.",
+   "place": "Garfield, MN",
+   "message": "Isle Royale",
+   "label": "Isle Royale",
+   "score": 7
   }
  ]
 }
