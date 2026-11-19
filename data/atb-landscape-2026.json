@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-18T22:05:12+00:00",
- "total": 73,
+ "updated": "2026-11-19T20:34:26+00:00",
+ "total": 74,
  "states": 16,
  "featured": [
   {
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Dezzie H.",
   "Kevin C.",
   "John E.",
   "Joyce E.",
@@ -116,14 +117,13 @@
   "Tim K.",
   "Mary B.",
   "Andy B.",
-  "Jeffrey E.",
-  "Stephanie E."
+  "Jeffrey E."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   7
+   8
   ],
   [
    -103.56,
@@ -871,6 +871,14 @@
    "message": "Cunningham Falls State Park, MD",
    "label": "Cunningham Falls State Park",
    "score": 7
+  },
+  {
+   "id": "ca2bde8762",
+   "name": "Dezzie H.",
+   "place": "Dickinson, ND",
+   "message": "Mission Canyon, Hays, MT",
+   "label": "Mission Canyon, Hays, MT",
+   "score": 6
   }
  ]
 }
