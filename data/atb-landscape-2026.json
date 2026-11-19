@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-19T20:34:26+00:00",
- "total": 74,
+ "updated": "2026-11-19T21:19:50+00:00",
+ "total": 75,
  "states": 16,
  "featured": [
   {
@@ -21,6 +21,12 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "c88d932140",
+   "name": "Tristyn B.",
+   "place": "Helena, MT",
+   "message": "Sunk Bay right outside of Mandaree"
   },
   {
    "id": "8798d79ee9",
@@ -53,12 +59,6 @@
    "message": "Medicine Rocks State Park"
   },
   {
-   "id": "ea4e906339",
-   "name": "Rhonda W.",
-   "place": "Fairview, MT",
-   "message": "Gila National Forest"
-  },
-  {
    "id": "554413fb31",
    "name": "Dawn K.",
    "place": "Homestead, FL",
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Tristyn B.",
   "Dezzie H.",
   "Kevin C.",
   "John E.",
@@ -116,8 +117,7 @@
   "Dawn K.",
   "Tim K.",
   "Mary B.",
-  "Andy B.",
-  "Jeffrey E."
+  "Andy B."
  ],
  "points": [
   [
@@ -208,6 +208,11 @@
   [
    -114.03,
    46.86,
+   1
+  ],
+  [
+   -112.02,
+   46.61,
    1
   ],
   [
@@ -879,6 +884,14 @@
    "message": "Mission Canyon, Hays, MT",
    "label": "Mission Canyon, Hays, MT",
    "score": 6
+  },
+  {
+   "id": "c88d932140",
+   "name": "Tristyn B.",
+   "place": "Helena, MT",
+   "message": "Sunk Bay right outside of Mandaree",
+   "label": "Sunk Bay",
+   "score": 7
   }
  ]
 }
