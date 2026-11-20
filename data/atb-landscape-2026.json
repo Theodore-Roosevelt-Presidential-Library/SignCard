@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-20T21:54:33+00:00",
- "total": 76,
+ "updated": "2026-11-20T22:04:29+00:00",
+ "total": 78,
  "states": 16,
  "featured": [
   {
@@ -78,6 +78,8 @@
   }
  ],
  "signers": [
+  "Tanis M.",
+  "Todd M.",
   "Nancy C.",
   "Tristyn B.",
   "Dezzie H.",
@@ -115,15 +117,13 @@
   "Mike C.",
   "I. S.",
   "Patricia C.",
-  "Dawn K.",
-  "Tim K.",
-  "Mary B."
+  "Dawn K."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   9
+   11
   ],
   [
    -103.56,
@@ -900,6 +900,22 @@
    "message": "Good Spirit Lake, Saskatchewan",
    "label": "Good Spirit Lake",
    "score": 7
+  },
+  {
+   "id": "895adb6c09",
+   "name": "Todd M.",
+   "place": "Dickinson, ND",
+   "message": "The Little Missouri River and the ND badlands.",
+   "label": "Little Missouri River",
+   "score": 8
+  },
+  {
+   "id": "65db97c584",
+   "name": "Tanis M.",
+   "place": "Dickinson, ND",
+   "message": "Natural arch on Padock Trail in Theodore Roosevelt NP where we have ridden horse with our kids.",
+   "label": "Natural Arch, Theodore Rooseve",
+   "score": 8
   }
  ]
 }
