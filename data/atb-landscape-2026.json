@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-19T21:19:50+00:00",
- "total": 75,
+ "updated": "2026-11-20T21:54:33+00:00",
+ "total": 76,
  "states": 16,
  "featured": [
   {
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Nancy C.",
   "Tristyn B.",
   "Dezzie H.",
   "Kevin C.",
@@ -116,14 +117,13 @@
   "Patricia C.",
   "Dawn K.",
   "Tim K.",
-  "Mary B.",
-  "Andy B."
+  "Mary B."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   8
+   9
   ],
   [
    -103.56,
@@ -891,6 +891,14 @@
    "place": "Helena, MT",
    "message": "Sunk Bay right outside of Mandaree",
    "label": "Sunk Bay",
+   "score": 7
+  },
+  {
+   "id": "600a07b615",
+   "name": "Nancy C.",
+   "place": "Dickinson, ND",
+   "message": "Good Spirit Lake, Saskatchewan",
+   "label": "Good Spirit Lake",
    "score": 7
   }
  ]
