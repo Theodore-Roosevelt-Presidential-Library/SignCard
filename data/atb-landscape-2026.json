@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-21T02:38:22+00:00",
- "total": 84,
+ "updated": "2026-11-21T10:58:23+00:00",
+ "total": 85,
  "states": 16,
  "featured": [
   {
@@ -23,6 +23,12 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "938280d4e8",
+   "name": "Cara P.",
+   "place": "Baker, MT",
+   "message": "The Ross Creek Scenic Area"
+  },
+  {
    "id": "11806d44c1",
    "name": "Brian F.",
    "place": "Box Elder, SD",
@@ -33,12 +39,6 @@
    "name": "Stacy O.",
    "place": "Colstrip, MT",
    "message": "The Bear Tooth Mountains"
-  },
-  {
-   "id": "c88d932140",
-   "name": "Tristyn B.",
-   "place": "Helena, MT",
-   "message": "Sunk Bay right outside of Mandaree"
   },
   {
    "id": "8798d79ee9",
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Cara P.",
   "Jesse O.",
   "Krista L.",
   "Andrea O.",
@@ -116,8 +117,7 @@
   "Chris D.",
   "Lisa D.",
   "Sawyer D.",
-  "Colter D.",
-  "Paul T."
+  "Colter D."
  ],
  "points": [
   [
@@ -153,6 +153,11 @@
   [
    -111.69,
    45.35,
+   2
+  ],
+  [
+   -104.27,
+   46.35,
    2
   ],
   [
@@ -238,11 +243,6 @@
   [
    -105.25,
    39.98,
-   1
-  ],
-  [
-   -104.27,
-   46.35,
    1
   ],
   [
@@ -979,6 +979,14 @@
    "message": "Under the Cotton woods and Junipers along the Little Missouri River",
    "label": "Little Missouri River Woods",
    "score": 8
+  },
+  {
+   "id": "938280d4e8",
+   "name": "Cara P.",
+   "place": "Baker, MT",
+   "message": "The Ross Creek Scenic Area",
+   "label": "Ross Creek Scenic Area",
+   "score": 7
   }
  ]
 }
