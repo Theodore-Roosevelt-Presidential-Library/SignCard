@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-21T10:58:23+00:00",
- "total": 85,
+ "updated": "2026-11-21T21:57:58+00:00",
+ "total": 92,
  "states": 16,
  "featured": [
   {
@@ -78,6 +78,13 @@
   }
  ],
  "signers": [
+  "Brenda W.",
+  "Michele W.",
+  "Shawn G.",
+  "Douglas W.",
+  "Jana P.",
+  "Brandon H.",
+  "Susan P.",
   "Cara P.",
   "Jesse O.",
   "Krista L.",
@@ -110,20 +117,18 @@
   "Kevin P.",
   "Landon P.",
   "Molly S.",
-  "Rylan M.",
-  "Foster M.",
-  "Amelia W.",
-  "Brandt W.",
-  "Chris D.",
-  "Lisa D.",
-  "Sawyer D.",
-  "Colter D."
+  "Rylan M."
  ],
  "points": [
   [
    -102.76,
    46.81,
    13
+  ],
+  [
+   -100.78,
+   46.81,
+   6
   ],
   [
    -103.56,
@@ -141,13 +146,18 @@
    4
   ],
   [
-   -100.78,
-   46.81,
-   4
+   -104.19,
+   46.97,
+   3
   ],
   [
    -103.98,
    46.93,
+   3
+  ],
+  [
+   -100.68,
+   46.72,
    3
   ],
   [
@@ -178,11 +188,6 @@
   [
    -103.26,
    47.8,
-   2
-  ],
-  [
-   -100.68,
-   46.72,
    2
   ],
   [
@@ -246,11 +251,6 @@
    1
   ],
   [
-   -104.19,
-   46.97,
-   1
-  ],
-  [
    -103.64,
    44.46,
    1
@@ -308,6 +308,16 @@
   [
    -94.63,
    38.86,
+   1
+  ],
+  [
+   -93.66,
+   44.94,
+   1
+  ],
+  [
+   -91.74,
+   45.51,
    1
   ],
   [
@@ -987,6 +997,54 @@
    "message": "The Ross Creek Scenic Area",
    "label": "Ross Creek Scenic Area",
    "score": 7
+  },
+  {
+   "id": "851d2ba897",
+   "name": "Susan P.",
+   "place": "Mound, MN",
+   "message": "Lake Itasca",
+   "label": "Lake Itasca",
+   "score": 6
+  },
+  {
+   "id": "a450acda52",
+   "name": "Brandon H.",
+   "place": "Bismarck, ND",
+   "message": "California Redwoods",
+   "label": "California Redwoods",
+   "score": 7
+  },
+  {
+   "id": "462e190c87",
+   "name": "Douglas W.",
+   "place": "Bismarck, ND",
+   "message": "Elkhorn Ranch",
+   "label": "Elkhorn Ranch",
+   "score": 7
+  },
+  {
+   "id": "34fd0d4ef8",
+   "name": "Shawn G.",
+   "place": "Wibaux, MT",
+   "message": "Beaver creek",
+   "label": "Beaver Creek",
+   "score": 6
+  },
+  {
+   "id": "c215ca33d9",
+   "name": "Michele W.",
+   "place": "Rice Lake, WI",
+   "message": "Long lake in Washburn county WI",
+   "label": "Long Lake, WI",
+   "score": 6
+  },
+  {
+   "id": "8da04374ff",
+   "name": "Brenda W.",
+   "place": "Bismarck, ND",
+   "message": "Crystal springs, Crystal springs. ND",
+   "label": "Crystal Springs, ND",
+   "score": 6
   }
  ]
 }
