@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-20T22:04:29+00:00",
- "total": 78,
+ "updated": "2026-11-21T02:26:48+00:00",
+ "total": 80,
  "states": 16,
  "featured": [
   {
@@ -21,6 +21,12 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "b9d42c9c6b",
+   "name": "Stacy O.",
+   "place": "Colstrip, MT",
+   "message": "The Bear Tooth Mountains"
   },
   {
    "id": "c88d932140",
@@ -53,12 +59,6 @@
    "message": "Monument Valley"
   },
   {
-   "id": "e73e0bc6f2",
-   "name": "Jasmine E.",
-   "place": "Baker, MT",
-   "message": "Medicine Rocks State Park"
-  },
-  {
    "id": "554413fb31",
    "name": "Dawn K.",
    "place": "Homestead, FL",
@@ -78,6 +78,8 @@
   }
  ],
  "signers": [
+  "Shelby R.",
+  "Stacy O.",
   "Tanis M.",
   "Todd M.",
   "Nancy C.",
@@ -115,15 +117,13 @@
   "Nick R.",
   "Jill R.",
   "Mike C.",
-  "I. S.",
-  "Patricia C.",
-  "Dawn K."
+  "I. S."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   11
+   12
   ],
   [
    -103.56,
@@ -223,6 +223,11 @@
   [
    -109.26,
    45.63,
+   1
+  ],
+  [
+   -106.64,
+   45.93,
    1
   ],
   [
@@ -915,6 +920,22 @@
    "place": "Dickinson, ND",
    "message": "Natural arch on Padock Trail in Theodore Roosevelt NP where we have ridden horse with our kids.",
    "label": "Natural Arch, Theodore Rooseve",
+   "score": 8
+  },
+  {
+   "id": "b9d42c9c6b",
+   "name": "Stacy O.",
+   "place": "Colstrip, MT",
+   "message": "The Bear Tooth Mountains",
+   "label": "Bear Tooth Mountains",
+   "score": 7
+  },
+  {
+   "id": "c13c0fdcd0",
+   "name": "Shelby R.",
+   "place": "Dickinson, ND",
+   "message": "The Confluence of the Missouri & Yellowstone Rivers",
+   "label": "Missouri & Yellowstone Rivers",
    "score": 8
   }
  ]
