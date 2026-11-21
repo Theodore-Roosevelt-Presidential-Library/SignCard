@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-21T02:26:48+00:00",
- "total": 80,
+ "updated": "2026-11-21T02:38:22+00:00",
+ "total": 84,
  "states": 16,
  "featured": [
   {
@@ -21,6 +21,12 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "11806d44c1",
+   "name": "Brian F.",
+   "place": "Box Elder, SD",
+   "message": "Shiretoko Peninsula, Hokkaido, Japan"
   },
   {
    "id": "b9d42c9c6b",
@@ -69,15 +75,13 @@
    "name": "Tim K.",
    "place": "Homestead, FL",
    "message": "Ocala national forest"
-  },
-  {
-   "id": "a7f8dc4070",
-   "name": "Jeffrey E.",
-   "place": "Glencoe, IL",
-   "message": "Adirondack Park"
   }
  ],
  "signers": [
+  "Jesse O.",
+  "Krista L.",
+  "Andrea O.",
+  "Brian F.",
   "Shelby R.",
   "Stacy O.",
   "Tanis M.",
@@ -113,17 +117,13 @@
   "Lisa D.",
   "Sawyer D.",
   "Colter D.",
-  "Paul T.",
-  "Nick R.",
-  "Jill R.",
-  "Mike C.",
-  "I. S."
+  "Paul T."
  ],
  "points": [
   [
    -102.76,
    46.81,
-   12
+   13
   ],
   [
    -103.56,
@@ -158,6 +158,11 @@
   [
    -104.23,
    47.89,
+   2
+  ],
+  [
+   -103.8,
+   46.83,
    2
   ],
   [
@@ -246,13 +251,18 @@
    1
   ],
   [
-   -103.8,
-   46.83,
+   -103.64,
+   44.46,
    1
   ],
   [
-   -103.64,
-   44.46,
+   -103.07,
+   44.12,
+   1
+  ],
+  [
+   -103.02,
+   46.81,
    1
   ],
   [
@@ -936,6 +946,38 @@
    "place": "Dickinson, ND",
    "message": "The Confluence of the Missouri & Yellowstone Rivers",
    "label": "Missouri & Yellowstone Rivers",
+   "score": 8
+  },
+  {
+   "id": "11806d44c1",
+   "name": "Brian F.",
+   "place": "Box Elder, SD",
+   "message": "Shiretoko Peninsula, Hokkaido, Japan",
+   "label": "Shiretoko Peninsula",
+   "score": 7
+  },
+  {
+   "id": "47fa80e788",
+   "name": "Andrea O.",
+   "place": "South Heart, ND",
+   "message": "On top of Sentinel Butte",
+   "label": "Sentinel Butte",
+   "score": 6
+  },
+  {
+   "id": "56fcd51e52",
+   "name": "Krista L.",
+   "place": "Sentinel Butte, ND",
+   "message": "Anywhere on the water",
+   "label": "Anywhere On Water",
+   "score": 4
+  },
+  {
+   "id": "e7e526cf85",
+   "name": "Jesse O.",
+   "place": "Dickinson, ND",
+   "message": "Under the Cotton woods and Junipers along the Little Missouri River",
+   "label": "Little Missouri River Woods",
    "score": 8
   }
  ]
