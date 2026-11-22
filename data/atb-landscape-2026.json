@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-21T21:57:58+00:00",
- "total": 92,
+ "updated": "2026-11-22T21:48:47+00:00",
+ "total": 95,
  "states": 16,
  "featured": [
   {
@@ -23,6 +23,12 @@
    "message": "The Mississippi River"
   },
   {
+   "id": "e31a08ffb8",
+   "name": "John Z.",
+   "place": "Big Sky, MT",
+   "message": "Yellowstone National Park"
+  },
+  {
    "id": "938280d4e8",
    "name": "Cara P.",
    "place": "Baker, MT",
@@ -33,12 +39,6 @@
    "name": "Brian F.",
    "place": "Box Elder, SD",
    "message": "Shiretoko Peninsula, Hokkaido, Japan"
-  },
-  {
-   "id": "b9d42c9c6b",
-   "name": "Stacy O.",
-   "place": "Colstrip, MT",
-   "message": "The Bear Tooth Mountains"
   },
   {
    "id": "8798d79ee9",
@@ -78,6 +78,9 @@
   }
  ],
  "signers": [
+  "Janie L.",
+  "Ewa Z.",
+  "John Z.",
   "Brenda W.",
   "Michele W.",
   "Shawn G.",
@@ -114,10 +117,7 @@
   "Terry K.",
   "Bobbi C.",
   "Rhonda W.",
-  "Kevin P.",
-  "Landon P.",
-  "Molly S.",
-  "Rylan M."
+  "Kevin P."
  ],
  "points": [
   [
@@ -163,6 +163,11 @@
   [
    -111.69,
    45.35,
+   2
+  ],
+  [
+   -111.37,
+   45.28,
    2
   ],
   [
@@ -273,6 +278,11 @@
   [
    -101.76,
    46.37,
+   1
+  ],
+  [
+   -101.39,
+   47.31,
    1
   ],
   [
@@ -1044,6 +1054,30 @@
    "place": "Bismarck, ND",
    "message": "Crystal springs, Crystal springs. ND",
    "label": "Crystal Springs, ND",
+   "score": 6
+  },
+  {
+   "id": "e31a08ffb8",
+   "name": "John Z.",
+   "place": "Big Sky, MT",
+   "message": "Yellowstone National Park",
+   "label": "Yellowstone National Park",
+   "score": 7
+  },
+  {
+   "id": "14e0603aa1",
+   "name": "Ewa Z.",
+   "place": "Big Sky, MT",
+   "message": "Big Sky, Montana",
+   "label": "Big Sky, Montana",
+   "score": 6
+  },
+  {
+   "id": "361a8597c8",
+   "name": "Janie L.",
+   "place": "Stanton, ND",
+   "message": "Glacier Park",
+   "label": "Glacier Park",
    "score": 6
   }
  ]
