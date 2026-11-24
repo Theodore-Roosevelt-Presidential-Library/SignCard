@@ -1,7 +1,7 @@
 {
  "campaign": "atb-landscape-2026",
- "updated": "2026-11-22T21:48:47+00:00",
- "total": 95,
+ "updated": "2026-11-24T21:55:22+00:00",
+ "total": 96,
  "states": 16,
  "featured": [
   {
@@ -21,6 +21,12 @@
    "name": "Kristine T.",
    "place": "Davenport, IA",
    "message": "The Mississippi River"
+  },
+  {
+   "id": "72c3116dc7",
+   "name": "Glenn G.",
+   "place": "Detroit Lakes, MN",
+   "message": "Itasca State Park, MN"
   },
   {
    "id": "e31a08ffb8",
@@ -53,12 +59,6 @@
    "message": "Cunningham Falls State Park, MD"
   },
   {
-   "id": "25db2c929b",
-   "name": "Joyce E.",
-   "place": "Garfield, MN",
-   "message": "Isle Royale"
-  },
-  {
    "id": "c6b1be04af",
    "name": "Neil S.",
    "place": "Menomonee Falls, WI",
@@ -78,6 +78,7 @@
   }
  ],
  "signers": [
+  "Glenn G.",
   "Janie L.",
   "Ewa Z.",
   "John Z.",
@@ -116,8 +117,7 @@
   "Glee M.",
   "Terry K.",
   "Bobbi C.",
-  "Rhonda W.",
-  "Kevin P."
+  "Rhonda W."
  ],
  "points": [
   [
@@ -161,6 +161,11 @@
    3
   ],
   [
+   -95.84,
+   46.82,
+   3
+  ],
+  [
    -111.69,
    45.35,
    2
@@ -193,11 +198,6 @@
   [
    -103.26,
    47.8,
-   2
-  ],
-  [
-   -95.84,
-   46.82,
    2
   ],
   [
@@ -1079,6 +1079,14 @@
    "message": "Glacier Park",
    "label": "Glacier Park",
    "score": 6
+  },
+  {
+   "id": "72c3116dc7",
+   "name": "Glenn G.",
+   "place": "Detroit Lakes, MN",
+   "message": "Itasca State Park, MN",
+   "label": "Itasca State Park",
+   "score": 7
   }
  ]
 }
